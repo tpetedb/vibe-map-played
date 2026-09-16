@@ -7,6 +7,7 @@ code the game exports, so the CLI can import a fully played campaign.
     uv run python tools/play.py                 play everything, print the code
     uv run python tools/play.py campus 3        play one stop, print the state
     uv run python tools/play.py --json          machine-readable summary
+    uv run python tools/play.py --name=Tom      play as Tom (default Lotte)
 """
 
 from __future__ import annotations
@@ -22,7 +23,7 @@ from pathlib import Path
 from playwright.sync_api import Browser, Page, sync_playwright
 
 ROOT = Path(__file__).resolve().parents[1]
-GAME = "/game/grimoire.html"
+GAME = "/game/vibe-map.html"
 WORLDS = ("campus", "winter", "desert", "prod")
 CHROMIUM_ARGS = [
     "--use-angle=swiftshader",
@@ -108,13 +109,13 @@ class Player:
     def _minigame(self, n: int) -> None:
         p = self.page
         if n == 1:
-            p.evaluate("summon()")
+            p.evaluate("spinUp()")
         elif n == 2:
             p.evaluate("speak(true)")
         elif n == 3:
             p.evaluate("roll(5)")
         elif n == 4:
-            p.fill("#spell", "A dragon that hoards spreadsheets")
+            p.fill("#release", "A scoring board ranked by coffee")
             p.evaluate("commit()")
             p.evaluate("ruin()")
             p.evaluate("revert(0)")
@@ -210,6 +211,9 @@ def play_everything(browser: Browser, url: str, *, name: str = "Lotte") -> dict:
 
 def main() -> None:
     args = [a for a in sys.argv[1:] if not a.startswith("--")]
+    name = next(
+        (a.split("=", 1)[1] for a in sys.argv[1:] if a.startswith("--name=")), "Lotte"
+    )
     httpd, url = serve()
     with sync_playwright() as p:
         browser = p.chromium.launch(args=CHROMIUM_ARGS)
@@ -217,12 +221,12 @@ def main() -> None:
             ctx = browser.new_context(viewport={"width": 1280, "height": 800})
             player = Player(ctx.new_page())
             player.attach()
-            player.start(url, "Lotte")
+            player.start(url, name)
             player.world(args[0])
             player.stop(int(args[1]))
             result = {"done": player.state()["doneW"], "errors": player.errors}
         else:
-            result = play_everything(browser, url)
+            result = play_everything(browser, url, name=name)
         browser.close()
     httpd.shutdown()
     if "--json" in sys.argv:

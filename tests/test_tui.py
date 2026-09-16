@@ -8,13 +8,13 @@ from pathlib import Path
 
 from textual.widgets import Button, DataTable, Input
 
-from grimoire.tui import Checks, GrimoireApp, Launch, Welcome
+from vibemap.tui import Checks, Launch, Map, VibeApp, Welcome
 
 
 def test_onboarding_screens_walk_through(tmp_path: Path) -> None:
     async def drive() -> str | None:
-        app = GrimoireApp(
-            config_path=tmp_path / "grimoire.toml", state_path=tmp_path / "state.json"
+        app = VibeApp(
+            config_path=tmp_path / "vibe.toml", state_path=tmp_path / "state.json"
         )
         async with app.run_test(size=(120, 50)) as pilot:
             await pilot.pause()
@@ -30,6 +30,13 @@ def test_onboarding_screens_walk_through(tmp_path: Path) -> None:
             assert isinstance(app.screen, Launch)
             buttons = app.screen.query(Button)
             assert any(b.id == "act-yolo" for b in buttons)
+            await pilot.click("#act-map")
+            await pilot.pause()
+            assert isinstance(app.screen, Map)
+            assert len(app.screen.query(".maprow")) == 4
+            await pilot.click("#back")
+            await pilot.pause()
+            assert isinstance(app.screen, Launch)
             await pilot.click("#act-quit")
             await pilot.pause()
         return app.return_value
@@ -41,4 +48,4 @@ def test_onboarding_screens_walk_through(tmp_path: Path) -> None:
     thread.start()
     thread.join(timeout=120)
     assert result.get("value") == "quit"
-    assert (tmp_path / "grimoire.toml").exists() and (tmp_path / "state.json").exists()
+    assert (tmp_path / "vibe.toml").exists() and (tmp_path / "state.json").exists()

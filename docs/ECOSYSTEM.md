@@ -119,3 +119,19 @@ Jesse Vincent, Matt Pocock and Seth Hobson are cited in section 1 through their 
 3. Karpathy's LLM Wiki is not code. It is a prose "idea file" meant to be pasted into any agent, and [claude-obsidian](https://github.com/AgriciDaniel/claude-obsidian) (15,005 stars, MIT) implements it for Claude Code while leaving the vault as plain Markdown.
 4. Routines are cron with the laptop closed. `/schedule daily PR review at 9am` saves a cloud routine that can also fire from an HTTP POST or a GitHub pull-request event, on any paid plan.
 5. A skill written for the course runs elsewhere. The client list at [agentskills.io](https://agentskills.io) includes Gemini CLI, Codex, Copilot, Cursor, OpenCode, [Goose](https://github.com/block/goose) (54,362 stars) and personal assistants such as [OpenClaw](https://github.com/openclaw/openclaw) (389,871 stars), so the `SKILL.md` folders in `.agents/skills/` are already portable.
+
+## Companions
+
+| Tool | Repo | What we took |
+|---|---|---|
+| claude-buddy | [btcromesh/claude-buddy](https://github.com/btcromesh/claude-buddy) (MIT) | The eighteen sprites, the idle and blink sequence and the seeded roll behind `vibe pet`, ported to `vibemap/pet.py`. It is the /buddy feature Claude Code shipped in 2.1.89 and pulled in 2.1.97, extracted into a single-file CLI. |
+| any-buddy | [cpaczek/any-buddy](https://github.com/cpaczek/any-buddy) (WTFPL) | Nothing vendored; the reference for the eye and hat options. |
+
+## Embedded in the game
+
+| Library | Licence | Where |
+|---|---|---|
+| three.js r128 | MIT | the island |
+| Motion 12 | MIT | springs on the sheet, the roadmap and the KPI count-up; optional |
+| d3-force 3 (with d3-quadtree, d3-timer, d3-dispatch) | ISC | the vault graph: a cooled simulation with collision, pan and zoom |
+| Lucide | ISC | the icons on every button in the HUD, the sheet and the vault toolbar |

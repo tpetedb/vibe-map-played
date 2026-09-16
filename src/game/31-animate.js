@@ -31,8 +31,9 @@ function animate(){
   if(dd>3.2&&started){dv.normalize();tp.addScaledVector(dv,3.6*dt);Tm.g.rotation.y=Math.atan2(dv.x,dv.z);tw=true}else if(started){Tm.g.rotation.y+= (Math.atan2(dv.x,dv.z)-Tm.g.rotation.y)*.05}
   animChar(Tm,tw,dt,t+1);animChar(chars.rolinda,false,dt,t+2);
   marker.material.opacity*=.985;marker.rotation.z+=dt*2;
-  // camera
-  const asp=$("stage").clientWidth/$("stage").clientHeight;const port=Math.min(1.5,Math.max(1,1.15/asp));const lv=chars.lotte.vel||new T.Vector3();const cp=new T.Vector3(pos.x*.55+lv.x*.4,16*port,pos.z*.55+18*port+lv.z*.4);camera.position.lerp(cp,.06);const lk=new T.Vector3(pos.x*.65,.8,pos.z*.65-1);camera.lookAt(lk);
+  // camera: a slow orbit of the island behind the title, then it follows
+  if(!started){const oa=t*.07;camera.position.lerp(new T.Vector3(Math.sin(oa)*36,20,Math.cos(oa)*36),.04);camera.lookAt(0,-1,0)}
+  else{const asp=$("stage").clientWidth/$("stage").clientHeight;const port=Math.min(1.5,Math.max(1,1.15/asp));const lv=chars.lotte.vel||new T.Vector3();const cp=new T.Vector3(pos.x*.55+lv.x*.4,16*port,pos.z*.55+18*port+lv.z*.4);camera.position.lerp(cp,.06);const lk=new T.Vector3(pos.x*.65,.8,pos.z*.65-1);camera.lookAt(lk)}
   // water
   const a=wGeo.attributes.position.array;for(let i=0;i<a.length;i+=3){a[i+1]=Math.sin(wBase[i]*.35+t*1.3)*.16+Math.cos(wBase[i+2]*.3+t*1.1)*.16}wGeo.attributes.position.needsUpdate=true;wGeo.computeVertexNormals();
   clouds.forEach(c=>{c.position.x+=c.userData.v*dt;if(c.position.x>50)c.position.x=-50});
@@ -72,9 +73,9 @@ function animate(){
     const allDone=S.done.length===8,nearInn=Math.hypot(pos.x,pos.z)<4.2;
     let nm=null,nd=99;(props.mentors||[]).forEach(c=>{const d=c.g.position.distanceTo(pos);if(d<nd){nd=d;nm=c}});
     (props.mentors||[]).forEach(c=>{c.g.position.y=Math.sin(t*2+c.g.position.x)*.03;c.head.rotation.y=Math.sin(t*.7+c.g.position.z)*.2;c.ring.scale.setScalar(1+Math.sin(t*3)*.05)});
-    if(nm&&nd<2.4){nearK="m:"+nm.id;$("enterbtn").textContent="Talk to "+MENTORS.find(m=>m.id===nm.id).name.split(" ").slice(-1)[0];$("enter").classList.add("on")}
-    else if(allDone&&nearInn){nearK=9;$("enterbtn").textContent=S.world==="campus"?"Calendar alignment":"Evening complete";$("enter").classList.add("on")}
-    else if(np.d<2.6&&!locked){nearK=k;$("enterbtn").textContent=(done?"Revisit ":"Enter ")+CH[np.i].n;$("enter").classList.add("on");if(!done&&lastSay!=="near"){say("near");lastSay="near"}}
+    if(nm&&nd<2.4){nearK="m:"+nm.id;$("enterbtn").innerHTML=icon("users")+"Talk to "+MENTORS.find(m=>m.id===nm.id).name.split(" ").slice(-1)[0];$("enter").classList.add("on")}
+    else if(allDone&&nearInn){nearK=9;$("enterbtn").innerHTML=icon(S.world==="campus"?"milestone":"trophy")+(S.world==="campus"?"Calendar alignment":"Evening complete");$("enter").classList.add("on")}
+    else if(np.d<2.6&&!locked){nearK=k;$("enterbtn").innerHTML=icon(done?"check":"play")+(done?"Revisit ":"Enter ")+CH[np.i].n;$("enter").classList.add("on");if(!done&&lastSay!=="near"){say("near");lastSay="near"}}
     else{nearK=0;$("enter").classList.remove("on")}}
   renderer.render(scene,camera);
 }
@@ -85,5 +86,5 @@ function animChar(c,walking,dt,t){
 }
 
 /* ---------------- UI ---------------- */
-function hud(){$("hud-name").textContent=S.name+" · "+CAMPAIGN[S.world||"campus"].title.split(":")[0];$("hud-runes").innerHTML=[1,2,3,4,5,6,7,8].map(k=>`<i class="${S.done.includes(k)?'on':''}"></i>`).join("");
+function hud(){$("hud-name").textContent=S.name+" · "+CAMPAIGN[S.world||"campus"].title.split(":")[0];$("hud-okrs").innerHTML=[1,2,3,4,5,6,7,8].map(k=>`<i class="${S.done.includes(k)?'on':''}"></i>`).join("");
   countUp($("k1"),S.done.length*13+S.versions.length*2,v=>String(Math.round(v)));countUp($("k2"),Math.round(S.done.length/8*100),v=>Math.round(v)+"%");countUp($("k3"),Object.values(S.bridges).filter(Boolean).length,v=>String(Math.round(v)))}

@@ -24,12 +24,12 @@ style-check *paths:
 links-check:
     @uv run python tools/checks.py links
 
-# the built game equals a fresh build of src/ (catches hand edits to game/grimoire.html)
+# the built game equals a fresh build of src/ (catches hand edits to game/vibe-map.html)
 [group('check')]
 build-check:
     @uv run python tools/build.py --check
 
-# the tech tree outputs are in sync with tools/tech.py
+# the tech tree outputs are in sync with vibemap/tech.py
 [group('check')]
 tree-check:
     @uv run python tools/regen_tree.py --check

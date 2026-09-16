@@ -26,7 +26,7 @@ def test_tree_outputs_match_tech_py() -> None:
 
 
 def test_campaign_json_has_four_evenings_of_eight_and_twelve_mentors() -> None:
-    data = json.loads((ROOT / "src" / "data" / "campaign.json").read_text())
+    data = json.loads((ROOT / "vibemap" / "data" / "campaign.json").read_text())
     assert list(data["evenings"]) == ["campus", "winter", "desert", "prod"]
     for world, ev in data["evenings"].items():
         assert len(ev["ws"]) == 8, world
@@ -39,6 +39,6 @@ def test_campaign_json_has_four_evenings_of_eight_and_twelve_mentors() -> None:
 
 
 def test_three_js_is_embedded_not_linked() -> None:
-    html = (ROOT / "game" / "grimoire.html").read_text()
+    html = (ROOT / "game" / "vibe-map.html").read_text()
     assert "Copyright 2010-2021 Three.js Authors" in html
     assert '<script src="http' not in html

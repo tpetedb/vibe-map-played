@@ -4,21 +4,23 @@ Instructions for any AI coding agent working in this repository. Format: https:/
 
 ## Project overview
 
-A gamified course and a template: a single-file 3D browser game (`game/grimoire.html`), a terminal companion with quests and XP (`grimoire/`), a small data pipeline (`data/`, `sql/`, `python/`), and an Obsidian vault (`vault/`) that grows as the learner progresses. Keep it small and readable. One file per concern; a dependency only when it removes real work.
+A gamified course and a template: a single-file 3D browser game (`game/vibe-map.html`), a terminal companion with quests and XP (`vibemap/`), a small data pipeline (`data/`, `sql/`, `python/`), and an Obsidian vault (`vault/`) that grows as the learner progresses. Keep it small and readable. One file per concern; a dependency only when it removes real work.
 
 ## File map
 
 | Path | Owns |
 |---|---|
-| `game/grimoire.html` | The built game, one file, three.js embedded, no CDN. Produced by `just build` from `src/`; never hand-edit once `src/` exists. |
-| `src/` | The game's source parts in load order; `tools/build.py` concatenates them. `src/data/campaign.json` is the one source for the four evenings and twelve mentors (the game and the CLI both read it). `src/vendor/three.min.js` is three.js r128, never edited. |
+| `game/vibe-map.html` | The built game, one file, three.js embedded, no CDN. Produced by `just build` from `src/`; never hand-edit once `src/` exists. |
+| `src/` | The game's source parts in load order; `tools/build.py` concatenates them and injects the campaign, the tech notes and `CONFIG` from `vibe.toml`. `src/vendor/` holds three.js r128, Motion 12, d3-force 3 and the Lucide licence, never edited; `src/game/05-icons.js` is generated from Lucide SVGs. |
+| `vibemap/data/` | Package data the game and the CLI share: `campaign.json` (four evenings, twelve mentors), `resources.md` (the curated links; `docs/RESOURCES.md` is generated from it). `vibemap/tech.py` is the tech tree. Installed copies of the CLI carry all three. |
 | `game/index.html` | Lotte's own game from workstream 1. Nothing may depend on its contents. |
-| `grimoire/` | The CLI package: `cli.py` (click commands), `state.py` (pydantic models, versioned), `quests.py` (auto-verified workstreams and XP), `vault.py` (Obsidian writer and lint), `scores.py` (polars and DuckDB), `tui.py` (the `just start` onboarding), `personas.py` and `themes.py` (presets), `config.py` (`grimoire.toml`). |
-| `tools/tech.py` | The one source of truth for the tech tree. `tools/regen_tree.py` emits the vault notes, the tree JS and `docs/ROADMAP.md`. |
+| `vibemap/` | The CLI package: `cli.py` (click commands), `state.py` (pydantic models, versioned), `quests.py` (auto-verified workstreams and XP), `vault.py` (Obsidian writer and lint), `scores.py` (polars and DuckDB), `tui.py` (the `just start` onboarding), `personas.py` and `themes.py` (presets), `config.py` (`vibe.toml`). |
+| `vibemap/project.py` | Where a camp is: `VIBE_HOME`, else the nearest ancestor with a `vibe.toml`. The CLI installs globally (`uv tool install vibe-map`) and runs in any camp; `vibe new` clones the template. |
+| `tools/regen_tree.py` | Emits the vault notes, the tree JS, `docs/ROADMAP.md` and `docs/RESOURCES.md` from the package data. Never hand-edit those outputs. |
 | `tests/` | The pytest battery: CLI and quest unit tests, build check, Playwright smoke tests in Chromium and WebKit. |
 | `data/scores.csv` | The system of record for scores. Columns `played_at,player,score,duration_s`; never rename without changing `sql/` and `python/`. |
 | `docs/` | `SYLLABUS.md` (the course), `ROADMAP.md` (generated), `RESOURCES.md` (curated links), `AOE-STUDY.md` (what sokrypton/aoe taught us). |
-| `vault/` | The Obsidian vault. `vault/Grimoire/Tonight.md` is the hot cache; every note is reachable from it. `.obsidian/` is pre-configured. |
+| `vault/` | The Obsidian vault. `vault/Camp/Tonight.md` is the hot cache; every note is reachable from it. `.obsidian/` is pre-configured. |
 | `.agents/skills/` | Skills in the Agent Skills standard. `.claude/skills/` holds symlinks to them. |
 | `justfile`, `agents.just` | Every task a human or an agent runs. `just` lists them; `just start` onboards. |
 
@@ -42,14 +44,14 @@ Adopted from sokrypton/aoe, see `docs/AOE-STUDY.md`:
 2. Before every commit, the full battery: `just verify` (ruff, pytest with Playwright, build check). Zero page errors in the browser is the bar.
 3. Test the entry point, not the mechanism. The smoke test clicks the real buttons; it does not call `claim()` directly.
 4. Take a screenshot and look at it. They land in `tests/out/`.
-5. Regenerate, never hand-edit: `just tree` after editing `tools/tech.py`.
+5. Regenerate, never hand-edit: `just tree` after editing `vibemap/tech.py`.
 
 ## Commands
 
 - `just` lists everything. `just start` is the onboarding menu. `just setup` installs what is missing.
 - Run the game: `just game`. Build it: `just build`.
-- Progress and quests: `uv run grimoire status`, `uv run grimoire check`, `uv run grimoire done <n>`.
-- Scores: `uv run grimoire scores`, `duckdb -c "$(cat sql/top_runs.sql)"`, `python3 python/scores.py`.
+- Progress and quests: `uv run vibe status`, `uv run vibe check`, `uv run vibe done <n>`.
+- Scores: `uv run vibe scores`, `duckdb -c "$(cat sql/top_runs.sql)"`, `python3 python/scores.py`.
 - Tests: `just test`. Full gate: `just verify`.
 
 ## Code style
@@ -61,8 +63,8 @@ Adopted from sokrypton/aoe, see `docs/AOE-STUDY.md`:
 
 ## Notes and memory
 
-- The Obsidian vault is `vault/`. One note per topic in `vault/Grimoire/`. Frontmatter with `title`, `date` and `tags`. Link generously with `[[wikilinks]]`. Date entries newest first.
-- After a session, write or update the note for what was built and link it from `vault/Grimoire/Tonight.md`. `uv run grimoire vault lint` finds orphans and dead links.
+- The Obsidian vault is `vault/`. One note per topic in `vault/Camp/`. Frontmatter with `title`, `date` and `tags`. Link generously with `[[wikilinks]]`. Date entries newest first.
+- After a session, write or update the note for what was built and link it from `vault/Camp/Tonight.md`. `uv run vibe vault lint` finds orphans and dead links.
 
 ## Git
 
