@@ -5,26 +5,30 @@ tags: [overview]
 ---
 # Tonight
 
-Lotte, Chief of Staff, on Normal. Level Intern (dark) with 0 XP, 300 to the next level. 0 of 32 stops done.
+Lotte, Chief of Staff, on Normal. Level Senior (imperial) with 1600 XP, 800 to the next level. 32 of 32 stops done.
 
 ## Workstreams
-- 18:00 [[Innovation Hub]]: a playable single-file game (to do)
-- 19:00 [[Centre of Excellence]]: AGENTS.md rules and a first skill (to do)
-- 20:00 [[Data Warehouse]]: scores.csv, DuckDB queries, a Python chart (to do)
-- 21:00 [[Business Continuity]]: git history, one rollback, one hook (to do)
-- 21:30 [[Stakeholder Bridge]]: one MCP integration (to do)
-- 22:00 [[Knowledge Tree]]: a linked vault and its graph (to do)
-- 22:30 [[Go-to-Market]]: the game at a public URL (to do)
-- 23:00 [[Autonomous Operations]]: headless Claude on a schedule (to do)
+- 18:00 [[Innovation Hub]]: a playable single-file game (done)
+- 19:00 [[Centre of Excellence]]: AGENTS.md rules and a first skill (done)
+- 20:00 [[Data Warehouse]]: scores.csv, DuckDB queries, a Python chart (done)
+- 21:00 [[Business Continuity]]: git history, one rollback, one hook (done)
+- 21:30 [[Stakeholder Bridge]]: one MCP integration (done)
+- 22:00 [[Knowledge Tree]]: a linked vault and its graph (done)
+- 22:30 [[Go-to-Market]]: the game at a public URL (done)
+- 23:00 [[Autonomous Operations]]: headless Claude on a schedule (done)
 
 ## The campaign
-- [[Evening 1]] Ship first, then discipline: 0/8 on the Innovation Campus
-- [[Evening 2]] History, and how these models actually work: 0/8 on the Cold Storage Cluster
-- [[Evening 3]] From vibes to determinism: 0/8 on the Sandbox Environment
-- [[Evening 4]] Terminal, git and the toolbelt, on Apple silicon: 0/8 on the Production Environment
+- [[Evening 1]] Ship first, then discipline: 8/8 on the Innovation Campus
+- [[Evening 2]] History, and how these models actually work: 8/8 on the Cold Storage Cluster
+- [[Evening 3]] From vibes to determinism: 8/8 on the Sandbox Environment
+- [[Evening 4]] Terminal, git and the toolbelt, on Apple silicon: 8/8 on the Production Environment
 
 ## Hot cache
-- Nothing yet. Walk to the 18:00 signpost.
+- 2026-09-16T23:58 [[Karpathy's ladder]] +50 XP: done in the game, imported
+- 2026-09-16T23:58 [[What they cannot do, and why]] +50 XP: done in the game, imported
+- 2026-09-16T23:58 [[Open weights versus closed models, on your own Mac]] +50 XP: done in the game, imported
+- 2026-09-16T23:58 [[From base model to assistant]] +50 XP: done in the game, imported
+- 2026-09-16T23:58 [[Scaling laws and the Bitter Lesson]] +50 XP: done in the game, imported
 
 Map: [[Map]] · Mentors: [[Your path]] · Your field: [[Your field]] · Resources: [[Resources]] · Tree: [[Tech tree]]
 
