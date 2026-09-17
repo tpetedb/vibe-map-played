@@ -1,6 +1,6 @@
 ---
 title: "Cost, tokens and model choice"
-date: 2026-09-16
+date: 2026-09-17
 tags: [tech, agents]
 ---
 # Cost, tokens and model choice

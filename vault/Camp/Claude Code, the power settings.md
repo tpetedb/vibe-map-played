@@ -1,13 +1,13 @@
 ---
 title: "Claude Code, the power settings"
-date: 2026-09-16
+date: 2026-09-17
 tags: [workstream]
 ---
 # Claude Code, the power settings
 
 Stop 5, [[Evening 4]]. Outcome: Plan mode, --continue, /compact, /rewind, permissions, memory, teleport between terminal, web and phone.
 
-## 2026-09-16
+## 2026-09-17
 - not done yet; run `vibe check` when it is
 - links: [[Tonight]], [[Map]]
 

@@ -1,13 +1,13 @@
 ---
 title: "Data Warehouse"
-date: 2026-09-16
+date: 2026-09-17
 tags: [workstream]
 ---
 # Data Warehouse
 
 20:00, [[Evening 1]]. Outcome: scores.csv, DuckDB queries, a Python chart.
 
-## 2026-09-16
+## 2026-09-17
 - not done yet; run `vibe check` when it is
 - links: [[Tonight]], [[Map]]
 

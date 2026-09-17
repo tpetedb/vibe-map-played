@@ -1,6 +1,6 @@
 ---
 title: "The OpenCode team"
-date: 2026-09-16
+date: 2026-09-17
 tags: [people]
 ---
 # The OpenCode team

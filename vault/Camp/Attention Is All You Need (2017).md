@@ -1,13 +1,13 @@
 ---
 title: "Attention Is All You Need (2017)"
-date: 2026-09-16
+date: 2026-09-17
 tags: [workstream]
 ---
 # Attention Is All You Need (2017)
 
 Stop 3, [[Evening 2]]. Outcome: Tokens, embeddings, attention, next-token prediction: the transformer, without hand-waving.
 
-## 2026-09-16
+## 2026-09-17
 - not done yet; run `vibe check` when it is
 - links: [[Tonight]], [[Map]]
 

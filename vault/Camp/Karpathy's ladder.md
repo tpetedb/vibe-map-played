@@ -1,13 +1,13 @@
 ---
 title: "Karpathy's ladder"
-date: 2026-09-16
+date: 2026-09-17
 tags: [workstream]
 ---
 # Karpathy's ladder
 
 Stop 8, [[Evening 2]]. Outcome: Build a tiny language model yourself, with Claude as the tutor.
 
-## 2026-09-16
+## 2026-09-17
 - not done yet; run `vibe check` when it is
 - links: [[Tonight]], [[Map]]
 

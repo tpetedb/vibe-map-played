@@ -1,13 +1,13 @@
 ---
 title: "The other agents"
-date: 2026-09-16
+date: 2026-09-17
 tags: [workstream]
 ---
 # The other agents
 
 Stop 7, [[Evening 4]]. Outcome: OpenCode, Codex CLI, Gemini CLI: same AGENTS.md, same .agents/skills, different engines.
 
-## 2026-09-16
+## 2026-09-17
 - not done yet; run `vibe check` when it is
 - links: [[Tonight]], [[Map]]
 

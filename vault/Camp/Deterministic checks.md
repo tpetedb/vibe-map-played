@@ -1,13 +1,13 @@
 ---
 title: "Deterministic checks"
-date: 2026-09-16
+date: 2026-09-17
 tags: [workstream]
 ---
 # Deterministic checks
 
 Stop 3, [[Evening 3]]. Outcome: Tests, linters and formatters: the cheapest way to make an agent behave.
 
-## 2026-09-16
+## 2026-09-17
 - not done yet; run `vibe check` when it is
 - links: [[Tonight]], [[Map]]
 

@@ -1,13 +1,13 @@
 ---
 title: "Git, part one"
-date: 2026-09-16
+date: 2026-09-17
 tags: [workstream]
 ---
 # Git, part one
 
 Stop 3, [[Evening 4]]. Outcome: Fork, clone, branch, commit, push, pull request, learned by doing it to the template.
 
-## 2026-09-16
+## 2026-09-17
 - not done yet; run `vibe check` when it is
 - links: [[Tonight]], [[Map]]
 

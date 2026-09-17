@@ -1,6 +1,6 @@
 ---
 title: "zsh and your shell config"
-date: 2026-09-16
+date: 2026-09-17
 tags: [tech, shell]
 ---
 # zsh and your shell config

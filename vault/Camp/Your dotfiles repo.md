@@ -1,13 +1,13 @@
 ---
 title: "Your dotfiles repo"
-date: 2026-09-16
+date: 2026-09-17
 tags: [workstream]
 ---
 # Your dotfiles repo
 
 Stop 8, [[Evening 4]]. Outcome: Everything you configured tonight, versioned, so the next Mac is ten minutes.
 
-## 2026-09-16
+## 2026-09-17
 - not done yet; run `vibe check` when it is
 - links: [[Tonight]], [[Map]]
 

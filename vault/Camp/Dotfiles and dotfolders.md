@@ -1,13 +1,13 @@
 ---
 title: "Dotfiles and dotfolders"
-date: 2026-09-16
+date: 2026-09-17
 tags: [workstream]
 ---
 # Dotfiles and dotfolders
 
 Stop 2, [[Evening 3]]. Outcome: What .git, .gitignore, .env, .venv, .claude, .agents, .github and ~/.config actually are.
 
-## 2026-09-16
+## 2026-09-17
 - not done yet; run `vibe check` when it is
 - links: [[Tonight]], [[Map]]
 

@@ -1,6 +1,6 @@
 ---
 title: "GitHub, pull requests, Pages"
-date: 2026-09-16
+date: 2026-09-17
 tags: [tech, git]
 ---
 # GitHub, pull requests, Pages

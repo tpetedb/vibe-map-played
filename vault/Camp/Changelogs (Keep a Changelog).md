@@ -1,6 +1,6 @@
 ---
 title: "Changelogs (Keep a Changelog)"
-date: 2026-09-16
+date: 2026-09-17
 tags: [tech, docs]
 ---
 # Changelogs (Keep a Changelog)

@@ -1,6 +1,6 @@
 ---
 title: "Evening 3"
-date: 2026-09-16
+date: 2026-09-17
 tags: [overview]
 ---
 # Evening 3

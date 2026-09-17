@@ -1,13 +1,13 @@
 ---
 title: "Open weights versus closed models, on your own Mac"
-date: 2026-09-16
+date: 2026-09-17
 tags: [workstream]
 ---
 # Open weights versus closed models, on your own Mac
 
 Stop 6, [[Evening 2]]. Outcome: Licences, Llama, Mistral, Qwen, Gemma; run a local model with Ollama on Apple silicon.
 
-## 2026-09-16
+## 2026-09-17
 - not done yet; run `vibe check` when it is
 - links: [[Tonight]], [[Map]]
 

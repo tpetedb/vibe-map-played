@@ -1,13 +1,13 @@
 ---
 title: "Evals: measure the agent, not the vibe"
-date: 2026-09-16
+date: 2026-09-17
 tags: [workstream]
 ---
 # Evals: measure the agent, not the vibe
 
 Stop 8, [[Evening 3]]. Outcome: A tiny harness that scores your prompts and skills on fixed cases.
 
-## 2026-09-16
+## 2026-09-17
 - not done yet; run `vibe check` when it is
 - links: [[Tonight]], [[Map]]
 

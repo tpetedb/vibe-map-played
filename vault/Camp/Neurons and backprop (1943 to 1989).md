@@ -1,13 +1,13 @@
 ---
 title: "Neurons and backprop (1943 to 1989)"
-date: 2026-09-16
+date: 2026-09-17
 tags: [workstream]
 ---
 # Neurons and backprop (1943 to 1989)
 
 Stop 1, [[Evening 2]]. Outcome: McCulloch-Pitts, Rosenblatt, Rumelhart-Hinton-Williams, LeCun's zip codes.
 
-## 2026-09-16
+## 2026-09-17
 - not done yet; run `vibe check` when it is
 - links: [[Tonight]], [[Map]]
 

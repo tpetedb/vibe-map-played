@@ -1,13 +1,13 @@
 ---
 title: "Business Continuity"
-date: 2026-09-16
+date: 2026-09-17
 tags: [workstream]
 ---
 # Business Continuity
 
 21:00, [[Evening 1]]. Outcome: git history, one rollback, one hook.
 
-## 2026-09-16
+## 2026-09-17
 - not done yet; run `vibe check` when it is
 - links: [[Tonight]], [[Map]]
 

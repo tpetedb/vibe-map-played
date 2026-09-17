@@ -15,7 +15,7 @@ The CLI is the source of truth: `uv run vibe <command>` (`uv run vibe --help` li
 - `export`: print the code to paste into the game (Roadmap, Import progress)
 - `import <code>`: take a code exported from the game (Roadmap, Export progress)
 - `explain <n>`: the workstream in plain words; `persona`: the mentor voice; `start`: the onboarding terminal
-- `scores`: the summary of `data/scores.csv`
+- `scores`: the summary of `workspace/data/scores.csv`
 
 When the user finishes a workstream: run `check <n>`. If it reports the definition of done unmet, say what is missing instead of forcing it; use `done <n> "..."` only when the user explicitly says to mark it done. Then use the obsidian-notes skill to enrich the note with what was actually built (file names, decisions, one thing learned), then `vault build` and `vault lint`. End with one line: what changed, and the next workstream.
 

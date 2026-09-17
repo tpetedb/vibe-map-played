@@ -1,13 +1,13 @@
 ---
 title: "The ImageNet moment (2012)"
-date: 2026-09-16
+date: 2026-09-17
 tags: [workstream]
 ---
 # The ImageNet moment (2012)
 
 Stop 2, [[Evening 2]]. Outcome: Fei-Fei Li's dataset, AlexNet, and why GPUs mattered.
 
-## 2026-09-16
+## 2026-09-17
 - not done yet; run `vibe check` when it is
 - links: [[Tonight]], [[Map]]
 

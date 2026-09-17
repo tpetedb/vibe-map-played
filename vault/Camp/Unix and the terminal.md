@@ -1,6 +1,6 @@
 ---
 title: "Unix and the terminal"
-date: 2026-09-16
+date: 2026-09-17
 tags: [tech, shell]
 ---
 # Unix and the terminal

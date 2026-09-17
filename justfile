@@ -1,14 +1,6 @@
-# Vibe Code Camp tasks. Run `just` or `just --list` to see them.
-# Python work delegates to uv; orchestration lives here. Install just with
-# `brew install just`.
-#
-# THIS file is the human's: starting the evening, playing, building, testing.
-# The imported agents.just adds two groups that render below these in
-# `just --list`: [check] (one targeted check per known mistake class) and
-# [agent] (compact recipes for coding agents that replace hand-composed
-# multi-step shell). Humans can use those too.
-
-import 'agents.just'
+# Your camp's tasks. Run `just` to list them. Everything delegates to the
+# `vibe` command (uv tool install vibe-map); nothing here needs the engine's
+# source. Install just with `brew install just`.
 
 # show the task list
 default:
@@ -16,98 +8,62 @@ default:
 
 # the onboarding terminal: checks the machine, offers installs, launches things
 start:
-    uv run vibe start
+    vibe start
 
-# install what the evening needs: Python env, browsers for the tests, skill links, vault
-setup *args:
-    ./scripts/setup.sh {{args}}
+# first time here: the progress file, the vault, the skills linked for Claude Code
+setup:
+    vibe init
+    mkdir -p .claude/skills
+    for d in .agents/skills/*/; do n=$(basename "$d"); [ -e ".claude/skills/$n" ] || ln -s "../../.agents/skills/$n" ".claude/skills/$n"; done
+    @echo "ready: just start"
 
-# the long game: the game in the browser, the vault in Obsidian, the status in this terminal (docs/LONG-GAME.md)
+# the long game: the game in the browser, the vault in Obsidian, your status here
 camp:
-    open game/vibe-map.html
+    vibe play
     -open -a Obsidian vault
-    uv run vibe status
+    vibe status
 
-# open the game in the default browser
+# open the game (the hosted one, or the cached copy from `vibe play --offline`)
 game:
-    open game/vibe-map.html
-
-# pull the AI feeds into the vault note News and bake them into the game
-news:
-    uv run vibe news
-    uv run python tools/build.py
-
-# rebuild game/vibe-map.html from src/
-build:
-    uv run python tools/build.py
-
-# regenerate the tech tree outputs from vibemap/tech.py (notes, tree JS, ROADMAP)
-tree:
-    uv run python tools/regen_tree.py
-    uv run python tools/build.py
+    vibe play
 
 # where you are in the campaign, with XP and quests
 status:
-    uv run vibe status
+    vibe status
 
 # verify the definition of done for a workstream, award the XP (all if omitted)
 check *n:
-    uv run vibe check {{n}}
+    vibe check {{n}}
+
+# mark a workstream done with one line on what you built
+done n note:
+    vibe done {{n}} "{{note}}"
 
 # rebuild the vault notes and the Mermaid map, then lint for orphans and dead links
 vault:
-    uv run vibe vault build
-    uv run vibe vault lint
+    vibe vault build
+    vibe vault lint
 
-# run the whole pytest battery (CLI, build, Playwright in Chromium and WebKit)
-test:
-    uv run pytest
+# pull the AI feeds into the vault note News
+news:
+    vibe news
 
-# the browser smoke tests only, with screenshots in tests/out
-smoke:
-    uv run pytest tests/test_game_smoke.py
-
-# lint (ruff check + format check)
-lint:
-    uv run ruff check . && uv run ruff format --check .
-
-# what CI runs: lint + tests + build check
-verify: lint test
-
-# render the screenshots and the gameplay GIF in docs/media from the built game
-media:
-    uv run python tools/media.py
-
-# regenerate docs/COOKBOOK.md from the personas
-cookbook:
-    uv run python tools/gen_cookbook.py
-
-# fetch the claude-obsidian skill set (MIT) and print how to load it on this vault
-obsidian-plugin:
-    @test -d ~/.claude/plugins/claude-obsidian || git clone --depth 1 https://github.com/AgriciDaniel/claude-obsidian.git ~/.claude/plugins/claude-obsidian
-    @echo 'claude --plugin-dir ~/.claude/plugins/claude-obsidian   # then /claude-obsidian:wiki-lint on vault/'
-
-# terminal setup modules from Tom's toolbox: `just dotfiles` lists, `just dotfiles install zsh` writes
-dotfiles *args:
-    uv run vibe dotfiles {{args}}
-
-# what is installed and what is missing; `just toolbelt missing` installs everything missing
-toolbelt *install:
+# the scores in workspace/data: summary, or `just scores top_runs` for a query in workspace/sql
+scores *sql:
     #!/usr/bin/env bash
     set -euo pipefail
-    if [ -n "{{install}}" ]; then uv run vibe toolbelt --install "{{install}}"; else uv run vibe toolbelt; fi
+    if [ -n "{{sql}}" ]; then vibe scores --sql "{{sql}}"; else vibe scores; fi
 
 # ask the provider to explain the last commits in plain words
 explain n="3":
-    uv run vibe explain -n {{n}}
+    vibe explain -n {{n}}
 
 # example: just council "Should I learn git before Python?"
 # convene the mentors on a question; minutes land in the vault
 council topic:
-    uv run vibe council "{{topic}}"
+    vibe council "{{topic}}"
 
-# example: just break sandbox
-# a sandbox branch to break things in: play/<name>, from the current branch
+# a sandbox branch to break things in: play/<name>
 break name:
     git switch -c play/{{name}}
     @echo "You are on play/{{name}}. Break anything. Come back with: just rescue"
@@ -121,8 +77,3 @@ rescue:
     git add -A && git commit -qm "Play session on $branch" || true
     git switch main
     echo "Back on main. $branch is kept; delete it with: git branch -D $branch"
-    uv run vibe explain -n 1 || true
-
-# remove build caches and test output
-clean:
-    rm -rf .pytest_cache .ruff_cache tests/out

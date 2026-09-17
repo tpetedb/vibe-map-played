@@ -1,13 +1,13 @@
 ---
 title: "CI: the check that runs without you"
-date: 2026-09-16
+date: 2026-09-17
 tags: [workstream]
 ---
 # CI: the check that runs without you
 
 Stop 6, [[Evening 3]]. Outcome: GitHub Actions on every push, so the main branch is always green.
 
-## 2026-09-16
+## 2026-09-17
 - not done yet; run `vibe check` when it is
 - links: [[Tonight]], [[Map]]
 

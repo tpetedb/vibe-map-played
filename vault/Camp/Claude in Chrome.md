@@ -1,13 +1,13 @@
 ---
 title: "Claude in Chrome"
-date: 2026-09-16
+date: 2026-09-17
 tags: [workstream]
 ---
 # Claude in Chrome
 
 Stop 6, [[Evening 4]]. Outcome: A browser agent for the repetitive web tasks, and Claude Code driving Chrome.
 
-## 2026-09-16
+## 2026-09-17
 - not done yet; run `vibe check` when it is
 - links: [[Tonight]], [[Map]]
 

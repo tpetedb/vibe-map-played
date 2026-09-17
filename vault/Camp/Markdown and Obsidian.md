@@ -1,6 +1,6 @@
 ---
 title: "Markdown and Obsidian"
-date: 2026-09-16
+date: 2026-09-17
 tags: [tech, formats]
 ---
 # Markdown and Obsidian

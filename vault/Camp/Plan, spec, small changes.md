@@ -1,13 +1,13 @@
 ---
 title: "Plan, spec, small changes"
-date: 2026-09-16
+date: 2026-09-17
 tags: [workstream]
 ---
 # Plan, spec, small changes
 
 Stop 5, [[Evening 3]]. Outcome: The Cherny workflow: plan mode, a spec, a to-do list, one PR at a time.
 
-## 2026-09-16
+## 2026-09-17
 - not done yet; run `vibe check` when it is
 - links: [[Tonight]], [[Map]]
 

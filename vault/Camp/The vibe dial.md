@@ -1,13 +1,13 @@
 ---
 title: "The vibe dial"
-date: 2026-09-16
+date: 2026-09-17
 tags: [workstream]
 ---
 # The vibe dial
 
 Stop 1, [[Evening 3]]. Outcome: Karpathy's vibe coding, Cherny's instrumented coding, and knowing which end you are on.
 
-## 2026-09-16
+## 2026-09-17
 - not done yet; run `vibe check` when it is
 - links: [[Tonight]], [[Map]]
 

@@ -1,13 +1,13 @@
 ---
 title: "Repetitive tasks, reliably"
-date: 2026-09-16
+date: 2026-09-17
 tags: [workstream]
 ---
 # Repetitive tasks, reliably
 
 Stop 7, [[Evening 3]]. Outcome: Headless runs, schedules, idempotency, and when a subagent beats a prompt.
 
-## 2026-09-16
+## 2026-09-17
 - not done yet; run `vibe check` when it is
 - links: [[Tonight]], [[Map]]
 

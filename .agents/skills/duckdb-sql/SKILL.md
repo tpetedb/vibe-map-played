@@ -1,16 +1,16 @@
 ---
 name: duckdb-sql
-description: Answers questions about the numbers in data/scores.csv with DuckDB SQL, straight from the CSV, no database server. Use for "top runs", "best score", "average per player", "how many runs", "who is winning", "longest streak", "query the scores", or when asked to write, explain or fix SQL or a file in sql/.
+description: Answers questions about the numbers in workspace/data/scores.csv with DuckDB SQL, straight from the CSV, no database server. Use for "top runs", "best score", "average per player", "how many runs", "who is winning", "longest streak", "query the scores", or when asked to write, explain or fix SQL or a file in sql/.
 allowed-tools: Bash(duckdb *)
 ---
 # DuckDB SQL
 
-DuckDB reads a CSV as a table: `select * from 'data/scores.csv'`. Columns: `played_at, player, score, duration_s`. The file is a system of record: query it, never rewrite it. Docs: https://duckdb.org/docs/ . SQL basics: https://sqlbolt.com
+DuckDB reads a CSV as a table: `select * from 'workspace/data/scores.csv'`. Columns: `played_at, player, score, duration_s`. The file is a system of record: query it, never rewrite it. Docs: https://duckdb.org/docs/ . SQL basics: https://sqlbolt.com
 
 Run (the `duckdb` CLI comes from `brew install duckdb`; the Python package is a project dependency):
-- one-off: `duckdb -c "select count(*) from 'data/scores.csv'"`
-- a saved query: `duckdb < sql/top_runs.sql`
-- in Python: `uv run python -c "import duckdb; duckdb.sql(\"select * from 'data/scores.csv' limit 5\").show()"`
+- one-off: `duckdb -c "select count(*) from 'workspace/data/scores.csv'"`
+- a saved query: `duckdb < workspace/sql/top_runs.sql`
+- in Python: `uv run python -c "import duckdb; duckdb.sql(\"select * from 'workspace/data/scores.csv' limit 5\").show()"`
 - the standard summary: `uv run vibe scores`
 
 Tested queries in `sql/`: `top_runs.sql` (five best runs), `per_player.sql` (runs, best, mean per player), `streaks.sql` (longest improving streak, with `lag()` over a window). Start from these.

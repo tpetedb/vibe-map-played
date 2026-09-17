@@ -1,13 +1,13 @@
 ---
 title: "What they cannot do, and why"
-date: 2026-09-16
+date: 2026-09-17
 tags: [workstream]
 ---
 # What they cannot do, and why
 
 Stop 7, [[Evening 2]]. Outcome: Hallucination, context windows, tokeniser quirks, and interpretability.
 
-## 2026-09-16
+## 2026-09-17
 - not done yet; run `vibe check` when it is
 - links: [[Tonight]], [[Map]]
 
