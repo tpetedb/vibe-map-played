@@ -28,7 +28,7 @@ Anthropic runs a /code-review command on every pull request internally, and a /f
 - Cat Wu: That is the design goal. They work to lower the barrier for people who are not: it should be intuitive enough that you drop in and it works, with point-and-click surfaces next to the terminal. ([How to use Claude Code like the people who built it (Every, with Cat Wu and Boris Cherny)](https://every.to/podcast/how-to-use-claude-code-like-the-people-who-built-it))
 
 ## Your exercise: Spec, plan, to-do, in that order
-About 12 minutes, in `workspace/mentors/wu/`. Status: not yet.
+About 12 minutes, in `workspace/mentors/wu/`. Status: done.
 
 1. Pick one small thing you want built this week.
 2. Write workspace/mentors/wu/spec.md with three headings: ## Spec, ## Plan, ## To-do.

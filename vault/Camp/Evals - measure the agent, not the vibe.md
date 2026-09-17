@@ -13,12 +13,15 @@ Stop 8, [[Evening 3]]. Outcome: A tiny harness that scores your prompts and skil
 - check told me what was still missing before I could claim the stop. What I
 - learned is that the deliverable is the point: the file on disk is what the
 - check reads, and the note is what I will read again. See [[Git]] and
-- [[Docker and containers]] for the parts I had to look up twice.
+- [[Docker and containers]] for the parts I had to look up twice, and
+- [[Prompting - task, goal, hard constraints]] for the way I asked.
 - links: [[Tonight]], [[Map]]
 
 ## Sources
 - https://docs.claude.com/en/docs/test-and-evaluate/develop-tests
 - https://code.claude.com/docs/en/best-practices
 - https://github.com/anthropics/anthropic-cookbook
+
+- I read around it afterwards to get the history straight: https://en.wikipedia.org/wiki/History_of_artificial_intelligence
 
 #workstream

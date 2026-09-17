@@ -1,3 +1,9 @@
+# Vibe Code Camp, played
+
+This repository is a camp made by `vibe new` from [tpetedb/vibe-map](https://github.com/tpetedb/vibe-map), after a full campaign: four islands, thirty-two stops, every mentor's exercise done and checked, every artifact built for real, the game forked and repaired, the finale reached, played as Tom (data engineer, hard). The three zones are visible: `workspace/` holds the worked example (the game from workstream 1, the scores, the queries, the chart) next to what the island asked for (`artifacts/`, `mentors/`, `forks/` and the deliverable of every stop), `vault/` the notes the CLI built, and the configuration files the rules and skills the agent works with. The state (`.vibe/state.json`) is committed so you can see what an evening leaves behind before you start your own. Open `vault/` in Obsidian for the graph (the R2-D2 theme is installed; pick it under Appearance); `vibe status` for the grid; `vibe pet` for the creature the name rolled. The camp's own README follows.
+
+---
+
 # Your Vibe Code Camp
 
 ## Start here

@@ -2,19 +2,646 @@
   "version": 2,
   "name": "Tom",
   "doneW": {
-    "campus": [],
-    "winter": [],
-    "desert": [],
-    "prod": []
+    "campus": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "winter": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "desert": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "prod": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ]
   },
-  "path": {},
-  "log": [],
-  "xp": 0,
-  "badges": [],
-  "checks": {},
+  "path": {
+    "cherny": "deep",
+    "wu": "deep",
+    "karpathy": "deep",
+    "lecun": "deep",
+    "hinton": "skip",
+    "li": "deep",
+    "sutton": "deep",
+    "amodei": "skip",
+    "olah": "deep",
+    "hashimoto": "deep",
+    "torvalds": "deep",
+    "opencode": "skip"
+  },
+  "log": [
+    {
+      "world": "campus",
+      "n": 1,
+      "at": "2026-09-17T19:47",
+      "note": "done in the game, imported",
+      "xp": 75
+    },
+    {
+      "world": "campus",
+      "n": 2,
+      "at": "2026-09-17T19:47",
+      "note": "done in the game, imported",
+      "xp": 75
+    },
+    {
+      "world": "campus",
+      "n": 3,
+      "at": "2026-09-17T19:47",
+      "note": "done in the game, imported",
+      "xp": 75
+    },
+    {
+      "world": "campus",
+      "n": 4,
+      "at": "2026-09-17T19:47",
+      "note": "done in the game, imported",
+      "xp": 75
+    },
+    {
+      "world": "campus",
+      "n": 5,
+      "at": "2026-09-17T19:47",
+      "note": "done in the game, imported",
+      "xp": 75
+    },
+    {
+      "world": "campus",
+      "n": 6,
+      "at": "2026-09-17T19:47",
+      "note": "done in the game, imported",
+      "xp": 75
+    },
+    {
+      "world": "campus",
+      "n": 7,
+      "at": "2026-09-17T19:47",
+      "note": "done in the game, imported",
+      "xp": 75
+    },
+    {
+      "world": "campus",
+      "n": 8,
+      "at": "2026-09-17T19:47",
+      "note": "done in the game, imported",
+      "xp": 75
+    },
+    {
+      "world": "desert",
+      "n": 1,
+      "at": "2026-09-17T19:47",
+      "note": "done in the game, imported",
+      "xp": 75
+    },
+    {
+      "world": "desert",
+      "n": 2,
+      "at": "2026-09-17T19:47",
+      "note": "done in the game, imported",
+      "xp": 75
+    },
+    {
+      "world": "desert",
+      "n": 3,
+      "at": "2026-09-17T19:47",
+      "note": "done in the game, imported",
+      "xp": 75
+    },
+    {
+      "world": "desert",
+      "n": 4,
+      "at": "2026-09-17T19:47",
+      "note": "done in the game, imported",
+      "xp": 75
+    },
+    {
+      "world": "desert",
+      "n": 5,
+      "at": "2026-09-17T19:47",
+      "note": "done in the game, imported",
+      "xp": 75
+    },
+    {
+      "world": "desert",
+      "n": 6,
+      "at": "2026-09-17T19:47",
+      "note": "done in the game, imported",
+      "xp": 75
+    },
+    {
+      "world": "desert",
+      "n": 7,
+      "at": "2026-09-17T19:47",
+      "note": "done in the game, imported",
+      "xp": 75
+    },
+    {
+      "world": "desert",
+      "n": 8,
+      "at": "2026-09-17T19:47",
+      "note": "done in the game, imported",
+      "xp": 75
+    },
+    {
+      "world": "prod",
+      "n": 1,
+      "at": "2026-09-17T19:47",
+      "note": "done in the game, imported",
+      "xp": 75
+    },
+    {
+      "world": "prod",
+      "n": 2,
+      "at": "2026-09-17T19:47",
+      "note": "done in the game, imported",
+      "xp": 75
+    },
+    {
+      "world": "prod",
+      "n": 3,
+      "at": "2026-09-17T19:47",
+      "note": "done in the game, imported",
+      "xp": 75
+    },
+    {
+      "world": "prod",
+      "n": 4,
+      "at": "2026-09-17T19:47",
+      "note": "done in the game, imported",
+      "xp": 75
+    },
+    {
+      "world": "prod",
+      "n": 5,
+      "at": "2026-09-17T19:47",
+      "note": "done in the game, imported",
+      "xp": 75
+    },
+    {
+      "world": "prod",
+      "n": 6,
+      "at": "2026-09-17T19:47",
+      "note": "done in the game, imported",
+      "xp": 75
+    },
+    {
+      "world": "prod",
+      "n": 7,
+      "at": "2026-09-17T19:47",
+      "note": "done in the game, imported",
+      "xp": 75
+    },
+    {
+      "world": "prod",
+      "n": 8,
+      "at": "2026-09-17T19:47",
+      "note": "done in the game, imported",
+      "xp": 75
+    },
+    {
+      "world": "winter",
+      "n": 1,
+      "at": "2026-09-17T19:47",
+      "note": "done in the game, imported",
+      "xp": 75
+    },
+    {
+      "world": "winter",
+      "n": 2,
+      "at": "2026-09-17T19:47",
+      "note": "done in the game, imported",
+      "xp": 75
+    },
+    {
+      "world": "winter",
+      "n": 3,
+      "at": "2026-09-17T19:47",
+      "note": "done in the game, imported",
+      "xp": 75
+    },
+    {
+      "world": "winter",
+      "n": 4,
+      "at": "2026-09-17T19:47",
+      "note": "done in the game, imported",
+      "xp": 75
+    },
+    {
+      "world": "winter",
+      "n": 5,
+      "at": "2026-09-17T19:47",
+      "note": "done in the game, imported",
+      "xp": 75
+    },
+    {
+      "world": "winter",
+      "n": 6,
+      "at": "2026-09-17T19:47",
+      "note": "done in the game, imported",
+      "xp": 75
+    },
+    {
+      "world": "winter",
+      "n": 7,
+      "at": "2026-09-17T19:47",
+      "note": "done in the game, imported",
+      "xp": 75
+    },
+    {
+      "world": "winter",
+      "n": 8,
+      "at": "2026-09-17T19:47",
+      "note": "done in the game, imported",
+      "xp": 75
+    }
+  ],
+  "xp": 4800,
+  "badges": [
+    "first-light",
+    "full-evening",
+    "campaign",
+    "streak-3",
+    "linked",
+    "collector",
+    "mentored",
+    "builder"
+  ],
+  "checks": {
+    "mentor:cherny": {
+      "ok": true,
+      "at": "2026-09-17T19:47",
+      "passed": [
+        "One rule, and the command that proves it",
+        "your note on Boris Cherny"
+      ],
+      "failed": []
+    },
+    "mentor:wu": {
+      "ok": true,
+      "at": "2026-09-17T19:47",
+      "passed": [
+        "Spec, plan, to-do, in that order",
+        "your note on Cat Wu"
+      ],
+      "failed": []
+    },
+    "mentor:karpathy": {
+      "ok": true,
+      "at": "2026-09-17T19:47",
+      "passed": [
+        "A bigram model in twenty lines",
+        "your note on Andrej Karpathy"
+      ],
+      "failed": []
+    },
+    "mentor:lecun": {
+      "ok": true,
+      "at": "2026-09-17T19:47",
+      "passed": [
+        "What mattered, and what you could throw away",
+        "your note on Yann LeCun"
+      ],
+      "failed": []
+    },
+    "mentor:hinton": {
+      "ok": true,
+      "at": "2026-09-17T19:47",
+      "passed": [
+        "Twenty steps of learning from error",
+        "your note on Geoffrey Hinton"
+      ],
+      "failed": []
+    },
+    "mentor:li": {
+      "ok": true,
+      "at": "2026-09-17T19:47",
+      "passed": [
+        "Label ten things yourself",
+        "your note on Fei-Fei Li"
+      ],
+      "failed": []
+    },
+    "mentor:sutton": {
+      "ok": true,
+      "at": "2026-09-17T19:47",
+      "passed": [
+        "The rule you wrote against plain search",
+        "your note on Rich Sutton"
+      ],
+      "failed": []
+    },
+    "mentor:amodei": {
+      "ok": true,
+      "at": "2026-09-17T19:47",
+      "passed": [
+        "A forecast you can be wrong about",
+        "your note on Dario Amodei"
+      ],
+      "failed": []
+    },
+    "mentor:olah": {
+      "ok": true,
+      "at": "2026-09-17T19:47",
+      "passed": [
+        "Draw the circuit of one decision",
+        "your note on Chris Olah"
+      ],
+      "failed": []
+    },
+    "mentor:hashimoto": {
+      "ok": true,
+      "at": "2026-09-17T19:47",
+      "passed": [
+        "One readable config file",
+        "your note on Mitchell Hashimoto"
+      ],
+      "failed": []
+    },
+    "mentor:torvalds": {
+      "ok": true,
+      "at": "2026-09-17T19:47",
+      "passed": [
+        "Hash a blob the way git does",
+        "your note on Linus Torvalds"
+      ],
+      "failed": []
+    },
+    "mentor:opencode": {
+      "ok": true,
+      "at": "2026-09-17T19:47",
+      "passed": [
+        "The same prompt, two providers",
+        "your note on The OpenCode team"
+      ],
+      "failed": []
+    },
+    "artifact:cafe": {
+      "ok": true,
+      "at": "2026-09-17T19:47",
+      "passed": [
+        "Serve one request and get a 404 on purpose",
+        "your note on The cafe"
+      ],
+      "failed": []
+    },
+    "artifact:fountain": {
+      "ok": true,
+      "at": "2026-09-17T19:47",
+      "passed": [
+        "Put a cache in front of a slow answer",
+        "your note on The fountain"
+      ],
+      "failed": []
+    },
+    "artifact:well": {
+      "ok": true,
+      "at": "2026-09-17T19:47",
+      "passed": [
+        "A table, an index and one transaction",
+        "your note on The well"
+      ],
+      "failed": []
+    },
+    "artifact:lighthouse": {
+      "ok": true,
+      "at": "2026-09-17T19:47",
+      "passed": [
+        "Turn a name into an address, twice over",
+        "your note on The lighthouse"
+      ],
+      "failed": []
+    },
+    "artifact:dock": {
+      "ok": true,
+      "at": "2026-09-17T19:47",
+      "passed": [
+        "Write a Dockerfile and build the image",
+        "your note on The dock"
+      ],
+      "failed": []
+    },
+    "artifact:windmill": {
+      "ok": true,
+      "at": "2026-09-17T19:47",
+      "passed": [
+        "A workflow that turns without you",
+        "your note on The windmill"
+      ],
+      "failed": []
+    },
+    "artifact:balloon": {
+      "ok": true,
+      "at": "2026-09-17T19:47",
+      "passed": [
+        "Put a number on the meter before you launch",
+        "your note on The balloon"
+      ],
+      "failed": []
+    },
+    "artifact:mountain": {
+      "ok": true,
+      "at": "2026-09-17T19:47",
+      "passed": [
+        "Name the six layers under your own keystroke",
+        "your note on The mountain"
+      ],
+      "failed": []
+    },
+    "artifact:stall": {
+      "ok": true,
+      "at": "2026-09-17T19:47",
+      "passed": [
+        "An API with a menu it writes itself",
+        "your note on The market stall"
+      ],
+      "failed": []
+    },
+    "artifact:bridge": {
+      "ok": true,
+      "at": "2026-09-17T19:47",
+      "passed": [
+        "Declare one server on the other side",
+        "your note on The bridge"
+      ],
+      "failed": []
+    },
+    "artifact:factory": {
+      "ok": true,
+      "at": "2026-09-17T19:47",
+      "passed": [
+        "Raw to bronze to silver to gold, in one file",
+        "your note on The factory"
+      ],
+      "failed": []
+    },
+    "artifact:post-office": {
+      "ok": true,
+      "at": "2026-09-17T19:47",
+      "passed": [
+        "A queue, a retry and a dead letter",
+        "your note on The post office"
+      ],
+      "failed": []
+    },
+    "artifact:shop": {
+      "ok": true,
+      "at": "2026-09-17T19:47",
+      "passed": [
+        "Buy a library and keep the receipt",
+        "your note on The shop"
+      ],
+      "failed": []
+    },
+    "artifact:bank": {
+      "ok": true,
+      "at": "2026-09-17T19:47",
+      "passed": [
+        "A safe, and the note that says what is in it",
+        "your note on The bank"
+      ],
+      "failed": []
+    },
+    "artifact:data-centre": {
+      "ok": true,
+      "at": "2026-09-17T19:47",
+      "passed": [
+        "The same work, one at a time and in a batch",
+        "your note on The data centre"
+      ],
+      "failed": []
+    },
+    "artifact:energy-grid": {
+      "ok": true,
+      "at": "2026-09-17T19:47",
+      "passed": [
+        "Back off the way the docs tell you to",
+        "your note on The energy grid"
+      ],
+      "failed": []
+    },
+    "artifact:library": {
+      "ok": true,
+      "at": "2026-09-17T19:47",
+      "passed": [
+        "Retrieve three notes and cite the one you used",
+        "your note on The library"
+      ],
+      "failed": []
+    },
+    "artifact:office": {
+      "ok": true,
+      "at": "2026-09-17T19:47",
+      "passed": [
+        "Hire one subagent with a narrow brief",
+        "your note on The office"
+      ],
+      "failed": []
+    },
+    "artifact:households": {
+      "ok": true,
+      "at": "2026-09-17T19:47",
+      "passed": [
+        "Export one person's rows, then erase them",
+        "your note on The households"
+      ],
+      "failed": []
+    },
+    "artifact:school": {
+      "ok": true,
+      "at": "2026-09-17T19:47",
+      "passed": [
+        "Split the data, train, and read the honest number",
+        "your note on The school"
+      ],
+      "failed": []
+    }
+  },
   "roadmap_done": [],
-  "artifacts": [],
-  "artifactsBuilt": [],
-  "mentors": [],
+  "artifacts": [
+    "cafe",
+    "fountain",
+    "well",
+    "lighthouse",
+    "dock",
+    "windmill",
+    "balloon",
+    "mountain",
+    "stall",
+    "bridge",
+    "factory",
+    "post-office",
+    "data-centre",
+    "energy-grid",
+    "library",
+    "shop",
+    "bank",
+    "office",
+    "households",
+    "school"
+  ],
+  "artifactsBuilt": [
+    "cafe",
+    "fountain",
+    "well",
+    "lighthouse",
+    "dock",
+    "windmill",
+    "balloon",
+    "mountain",
+    "stall",
+    "bridge",
+    "factory",
+    "post-office",
+    "shop",
+    "bank",
+    "data-centre",
+    "energy-grid",
+    "library",
+    "office",
+    "households",
+    "school"
+  ],
+  "mentors": [
+    "cherny",
+    "wu",
+    "karpathy",
+    "lecun",
+    "hinton",
+    "li",
+    "sutton",
+    "amodei",
+    "olah",
+    "hashimoto",
+    "torvalds",
+    "opencode"
+  ],
   "unlocked": []
 }

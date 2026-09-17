@@ -1,0 +1,10 @@
+filters:
+  and:
+    - file.hasTag("tech")
+views:
+  - type: table
+    name: Tech notes
+    order:
+      - file.name
+      - date
+      - tags

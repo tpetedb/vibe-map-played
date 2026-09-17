@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "camp-scores": {
+      "command": "uv",
+      "args": [
+        "--directory",
+        "/Users/you/vibe-map-camp",
+        "run",
+        "scores.py"
+      ]
+    }
+  }
+}

@@ -13,7 +13,8 @@ Stop 5, [[Evening 4]]. Outcome: Plan mode, --continue, /compact, /rewind, permis
 - check told me what was still missing before I could claim the stop. What I
 - learned is that the deliverable is the point: the file on disk is what the
 - check reads, and the note is what I will read again. See [[Git]] and
-- [[Docker and containers]] for the parts I had to look up twice.
+- [[Docker and containers]] for the parts I had to look up twice, and
+- [[Prompting - task, goal, hard constraints]] for the way I asked.
 - links: [[Tonight]], [[Map]]
 
 ## Sources
@@ -23,5 +24,7 @@ Stop 5, [[Evening 4]]. Outcome: Plan mode, --continue, /compact, /rewind, permis
 - https://howborisusesclaudecode.com/
 - https://claude.com/chrome
 - https://code.claude.com/docs/en/chrome
+
+- I read around it afterwards to get the history straight: https://en.wikipedia.org/wiki/History_of_artificial_intelligence
 
 #workstream

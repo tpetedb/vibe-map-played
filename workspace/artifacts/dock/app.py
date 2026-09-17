@@ -1,0 +1,1 @@
+print('one crate, opened')

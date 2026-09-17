@@ -13,12 +13,15 @@ Stop 5, [[Evening 2]]. Outcome: Pretraining, supervised fine-tuning, RLHF, and C
 - check told me what was still missing before I could claim the stop. What I
 - learned is that the deliverable is the point: the file on disk is what the
 - check reads, and the note is what I will read again. See [[Git]] and
-- [[Docker and containers]] for the parts I had to look up twice.
+- [[Docker and containers]] for the parts I had to look up twice, and
+- [[Prompting - task, goal, hard constraints]] for the way I asked.
 - links: [[Tonight]], [[Map]]
 
 ## Sources
 - https://arxiv.org/abs/2212.08073
 - https://www.anthropic.com/news/core-views-on-ai-safety
 - https://arxiv.org/abs/2203.02155
+
+- I read around it afterwards to get the history straight: https://en.wikipedia.org/wiki/History_of_artificial_intelligence
 
 #workstream

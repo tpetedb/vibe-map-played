@@ -1,0 +1,19 @@
+# Your fork of the game. One command: build it, then open it.
+# The source configuration is src/config/; the journey configuration stays in
+# your camp's config/camp.toml. See docs/CONFIG.md in the product.
+
+# show the task list
+default:
+    @just --list
+
+# concatenate src/ into game/vibe-map.html
+build:
+    python3 tools/build.py
+
+# open your build
+game: build
+    open game/vibe-map.html
+
+# record whether the build passes right now (the repair challenge)
+record:
+    python3 tools/record_build.py

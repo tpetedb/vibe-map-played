@@ -5,8 +5,8 @@
 
 [learner]
 name = "Tom"
-persona = "chief-of-staff"  # chief-of-staff | cleaning-ceo | university-md | pabo-teacher | data-engineer | interior-stylist
-difficulty = "normal"  # beginner | easy | normal | hard | expert | god
+persona = "data-engineer"  # chief-of-staff | cleaning-ceo | university-md | pabo-teacher | data-engineer | interior-stylist
+difficulty = "hard"  # beginner | easy | normal | hard | expert | god
 mode = "campaign"  # campaign (four evenings) | roadmap (the tech tree as quests)
 provider = "claude"  # claude | codex | gemini | copilot | opencode
 
