@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "runs": [
+    {
+      "at": "2026-09-17T19:34:46",
+      "ok": false,
+      "error": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/maxgroupit/vibe-map-played/workspace/forks/vibe-map/src/game/90-boot.js'"
+    },
+    {
+      "at": "2026-09-17T19:34:47",
+      "ok": true,
+      "error": ""
+    }
+  ]
+}

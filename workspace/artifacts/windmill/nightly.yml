@@ -1,0 +1,9 @@
+name: nightly
+on:
+  schedule:
+    - cron: "15 4 * * *"
+jobs:
+  turn:
+    runs-on: ubuntu-latest
+    steps:
+      - run: date -u

@@ -30,7 +30,7 @@ Zero to Hero goes micrograd (a 100-line autograd engine), makemore (character-le
 - Andrej Karpathy: There is a general track next to the technical one on his page: the same ideas, without the mathematics. ([karpathy.ai](https://karpathy.ai/))
 
 ## Your exercise: A bigram model in twenty lines
-About 15 minutes, in `workspace/mentors/karpathy/`. Status: not yet.
+About 15 minutes, in `workspace/mentors/karpathy/`. Status: done.
 
 1. Write workspace/mentors/karpathy/bigram.py with TEXT = 'the cat sat on the mat'.
 2. Count every pair of neighbouring characters into a dictionary of dictionaries.
