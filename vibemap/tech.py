@@ -495,7 +495,43 @@ T = [
             ),
             ("Source: Obsidian, About", "https://obsidian.md/about"),
         ],
-        ["vault", "agentsmd", "readme", "adr"],
+        ["vault", "agentsmd", "readme", "adr", "obsidian"],
+    ),
+    (
+        "obsidian",
+        "feudal",
+        "Obsidian features",
+        "Obsidian is more than a Markdown editor: properties (typed frontmatter), callouts, embeds, a canvas, bases (database views over your notes), templates, daily notes, bookmarks, a graph, a URI scheme, a CLI, Sync and Publish. The vault carries one note per feature, each with the exact commands, the syntax and a five-minute try taken from the official help; `vibe vault feature --all` writes them.",
+        "Obsidian left beta with 1.0.0 on 13 October 2022, added Canvas in December 2022, Properties with 1.4 on 31 August 2023, Bases (table and cards views) in the 1.9 line, and a command line interface that needs the 1.12 installer; kanban views arrived in 1.14 early access.",
+        "Run `uv run vibe vault feature --all`, open the vault in Obsidian, open `Camp map.canvas`, then `Tech notes.base`, then run Slides: Start presentation on Camp deck.",
+        [
+            ("Obsidian Help", "https://help.obsidian.md/"),
+            (
+                "The feature table",
+                "https://github.com/tpetedb/vibe-map/blob/main/docs/OBSIDIAN.md",
+            ),
+            (
+                "Source: Obsidian 1.0.0 changelog (13 October 2022)",
+                "https://obsidian.md/changelog/2022-10-13-desktop-v1.0.0/",
+            ),
+            (
+                "Source: Obsidian 1.4 changelog, Properties (31 August 2023)",
+                "https://obsidian.md/changelog/2023-08-31-desktop-v1.4.5/",
+            ),
+            (
+                "Source: Obsidian Help, Bases views (table and cards since 1.9)",
+                "https://help.obsidian.md/Bases/Views",
+            ),
+            (
+                "Source: Obsidian Help, Obsidian CLI (requires the 1.12 installer)",
+                "https://help.obsidian.md/Extending+Obsidian/Obsidian+CLI",
+            ),
+            (
+                "Source: Wikipedia, Obsidian (software): Canvas introduced December 2022",
+                "https://en.wikipedia.org/wiki/Obsidian_(software)",
+            ),
+        ],
+        ["vault"],
     ),
     (
         "data",
@@ -951,6 +987,89 @@ T = [
         [],
     ),
     (
+        "githooks",
+        "dark",
+        "Git hooks",
+        "Scripts git runs at moments in its own lifecycle: pre-commit before a commit is written, commit-msg to check the message, pre-push before anything leaves the machine, post-checkout and post-merge after a switch. A non-zero exit aborts the step. They live in .git/hooks (not versioned), or in a folder you commit and point at with core.hooksPath; the pre-commit framework and lefthook manage them from a config file.",
+        "Hooks have been in git since the first releases (the githooks manual page lists thirty of them); core.hooksPath arrived in Git 2.9 (June 2016) so a team can version its hooks; pre-commit (Yelp, 2014) and lefthook (Evil Martians, 2019) turned them into a one-line install.",
+        "In this repo: `mkdir -p .githooks && printf '#!/bin/sh\nuv run ruff check vibemap tests tools\n' > .githooks/pre-commit && chmod +x .githooks/pre-commit && git config core.hooksPath .githooks`. Then commit something with a lint error and watch it refuse.",
+        [
+            ("githooks manual", "https://git-scm.com/docs/githooks"),
+            (
+                "Pro Git, Customizing Git: Git Hooks",
+                "https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks",
+            ),
+            ("pre-commit framework", "https://pre-commit.com/"),
+            ("lefthook", "https://github.com/evilmartians/lefthook"),
+            (
+                "Source: githooks manual, default hooks directory and core.hooksPath",
+                "https://git-scm.com/docs/githooks",
+            ),
+            (
+                "Source: Git 2.9.0 release notes (core.hooksPath)",
+                "https://github.com/git/git/blob/master/Documentation/RelNotes/2.9.0.txt",
+            ),
+        ],
+        ["agenthooks", "ci"],
+    ),
+    (
+        "agenthooks",
+        "imperial",
+        "Agent hooks",
+        "The same idea inside a coding agent: shell commands (or HTTP endpoints, MCP tools, prompts) that Claude Code runs at points in its lifecycle. PreToolUse can block a tool call, PostToolUse can react to an edit (this repo backs up data/ after every edit), UserPromptSubmit can add context, Stop can keep the agent working, SessionStart can load state. Configured under hooks in settings.json, filtered by a matcher, fed JSON on stdin; exit 2 blocks, JSON on stdout decides.",
+        "Claude Code documents thirty-two hook events, from SessionStart and PreToolUse to PreCompact and WorktreeCreate, in five configuration scopes (user, project, local, managed policy, plugins); the vibe-map repo uses one PostToolUse hook and Tom's toolbox ships guard hooks as a template.",
+        "Open .claude/settings.json in this repo, read the PostToolUse hook, then add a PreToolUse hook with matcher Bash whose command is `jq -e '.tool_input.command | test(\"rm -rf\") | not' >/dev/null || exit 2`. Ask Claude to delete a folder with rm -rf and watch the refusal.",
+        [
+            ("Claude Code hooks reference", "https://code.claude.com/docs/en/hooks"),
+            ("Claude Code hooks guide", "https://code.claude.com/docs/en/hooks-guide"),
+            (
+                "This repo's hook",
+                "https://github.com/tpetedb/vibe-map/blob/main/.claude/settings.json",
+            ),
+            (
+                "Source: Claude Code hooks reference (events, scopes, exit codes)",
+                "https://code.claude.com/docs/en/hooks",
+            ),
+        ],
+        ["security", "headless"],
+    ),
+    (
+        "interfaces",
+        "dark",
+        "Interfaces: GUI, TUI, CLI, API",
+        "Four ways to talk to a program. A CLI takes a command and flags and prints text (`vibe status`, git, uv). A TUI draws a screen inside the terminal you can move around in (`just start`, htop, the Claude Code chat). A GUI is windows and a pointer (Obsidian, Zed, the browser game). An API is for programs, not people: HTTP endpoints that return JSON (GitHub's REST API), or a protocol two programs agree on, such as MCP between an agent and a tool server and ACP between an editor and an agent. One program can have all four: Obsidian has a GUI, a URI scheme and a CLI.",
+        "The command line came with time-sharing systems and Unix (1969); full-screen terminal programs followed once terminals could address the screen, with vi (1976) and the curses library (1978); the graphical desktop was prototyped on the Xerox Alto (1973) and sold with the Macintosh (1984); REST named the web's API style in Roy Fielding's dissertation (2000); MCP was published by Anthropic on 25 November 2024 and ACP by Zed in August 2025.",
+        "Run the same thing four ways: `uv run vibe status` (CLI), `just start` then Campaign map (TUI), the Roadmap button in game/vibe-map.html (GUI), and `gh api repos/tpetedb/vibe-map` (API). Notice what each one is good at.",
+        [
+            ("Textual, TUIs in Python", "https://textual.textualize.io/"),
+            ("click, CLIs in Python", "https://click.palletsprojects.com/"),
+            ("GitHub REST API", "https://docs.github.com/en/rest"),
+            ("Model Context Protocol", "https://modelcontextprotocol.io/"),
+            ("Agent Client Protocol", "https://agentclientprotocol.com/"),
+            (
+                "Source: Roy Fielding, Architectural Styles and the Design of Network-based Software Architectures (2000)",
+                "https://ics.uci.edu/~fielding/pubs/dissertation/top.htm",
+            ),
+            (
+                "Source: Anthropic, Introducing the Model Context Protocol (25 November 2024)",
+                "https://www.anthropic.com/news/model-context-protocol",
+            ),
+            (
+                "Source: Zed, Bring your own agent to Zed (ACP, August 2025)",
+                "https://zed.dev/blog/bring-your-own-agent-to-zed",
+            ),
+            (
+                "Source: Wikipedia, Text-based user interface (curses, 1978)",
+                "https://en.wikipedia.org/wiki/Text-based_user_interface",
+            ),
+            (
+                "Source: Wikipedia, Xerox Alto (1973) and Macintosh (1984)",
+                "https://en.wikipedia.org/wiki/Xerox_Alto",
+            ),
+        ],
+        ["unix", "mcp", "apis"],
+    ),
+    (
         "mcp",
         "imperial",
         "MCP (Model Context Protocol)",
@@ -1209,3 +1328,89 @@ T = [
         ["github"],
     ),
 ]
+
+
+# The tree is grouped by category, not by age: every topic has a depth of its
+# own (1 basics, 2 working knowledge, 3 deep), and a category is a shelf you
+# come back to. AGES stay as the player's XP ladder only.
+CATEGORIES = [
+    (
+        "shell",
+        "Terminal and shell",
+        "Where every command starts: the terminal, files, the shell and its config, ports, remote machines.",
+    ),
+    (
+        "git",
+        "Git and GitHub",
+        "Versions, branches, hooks, pull requests, Pages and the pipelines that run on every push.",
+    ),
+    (
+        "formats",
+        "Config and formats",
+        "The small languages configuration is written in: JSON, YAML, TOML, Markdown, .env.",
+    ),
+    (
+        "code",
+        "Languages and code",
+        "Python first, then the web, the other languages and how to know the code works.",
+    ),
+    ("data", "Data", "Files, schemas, warehouses and SQL over all of it."),
+    (
+        "net",
+        "Web, networks and APIs",
+        "How programs talk over HTTP and how to build and consume an API.",
+    ),
+    (
+        "ship",
+        "Ship and run",
+        "Containers, the cloud, platforms and agents that run without you.",
+    ),
+    (
+        "agents",
+        "Agents and the harness",
+        "What a model is and is not, the context, the harness, skills, hooks, MCP, subagents, security and cost.",
+    ),
+    (
+        "docs",
+        "Docs and versioning",
+        "The README, semantic versioning, changelogs and decision records.",
+    ),
+    (
+        "knowledge",
+        "Knowledge and Obsidian",
+        "Obsidian feature by feature and the vault as long-term memory.",
+    ),
+    (
+        "future",
+        "What is coming",
+        "What stays the same, what changes, and what to do about it.",
+    ),
+]
+DEPTHS = {1: "Basics", 2: "Working knowledge", 3: "Deep"}
+CATEGORY: dict[str, tuple[str, int]] = {
+    "unix": ("shell", 1), "files": ("shell", 1), "interfaces": ("shell", 1),
+    "bash": ("shell", 2), "zsh": ("shell", 2), "dotfiles": ("shell", 2),
+    "localhost": ("shell", 2), "ssh": ("shell", 3),
+    "git": ("git", 1), "github": ("git", 2), "githooks": ("git", 2), "ci": ("git", 3),
+    "config": ("formats", 1), "env": ("formats", 1), "markdown": ("formats", 1),
+    "toml": ("formats", 2), "yaml": ("formats", 2),
+    "python": ("code", 1), "pylibs": ("code", 2), "web": ("code", 2),
+    "languages": ("code", 3), "tests": ("code", 3),
+    "data": ("data", 1), "sql": ("data", 2),
+    "http": ("net", 1), "apis": ("net", 2),
+    "docker": ("ship", 2), "cloud": ("ship", 2), "headless": ("ship", 3),
+    "kubernetes": ("ship", 3),
+    "llm": ("agents", 1), "context": ("agents", 1), "agentsmd": ("agents", 1),
+    "harness": ("agents", 2), "skills": ("agents", 2), "hooks": ("agents", 2),
+    "mcp": ("agents", 2), "security": ("agents", 2), "cost": ("agents", 2),
+    "agenthooks": ("agents", 3), "subagents": ("agents", 3),
+    "readme": ("docs", 1), "semver": ("docs", 2), "changelog": ("docs", 2),
+    "adr": ("docs", 3),
+    "obsidian": ("knowledge", 1), "vault": ("knowledge", 2),
+    "future": ("future", 1),
+}  # fmt: skip
+
+
+def category(node_id: str) -> tuple[str, int]:
+    """(category id, depth) for a node; unknown nodes land in agents, depth 2."""
+    return CATEGORY.get(node_id, ("agents", 2))

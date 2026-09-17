@@ -74,7 +74,7 @@ Needs [uv](https://docs.astral.sh/uv/) and git. Homebrew has both: `brew install
 
    `vibe done` writes a dated note into the vault and links it from `vault/Camp/Tonight.md`.
 
-6. Open the vault in Obsidian: **Open folder as vault**, choose `vault/`. Graph colours, the theme and the templates are pre-configured. `vibe vault lint` reports orphans and dead links.
+6. Open the vault in Obsidian: **Open folder as vault**, choose `vault/`. Graph colours, the theme and the templates are pre-configured. `vibe vault lint` reports orphans and dead links. `vibe vault feature --all` adds one note per Obsidian feature, with a canvas, a base, a template and a deck to click through.
 
 ## Path C: the whole workshop with just
 
@@ -108,7 +108,17 @@ For a machine you intend to keep. Adds the test browsers, the skills and the onb
    just verify                  # ruff, pytest with Playwright, build check
    ```
 
-5. Break something on purpose, then come back.
+5. Make the terminal yours, module by module.
+
+   ```bash
+   vibe dotfiles                 # what is in place
+   vibe dotfiles install zsh --brew
+   vibe dotfiles install tmux
+   ```
+
+   Each module is a few files from Tom's toolbox; anything that differs is backed up next to itself.
+
+6. Break something on purpose, then come back.
 
    ```bash
    just break sandbox           # a play/sandbox branch

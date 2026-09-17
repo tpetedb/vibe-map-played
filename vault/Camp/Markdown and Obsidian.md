@@ -1,7 +1,7 @@
 ---
 title: "Markdown and Obsidian"
 date: 2026-09-16
-tags: [tech, feudal]
+tags: [tech, formats]
 ---
 # Markdown and Obsidian
 
@@ -12,11 +12,11 @@ Markdown is prose with a little structure (#, -, **, `[[links]]`). It is the fil
 **Try in five minutes.** Write vault/Camp/Me.md with three sentences and two `[[links]]`. Open the graph.
 
 - Docs: [Markdown guide](https://www.markdownguide.org), [Obsidian help](https://help.obsidian.md), [Mermaid](https://mermaid.js.org/intro/), [Source: Markdown 1.0.1 (December 2004)](https://daringfireball.net/projects/markdown/), [Source: Daring Fireball on GitHub Flavored Markdown (October 2009)](https://daringfireball.net/linked/2009/10/23/github-flavored-markdown), [Source: Obsidian, About](https://obsidian.md/about)
-- Unlocks: [[Memory - the vault as long-term memory]], [[AGENTS.md]], [[README and the quickstart]], [[Architecture decision records]]
-- Age: Feudal Age · Level: Junior
+- Unlocks: [[Memory - the vault as long-term memory]], [[AGENTS.md]], [[README and the quickstart]], [[Architecture decision records]], [[Obsidian features]]
+- Shelf: Config and formats · Depth: Basics
 
 <!-- generated from vibemap/tech.py; edit there -->
 
 Back to [[Tech tree]]
 
-#tech #feudal
+#tech #formats

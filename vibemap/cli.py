@@ -115,6 +115,7 @@ def status(ctx: Ctx, as_json: bool) -> None:
         f"Level [ok]{label}[/] ({age} age) · [xp]{st.xp} XP[/]"
         + (f" · {nxt - st.xp} to the next level" if nxt else " · top level")
         + f" · {st.total_done()}/32 stops"
+        + f" · {len(st.artifacts)}/{len(campaign.artifacts())} artifacts"
     )
     panel = Panel(head, title="Vibe Code Camp", border_style="accent")
     if cfg.pet.enabled:
@@ -331,6 +332,43 @@ def vault_log(ctx: Ctx, line: str) -> None:
     """Append one line to Tonight's Build log."""
     ctx.vault.add_build_log(line)
     console.print("[ok]logged[/]")
+
+
+@vault.command("feature")
+@click.argument("feature_id", required=False)
+@click.option("--all", "everything", is_flag=True, help="bootstrap every feature")
+@pass_ctx
+def vault_feature(ctx: Ctx, feature_id: str | None, everything: bool) -> None:
+    """List Obsidian features, or bootstrap one (or all) into the vault.
+
+    Each feature gets a note with the facts, the syntax and a five-minute
+    try from the official help; canvases, bases, templates, slides and
+    snippets also get a working example file.
+    """
+    from vibemap import obsidian
+
+    if feature_id is None and not everything:
+        t = Table(box=None, header_style="path")
+        t.add_column("id")
+        t.add_column("feature")
+        t.add_column("kind", style="muted")
+        for f in obsidian.features().values():
+            t.add_row(f.id, f.name, f.kind)
+        console.print(t)
+        console.print("[muted]docs/OBSIDIAN.md has the table with the tries.[/]")
+        return
+    ids = list(obsidian.features()) if everything else [feature_id]
+    try:
+        titles = obsidian.bootstrap(ctx.vault.dir, ids, write=ctx.vault.write)
+    except ValueError as e:
+        _fail(str(e))
+    ctx.vault.add_build_log(
+        f"[[Obsidian features]]: {len(titles)} feature note(s) bootstrapped"
+    )
+    console.print(
+        f"[ok]{len(titles)} feature note(s)[/] under vault/{ctx.cfg.vault.folder}/, "
+        "hub [[Obsidian features]]. Open the vault and follow the tries."
+    )
 
 
 @vault.command("method")
@@ -597,6 +635,113 @@ def theme(ctx: Ctx, name: str | None, create: bool, brief: str) -> None:
     data["theme"]["preset"] = name
     Config.model_validate(data).save(CONFIG_PATH)
     console.print(f"[ok]theme[/] = {name}. Run `just build` to bake it into the game.")
+
+
+# ---- dotfiles ------------------------------------------------------------------
+
+
+@cli.group(invoke_without_command=True)
+@click.pass_context
+def dotfiles(click_ctx: click.Context) -> None:
+    """Terminal setup modules from Tom's toolbox: list, show, install."""
+    if click_ctx.invoked_subcommand is None:
+        click_ctx.invoke(dotfiles_list)
+
+
+@dotfiles.command("list")
+@pass_ctx
+def dotfiles_list(ctx: Ctx) -> None:
+    """Every module with its install state."""
+    from vibemap import dotfiles as df
+
+    home, vault = df.default_home(), ROOT / ctx.cfg.vault.path
+    t = Table(box=None, header_style="path")
+    t.add_column("id")
+    t.add_column("module")
+    t.add_column("state")
+    t.add_column("what", style="muted", max_width=70)
+    for m in df.MODULES.values():
+        state = (
+            "[ok]installed[/]"
+            if df.is_installed(m, home=home, vault=vault)
+            else "[todo]not yet[/]"
+        )
+        t.add_row(m.id, m.name, state, m.what.split(". ")[0] + ".")
+    console.print(t)
+    console.print(
+        "[muted]vibe dotfiles show <id> prints the files; "
+        "vibe dotfiles install <id> (or --all) writes them with backups. "
+        "Adapted from github.com/tpetedb/toms-toolbox (MIT).[/]"
+    )
+
+
+@dotfiles.command("show")
+@click.argument("module_id")
+@pass_ctx
+def dotfiles_show(ctx: Ctx, module_id: str) -> None:
+    """Print a module's files, brew line and what to do after."""
+    from vibemap import dotfiles as df
+
+    try:
+        m = df.get_module(module_id)
+    except ValueError as e:
+        _fail(str(e))
+    console.print(Panel(m.what, title=m.name, border_style="accent"))
+    if m.brew:
+        console.print(f"[path]deps[/]  {df.brew_command(m)}")
+    for rel, target in m.files:
+        console.print(f"[path]file[/]  {target}")
+        console.print(escape(df.source_text(rel).rstrip()), highlight=False)
+        console.print()
+    if m.append:
+        console.print(f"[path]appends to[/] {m.append[0]}: {escape(m.append[1])}")
+    console.print(f"[path]after[/] {m.after}\n[path]docs[/]  {m.docs}")
+
+
+@dotfiles.command("install")
+@click.argument("module_id", required=False)
+@click.option("--all", "everything", is_flag=True, help="every module")
+@click.option("--dry-run", is_flag=True, help="print what would change, write nothing")
+@click.option(
+    "--brew", "run_brew", is_flag=True, help="also run brew install for the deps"
+)
+@pass_ctx
+def dotfiles_install(
+    ctx: Ctx, module_id: str | None, everything: bool, dry_run: bool, run_brew: bool
+) -> None:
+    """Write a module's files (backups for anything that differs)."""
+    from vibemap import dotfiles as df
+
+    if not module_id and not everything:
+        _fail("give a module id or --all; vibe dotfiles lists them")
+    home, vault = df.default_home(), ROOT / ctx.cfg.vault.path
+    ids = list(df.MODULES) if everything else [module_id]
+    for mid in ids:
+        try:
+            m = df.get_module(mid)  # type: ignore[arg-type]
+        except ValueError as e:
+            _fail(str(e))
+        if m.macos_only and sys.platform != "darwin":
+            console.print(f"[warn]{m.id}[/]: macOS only, skipped")
+            continue
+        if run_brew and m.brew and not dry_run:
+            subprocess.run(["brew", "install", *" ".join(m.brew).split()], check=False)
+        p = df.install(m, home=home, vault=vault, dry_run=dry_run)
+        verb = "would write" if dry_run else "wrote"
+        for target, backup in p.writes:
+            console.print(
+                f"[ok]{verb}[/] {target}"
+                + ("  [muted](backup kept)[/]" if backup else "")
+            )
+        for rc in p.appends:
+            console.print(
+                f"[ok]{'would append' if dry_run else 'appended'}[/] one line to {rc}"
+            )
+        for target in p.skipped:
+            console.print(f"[muted]unchanged[/] {target}")
+        if m.brew and not run_brew:
+            console.print(f"[muted]deps: {df.brew_command(m)}[/]")
+        console.print(f"[path]{m.id}[/] {m.after}")
 
 
 # ---- pet ----------------------------------------------------------------------

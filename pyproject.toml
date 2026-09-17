@@ -4,7 +4,7 @@
 # Read it top to bottom; every table is explained in docs/SYLLABUS.md.
 [project]
 name = "vibe-map"
-version = "0.3.0"
+version = "0.4.0"
 description = "Terminal companion, vault builder and test harness for Vibe Code Camp"
 readme = "README.md"
 requires-python = ">=3.12"
@@ -62,6 +62,8 @@ select = ["E", "F", "I", "UP", "B"]
 "vibemap/personas.py" = ["E501"]
 "vibemap/toolbelt.py" = ["E501"]
 "vibemap/pet.py" = ["E501"]
+"vibemap/obsidian.py" = ["E501"]
+"vibemap/dotfiles.py" = ["E501"]
 
 [tool.basedpyright]
 typeCheckingMode = "basic"

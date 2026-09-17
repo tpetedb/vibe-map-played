@@ -16,7 +16,15 @@ from pathlib import Path
 
 from vibemap import campaign, project
 from vibemap.config import DIFFICULTIES, Config
-from vibemap.palette import BLUE, GREEN, ORANGE, RED, YELLOW, hex_to_int
+from vibemap.palette import (
+    BLUE,
+    CATEGORY_COLOURS,
+    GREEN,
+    ORANGE,
+    RED,
+    YELLOW,
+    hex_to_int,
+)
 from vibemap.personas import Persona
 from vibemap.state import State
 
@@ -27,6 +35,7 @@ WIKILINK = re.compile(r"\[\[([^\]|#]+)(?:[#|][^\]]*)?\]\]")
 GRAPH_GROUPS: tuple[tuple[str, str], ...] = (
     ("tag:#workstream", GREEN),
     ("tag:#people", BLUE),
+    *((f"tag:#{c}", colour) for c, colour in CATEGORY_COLOURS.items()),
     ("tag:#tech", YELLOW),
     ("tag:#decision", RED),
     ("tag:#concept", ORANGE),
@@ -154,6 +163,7 @@ class Vault:
             self._write_evenings(),
             self._write_map(),
             self._write_path(),
+            self._write_artifacts(),
             self._write_field(persona),
             self._write_cookbook(persona),
             self._write_tech_tree(),
@@ -202,10 +212,14 @@ class Vault:
                 )
         else:
             lines.append("- Nothing yet. Walk to the 18:00 signpost.")
+        hubs = "Resources: [[Resources]] · Tree: [[Tech tree]]"
+        # Bootstrapped hubs (features, methods) stay reachable across rebuilds.
+        if self.path("Obsidian features").exists():
+            hubs += " · Obsidian: [[Obsidian features]]"
         lines += [
             "",
-            "Map: [[Map]] · Mentors: [[Your path]] · Your field: [[Your field]] · "
-            "Resources: [[Resources]] · Tree: [[Tech tree]]",
+            "Map: [[Map]] · Mentors: [[Your path]] · Artifacts: [[Artifacts]] · "
+            "Your field: [[Your field]] · " + hubs,
             "",
             "## Build log",
             build_log.strip() or "- (the agent adds one line per session here)",
@@ -270,6 +284,25 @@ class Vault:
         )
         return [self.write("Map", body, tags=["overview"])]
 
+    def _write_artifacts(self) -> list[Path]:
+        """One note listing the island artifacts and what each teaches."""
+        found = set(self.state.artifacts)
+        body = [
+            "Things on the island that explain one idea each. Walk up to the "
+            "yellow ring and press Inspect; a found one turns green. The CLI "
+            "learns about them through the progress code.",
+            "",
+        ]
+        for a in campaign.artifacts():
+            mark = "found" if a["id"] in found else "not yet"
+            links = ", ".join(f"[[{t}]]" for t in a["links"])
+            body.append(
+                f"- {mark}: **{a['name']}** ({a['prop']}): {a['concept']}. "
+                f"{a['what']} See {links}."
+            )
+        body += ["", "Back to [[Tonight]]", "", "#concept"]
+        return [self.write("Artifacts", "\n".join(body), tags=["concept"])]
+
     def _write_path(self) -> list[Path]:
         out = []
         body = [
@@ -320,12 +353,19 @@ class Vault:
     def _write_tech_tree(self) -> list[Path]:
         out = []
         by_name = {n.id: safe_title(n.name) for n in campaign.tech_nodes()}
-        age_of = {a[0]: (a[1], a[2]) for a in campaign.ages()}
-        overview = ["The roadmap from intern to expert, Age of Empires style.", ""]
-        for age_id, age_name, level, blurb in campaign.ages():
-            names = [n for n in campaign.tech_nodes() if n.age == age_id]
+        cat_name = {c: n for c, n, _ in campaign.categories()}
+        overview = [
+            "The whole map, shelf by shelf. Every topic has a depth: basics, "
+            "working knowledge, deep.",
+            "",
+        ]
+        for cat_id, name, blurb in campaign.categories():
+            names = sorted(
+                (n for n in campaign.tech_nodes() if n.category == cat_id),
+                key=lambda n: n.depth,
+            )
             overview.append(
-                f"**{age_name} ({level}).** {blurb} "
+                f"**{name}.** {blurb} "
                 + ", ".join(f"[[{safe_title(n.name)}]]" for n in names)
             )
         overview += ["", "Back to [[Tonight]] · [[Resources]]", "", "#overview"]
@@ -333,7 +373,7 @@ class Vault:
         for n in campaign.tech_nodes():
             if self.exists(n.name) and not _is_generated(self.path(n.name)):
                 continue
-            age_name, level = age_of[n.age]
+            shelf = cat_name[n.category]
             docs = ", ".join(f"[{t}]({u})" for t, u in n.docs)
             unlocks = ", ".join(f"[[{by_name[u]}]]" for u in n.unlocks if u in by_name)
             done = n.id in self.state.roadmap_done
@@ -342,12 +382,12 @@ class Vault:
                 f"**Try in five minutes.** {n.try_it}\n\n"
                 + (f"- Docs: {docs}\n" if docs else "")
                 + (f"- Unlocks: {unlocks}\n" if unlocks else "")
-                + f"- Age: {age_name} · Level: {level}"
+                + f"- Shelf: {shelf} · Depth: {campaign.depth_label(n.depth)}"
                 + (" · done" if done else "")
                 + "\n\n<!-- generated from vibemap/tech.py; edit there -->\n\n"
-                f"Back to [[Tech tree]]\n\n#tech #{n.age}"
+                f"Back to [[Tech tree]]\n\n#tech #{n.category}"
             )
-            out.append(self.write(n.name, body, tags=["tech", n.age]))
+            out.append(self.write(n.name, body, tags=["tech", n.category]))
         return out
 
     def _write_resources(self) -> list[Path]:

@@ -1,6 +1,6 @@
 # Vibe Code Camp, played
 
-This repository is [tpetedb/vibe-map](https://github.com/tpetedb/vibe-map) after a full campaign: four islands, thirty-two stops, every mentor met, the finale reached, played as Tom (data engineer, hard). The state (`.vibe/state.json`), the config (`vibe.toml`) and the vault the CLI built from it are committed, so you can see what an evening leaves behind before you start your own. Open `vault/` in Obsidian for the graph; `uv run vibe status` for the grid; `uv run vibe pet` for the creature the name rolled. The template's own README follows.
+This repository is [tpetedb/vibe-map](https://github.com/tpetedb/vibe-map) after a full campaign: four islands, thirty-two stops, every mentor met, all ten artifacts inspected, the finale reached, played as Tom (data engineer, hard). The state (`.vibe/state.json`), the config (`vibe.toml`) and the vault the CLI built from it are committed, so you can see what an evening leaves behind before you start your own. Open `vault/` in Obsidian for the graph (the R2-D2 theme is installed; pick it under Appearance) and the 35 Obsidian feature notes with their canvas, base and deck; `uv run vibe status` for the grid; `uv run vibe pet` for the creature the name rolled. The template's own README follows.
 
 ---
 
@@ -56,7 +56,13 @@ cd ~/camp && vibe status          # the CLI finds the camp from any subfolder
 | 22:30 | Go-to-Market          | the game at a public URL                             | a Pages workflow or a live Pages site |
 | 23:00 | Autonomous Operations | headless Claude on a schedule, a subagent            | a subagent file and a schedule |
 
-`uv run vibe check 3` runs the checks for a workstream and awards the XP when they pass. Levels mirror the ages of the tech tree: Intern, Junior, Medior, Senior, Expert. Four evenings, four islands, thirty-two stops, twelve mentors from the field who stand on the islands with their real ideas and sources.
+`uv run vibe check 3` runs the checks for a workstream and awards the XP when they pass. Levels are the XP ladder: Intern, Junior, Medior, Senior, Expert. Four evenings, four islands, thirty-two stops, twelve mentors from the field who stand on the islands with their real ideas and sources.
+
+## Ten things on the island that explain one idea each
+
+![The cafe artifact: order a coffee, get a 200; order five, get a 429](docs/media/artifact-cafe.png)
+
+Walk up to a yellow ring and press **Inspect**. The cafe serves a coffee the way a server answers a client (200, 404, 429, 503, with the latency); the fountain is a cache (miss, hit, stale, invalidate); the well is a database (a scan, an index, a transaction); the lighthouse is DNS; the dock packs, ships and unloads a container; the windmill is cron; the balloon is the cloud with its meter running; the mountain is the stack, six layers from the chip to the agent; the market stall is an API with a menu; the bridge is MCP. Each one prints its demo like a terminal, ends with a question from Rolinda, and links the vault note that goes deeper. Found ones turn green, travel in the progress code, and earn the Collector badge.
 
 ## Make it yours
 
@@ -64,6 +70,7 @@ cd ~/camp && vibe status          # the CLI finds the camp from any subfolder
 - **Difficulty.** `uv run vibe difficulty hard`: beginner and easy spell every command out, hard and expert add strict and extra checks, god needs `just verify` green to claim.
 - **Theme.** `uv run vibe theme boardroom` swaps the wine-night jargon for a serious voice; `--create` asks your provider to write a new one into `themes/`.
 - **Provider.** Everything that talks to a model (`explain`, `council`, custom themes) uses the CLI you chose, in print mode.
+- **Obsidian, feature by feature.** `uv run vibe vault feature --all` writes one note per Obsidian feature (links, properties, callouts, canvas, bases, templates, daily notes, bookmarks, search, hotkeys, workspaces, slides, URI, CLI, Sync, Publish and more) with the exact commands and a five-minute try from the official help, plus working example files: a canvas, a base, a template, a deck, a CSS snippet. The table: [docs/OBSIDIAN.md](docs/OBSIDIAN.md).
 - **Note-taking.** `uv run vibe vault method zettelkasten` bootstraps a method into the vault: Zettelkasten, PARA, Johnny.Decimal, LYT, Evergreen, Cornell, Bullet Journal, or daily notes with a weekly review.
 
 Every knob lives in `vibe.toml`; delete the file and everything still works.
@@ -80,6 +87,17 @@ uv run vibe pet --all                 # the gallery: nineteen species
 ```
 
 It also strolls across the launch screen of `just start` and sits next to `vibe status`. Same name, same creature: the roll is the one from claude-buddy, so a name that hatched a snail in Claude Code hatches the same snail here. Everything is overridable in `vibe.toml` under `[pet]`, or switch it off with `--off`.
+
+## Your terminal, Tom's way
+
+```bash
+uv run vibe dotfiles                       # six modules and whether they are in place
+uv run vibe dotfiles show zsh              # the files, the brew line, what to do after
+uv run vibe dotfiles install zsh --brew    # completion dropdown, fzf, highlighting, one line in ~/.zshrc
+uv run vibe dotfiles install --all         # tmux bar, Ghostty theme, Starship prompt, AeroSpace, the R2-D2 Obsidian theme
+```
+
+Adapted from [Tom's toolbox](https://github.com/tpetedb/toms-toolbox) (MIT). Anything that already exists and differs is backed up next to itself first. The same screen lives in `just start` under Terminal setup.
 
 ## Break things on purpose
 
