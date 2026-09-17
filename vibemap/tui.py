@@ -61,6 +61,7 @@ ACTIONS: dict[str, tuple[str, str]] = {
     "map": ("Campaign map", "the four islands and 32 stops, in this screen"),
     "dotfiles": ("Terminal setup", "zsh, tmux, Ghostty, Starship, the R2-D2 themes"),
     "status": ("Campaign status", "uv run vibe status"),
+    "news": ("Pull the AI news", "vibe news, then rebuild the game with it"),
     "quit": ("Quit", ""),
 }
 
@@ -141,6 +142,16 @@ class Welcome(Screen[None]):
                 id="provider",
                 allow_blank=False,
             )
+            yield Label("Vault")
+            yield Select(
+                [
+                    ("Full from day one: every note in the graph", "full"),
+                    ("Grows as you play: notes unlock stop by stop", "grow"),
+                ],
+                value=self.cfg.vault.mode,
+                id="vaultmode",
+                allow_blank=False,
+            )
             yield Label("Theme")
             yield Select(
                 [(t.label, t.id) for t in THEMES.values()],
@@ -166,6 +177,7 @@ class Welcome(Screen[None]):
         data["learner"]["difficulty"] = self.query_one("#difficulty", Select).value
         data["learner"]["provider"] = self.query_one("#provider", Select).value
         data["theme"]["preset"] = self.query_one("#theme", Select).value
+        data["vault"]["mode"] = self.query_one("#vaultmode", Select).value
         name = self.query_one("#name", Input).value.strip() or "Lotte"
         data["learner"]["name"] = name
         cfg = Config.model_validate(data)
@@ -488,6 +500,9 @@ def run() -> None:
         os.execvp("just", ["just", "test"])
     elif choice == "status":
         os.execvp("uv", ["uv", "run", "--no-sync", "vibe", "status"])
+    elif choice == "news":
+        subprocess.run(["uv", "run", "--no-sync", "vibe", "news"], check=False)
+        os.execvp("uv", ["uv", "run", "--no-sync", "python", "tools/build.py"])
     else:
         print(f"unknown choice {shlex.quote(choice)}")
 

@@ -22,9 +22,20 @@ start:
 setup *args:
     ./scripts/setup.sh {{args}}
 
+# the long game: the game in the browser, the vault in Obsidian, the status in this terminal (docs/LONG-GAME.md)
+camp:
+    open game/vibe-map.html
+    -open -a Obsidian vault
+    uv run vibe status
+
 # open the game in the default browser
 game:
     open game/vibe-map.html
+
+# pull the AI feeds into the vault note News and bake them into the game
+news:
+    uv run vibe news
+    uv run python tools/build.py
 
 # rebuild game/vibe-map.html from src/
 build:
@@ -70,6 +81,11 @@ media:
 # regenerate docs/COOKBOOK.md from the personas
 cookbook:
     uv run python tools/gen_cookbook.py
+
+# fetch the claude-obsidian skill set (MIT) and print how to load it on this vault
+obsidian-plugin:
+    @test -d ~/.claude/plugins/claude-obsidian || git clone --depth 1 https://github.com/AgriciDaniel/claude-obsidian.git ~/.claude/plugins/claude-obsidian
+    @echo 'claude --plugin-dir ~/.claude/plugins/claude-obsidian   # then /claude-obsidian:wiki-lint on vault/'
 
 # terminal setup modules from Tom's toolbox: `just dotfiles` lists, `just dotfiles install zsh` writes
 dotfiles *args:

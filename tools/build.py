@@ -34,6 +34,7 @@ GAME_ORDER = [
     "12-buildings.js",
     "@campaign",
     "16-artifacts.js",
+    "17-artifact-props.js",
     "20-worlds.js",
     "21-world-build.js",
     "30-input.js",
@@ -46,6 +47,7 @@ GAME_ORDER = [
     "70-minigames.js",
     "71-finale.js",
     "80-sync.js",
+    "85-settings.js",
     "90-boot.js",
 ]
 
@@ -76,6 +78,18 @@ def _tree_js() -> str:
     return (GENERATED / "tree.js").read_text(encoding="utf-8").rstrip("\n") + "\n"
 
 
+def _news_js() -> str:
+    """data/news.json, embedded so a file:// game shows it without a fetch."""
+    p = ROOT / "data" / "news.json"
+    data = json.loads(p.read_text(encoding="utf-8")) if p.exists() else {}
+    items = [
+        {k: it.get(k, "") for k in ("source", "title", "link", "date")}
+        for it in data.get("items", [])[:20]
+    ]
+    payload = {"fetched_at": data.get("fetched_at", ""), "items": items}
+    return "const NEWS=" + json.dumps(payload, ensure_ascii=False) + ";\n"
+
+
 def _config_js() -> str:
     """The values from vibe.toml the game exposes as a constant."""
     sys.path.insert(0, str(ROOT))
@@ -98,6 +112,7 @@ def _config_js() -> str:
         "difficulty": cfg.learner.difficulty,
         "persona": cfg.learner.persona,
         "mode": cfg.learner.mode,
+        "vault": {"mode": cfg.vault.mode},
     }
     return "const CONFIG=" + json.dumps(data, ensure_ascii=False) + ";\n"
 
@@ -107,6 +122,7 @@ def _game_script() -> str:
     for name in GAME_ORDER:
         if name == "@config":
             parts.append(_config_js())
+            parts.append(_news_js())
         elif name == "@campaign":
             parts.append(_campaign_js())
         elif name == "@notes":
