@@ -29,7 +29,7 @@ Write a pre-commit style Claude Code hook (PostToolUse on Edit and Write) that c
 Workstream 8. Headless agent summarises last night's runs into the vault.
 
 ```text
-Write a script that runs the provider in print mode over data/pipeline_runs.csv and writes vault/Camp/Runs.md with a table and one paragraph. Schedule it at 07:00.
+Write a script that runs the provider in print mode over workspace/data/pipeline_runs.csv and writes vault/Camp/Runs.md with a table and one paragraph. Schedule it at 07:00.
 ```
 
 **Done when:** Runs.md is updated by the schedule, not by you.
