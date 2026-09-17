@@ -2,6 +2,7 @@
 title: "Docker and containers"
 date: 2026-09-17
 tags: [tech, ship]
+generated: 19dccb7a1702
 ---
 # Docker and containers
 

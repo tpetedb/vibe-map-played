@@ -24,11 +24,11 @@ Tom, Data engineer, on Hard. Level Expert (future) with 2400 XP. 32 of 32 stops 
 - [[Evening 4]] Terminal, git and the toolbelt, on Apple silicon: 8/8 on the Production Environment
 
 ## Hot cache
-- 2026-09-17T13:44 [[Karpathy's ladder]] +75 XP: done in the game, imported
-- 2026-09-17T13:44 [[What they cannot do, and why]] +75 XP: done in the game, imported
-- 2026-09-17T13:44 [[Open weights versus closed models, on your own Mac]] +75 XP: done in the game, imported
-- 2026-09-17T13:44 [[From base model to assistant]] +75 XP: done in the game, imported
-- 2026-09-17T13:44 [[Scaling laws and the Bitter Lesson]] +75 XP: done in the game, imported
+- 2026-09-17T15:44 [[Karpathy's ladder]] +75 XP: done in the game, imported
+- 2026-09-17T15:44 [[What they cannot do, and why]] +75 XP: done in the game, imported
+- 2026-09-17T15:44 [[Open weights versus closed models, on your own Mac]] +75 XP: done in the game, imported
+- 2026-09-17T15:44 [[From base model to assistant]] +75 XP: done in the game, imported
+- 2026-09-17T15:44 [[Scaling laws and the Bitter Lesson]] +75 XP: done in the game, imported
 
 Map: [[Map]] · Mentors: [[Your path]] · Artifacts: [[Artifacts]] · Your field: [[Your field]] · Resources: [[Resources]] · Tree: [[Tech tree]] · Obsidian: [[Obsidian features]]
 

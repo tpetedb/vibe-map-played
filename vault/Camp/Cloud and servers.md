@@ -2,6 +2,7 @@
 title: "Cloud and servers"
 date: 2026-09-17
 tags: [tech, ship]
+generated: ab71332c23b0
 ---
 # Cloud and servers
 

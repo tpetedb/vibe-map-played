@@ -2,6 +2,7 @@
 title: "Hooks"
 date: 2026-09-17
 tags: [tech, agents]
+generated: 5aaf89b67042
 ---
 # Hooks
 
