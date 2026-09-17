@@ -28,7 +28,7 @@ Transformer Circuits publishes the research: from toy models to finding millions
 - Chris Olah: Because an explanation you can see and poke at is the point. Distill was built for that, and for paying down the research debt that builds up when nobody explains. ([Distill](https://distill.pub))
 
 ## Your exercise: Draw the circuit of one decision
-About 15 minutes, in `workspace/mentors/olah/`. Status: done.
+About 15 minutes, in `workspace/mentors/olah/`. Status: not yet.
 
 1. Pick one decision a tool makes for you: a spam filter, a recommendation, an autocomplete.
 2. Write workspace/mentors/olah/circuit.md with ## What I looked at and your best guess at the inputs, the middle and the output.

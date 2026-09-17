@@ -1,8 +1,0 @@
-# A big font because I read this all evening.
-font-size = 14
-# Rounded off the top so the tabs do not fight the tiling window manager.
-window-decoration = false
-# Enough history to scroll back to the traceback I just lost.
-scrollback-limit = 10000
-# The palette is OLED black, so an unfocused split should still be readable.
-unfocused-split-opacity = 0.9

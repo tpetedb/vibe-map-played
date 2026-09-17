@@ -1,3 +1,0 @@
-/* Obsidian features demo: a coloured left rule on notes tagged #feature.
-   Enable it under Settings, Appearance, CSS snippets. */
-.markdown-preview-view .tag[href="#feature"] { color: #FFBF00; }

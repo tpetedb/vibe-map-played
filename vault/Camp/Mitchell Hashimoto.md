@@ -28,7 +28,7 @@ Ghostty's docs are the reference for the terminal setup at Evening 4 Stop 2. His
 - Mitchell Hashimoto: Almost nothing. The defaults are meant to be sensible, and every key also works as a command-line flag. ([Ghostty configuration reference](https://ghostty.org/docs/config))
 
 ## Your exercise: One readable config file
-About 10 minutes, in `workspace/mentors/hashimoto/`. Status: done.
+About 10 minutes, in `workspace/mentors/hashimoto/`. Status: not yet.
 
 1. Write workspace/mentors/hashimoto/config.ghostty with at least three key = value lines for a terminal you would actually want.
 2. Above each one, a comment line starting with a hash that says why, not what.

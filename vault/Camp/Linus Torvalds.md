@@ -28,7 +28,7 @@ The official git book is free and the first three chapters are enough for everyt
 - Linus Torvalds: Because once the name is the content, losing work gets hard. Branches are cheap for the same reason: they are only a name pointing at one of those objects. ([git internals chapter](https://git-scm.com/book/en/v2/Git-Internals-Git-Objects))
 
 ## Your exercise: Hash a blob the way git does
-About 12 minutes, in `workspace/mentors/torvalds/`. Status: done.
+About 12 minutes, in `workspace/mentors/torvalds/`. Status: not yet.
 
 1. Write workspace/mentors/torvalds/hash.py using hashlib.
 2. Build the bytes b'blob ' + the length + b'\x00' + b'what is up, doc?' and take the SHA-1 hexdigest.

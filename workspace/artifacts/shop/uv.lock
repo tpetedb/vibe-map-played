@@ -1,5 +1,0 @@
-version = 1
-
-[[package]]
-name = "humanize"
-version = "4.12.3"

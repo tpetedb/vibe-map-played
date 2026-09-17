@@ -30,7 +30,7 @@ His 2022 position paper lays out a world-model architecture (JEPA) where the sys
 - Yann LeCun: He calls the doom case overstated: intelligence on its own does not produce a will to dominate. Hold that next to what Hinton says and keep both. ([Interview with TIME](https://time.com/6694432/yann-lecun-meta-ai-interview/))
 
 ## Your exercise: What mattered, and what you could throw away
-About 12 minutes, in `workspace/mentors/lecun/`. Status: done.
+About 12 minutes, in `workspace/mentors/lecun/`. Status: not yet.
 
 1. Take one task you gave an agent recently.
 2. Write workspace/mentors/lecun/abstraction.md with ## What mattered and ## What I could throw away.
