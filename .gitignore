@@ -1,5 +1,6 @@
 .venv/
 backups/
+.vibe/
 workspace/python/out/
 .DS_Store
 __pycache__/

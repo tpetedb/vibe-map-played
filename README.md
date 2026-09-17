@@ -1,9 +1,3 @@
-# Vibe Code Camp, played
-
-This repository is a camp made by `vibe new` from [tpetedb/vibe-map](https://github.com/tpetedb/vibe-map), after a full campaign: four islands, thirty-two stops, every mentor met, every artifact inspected, the finale reached, played as Tom (data engineer, hard). The three zones are visible: `workspace/` holds the worked example (the game from workstream 1, the scores, the queries, the chart), `vault/` the notes the CLI built, and the configuration files the rules and skills the agent works with. The state (`.vibe/state.json`) is committed so you can see what an evening leaves behind before you start your own. Open `vault/` in Obsidian for the graph (the R2-D2 theme is installed; pick it under Appearance); `vibe status` for the grid; `vibe pet` for the creature the name rolled. The camp's own README follows.
-
----
-
 # Your Vibe Code Camp
 
 ## Start here
@@ -22,9 +16,9 @@ This folder is a camp: the place where you play the course and build your own th
 
 | Where your things are | Folder | What it is |
 |---|---|---|
-| Your work | `workspace/` | Everything you build during the course: the game from workstream 1, the scores CSV and its queries, the chart, the tool. Empty on day one apart from a README. The lessons run here and the checks look here. |
+| Your work | `workspace/` | Everything you build during the course: the game from workstream 1, the scores CSV and its queries, the chart, the tool, the mentor exercises in `mentors/`, the artifact tasks in `artifacts/` and your fork of the game in `forks/`. Empty on day one apart from a README. The lessons run here and the checks look here. |
 | Your notes | `vault/` | The course notes. `vibe` writes them, you and your agent add your own. Open it in Obsidian. |
-| Settings | `vibe.toml`, `justfile`, `AGENTS.md`, `CLAUDE.md`, `.agents/`, `.claude/`, `.github/` | How the camp and your agent behave. You will be taught to change these; until then, leave them alone. |
+| Settings | `config/camp.toml`, `justfile`, `AGENTS.md`, `CLAUDE.md`, `.agents/`, `.claude/`, `.github/` | How the camp and your agent behave. You will be taught to change these; until then, leave them alone. |
 
 The state of your progress lives in `.vibe/state.json` (ignored by git) and travels to the game as a progress code (`vibe export`, `vibe import`).
 
@@ -38,6 +32,20 @@ just vault        # rebuild the notes and lint for dead links
 ```
 
 From workstream 3 on, when `workspace/data/scores.csv` exists, `just scores` summarises it and `just scores top_runs` runs a query from `workspace/sql`.
+
+## What the island asks you to build
+
+Two things on the islands leave work on your machine, next to the stops.
+
+- A mentor sets you one exercise of under fifteen minutes. It lives in `workspace/mentors/<id>/`: whatever the exercise asks for, plus a `notes.md` with a `## What I learned` section in your own words. `vibe check --mentor <id>` (or `--mentor all`) verifies it, and their plaque goes up on the island.
+- An artifact's sheet has a **Do it for real** task, written from the official documentation of the thing it stands for. You build it in `workspace/artifacts/<id>/`. `vibe check --artifact <id>` (or `--artifact all`) looks at what you built and runs it; if it needs a tool you do not have, it tells you which one instead of failing.
+- On the production island you take the game apart. `vibe fork` copies it into `workspace/forks/vibe-map/`, where `just build` makes your own copy and `vibe check --fork` runs the four challenges. That folder is yours to break.
+
+```bash
+vibe check --mentor all
+vibe check --artifact all
+vibe check --fork
+```
 
 The full loop between the terminal, the game and Obsidian: https://github.com/tpetedb/vibe-map/blob/main/docs/LONG-GAME.md
 

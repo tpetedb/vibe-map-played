@@ -5,18 +5,18 @@ tags: [persona]
 ---
 # Your field
 
-Data engineer: pipelines, warehouses, orchestration and tests.
+Chief of Staff: running the leadership team's week.
 
-**Your game (workstream 1).** Pipeline defense: rows flow from left to right, schema drift attacks at night, and you place tests and quarantine tables to keep the gold layer clean until the CEO's dashboard loads.
+**Your game (workstream 1).** A calendar dungeon: meetings are rooms, each room has a monster (a decision that keeps getting postponed), and you clear the week by making three decisions before Friday.
 
-**Your dataset (workstream 3).** `workspace/data/examples/pipeline_runs.csv` with columns run_at, pipeline, layer, rows, seconds, status. The question to answer: Which layer failed last night, and what did the row counts say before it did?
+**Your dataset (workstream 3).** `workspace/data/examples/meetings.csv` with columns date, meeting, attendees, minutes, decisions. The question to answer: Which meeting costs the most minutes per decision?
 
-**Rolinda asks.** If the silver run says zero rows, what did the bronze run say, and why did nobody get paged?
+**Rolinda asks.** Which meeting should be an email, and can you prove it with the numbers?
 
 ## Recipes
-- **Two-file task pattern** (workstream 3): A pipeline task as a .py plus a .yaml sidecar with tests. See [[Cookbook]].
-- **Schema drift guard** (workstream 4): A hook that refuses a commit when a CSV header changes. See [[Cookbook]].
-- **Nightly run report** (workstream 8): Headless agent summarises last night's runs into the vault. See [[Cookbook]].
+- **The week in one page** (workstream 2): Turn a folder of meeting notes into a one-page brief. See [[Cookbook]].
+- **Meeting cost dashboard** (workstream 3): A chart of minutes per decision by meeting. See [[Cookbook]].
+- **Monday morning agent** (workstream 8): An agent that drafts the weekly agenda every Monday at 07:30. See [[Cookbook]].
 
 Back to [[Tonight]]
 

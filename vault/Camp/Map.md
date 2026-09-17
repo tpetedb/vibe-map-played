@@ -5,7 +5,7 @@ tags: [overview]
 ---
 # Map
 
-32/32 stops across four evenings. Updated 2026-09-17.
+0/32 stops across four evenings. Updated 2026-09-17.
 
 ```mermaid
 flowchart TD
@@ -48,7 +48,7 @@ flowchart TD
     p2["Stop 3 Git, part one"]
     p3["Stop 4 Git, part two"]
     p4["Stop 5 Claude Code, the power settings"]
-    p5["Stop 6 Claude in Chrome"]
+    p5["Stop 6 Fork the game"]
     p6["Stop 7 The other agents"]
     p7["Stop 8 Your dotfiles repo"]
     p0 --> p1 --> p2 --> p3 --> p4 --> p5 --> p6 --> p7
@@ -56,46 +56,10 @@ flowchart TD
   E0 --> E1
   E1 --> E2
   E2 --> E3
-  class c0,c1,c2,c3,c4,c5,c6,c7 done
-  class w0,w1,w2,w3,w4,w5,w6,w7 done
-  class d0,d1,d2,d3,d4,d5,d6,d7 done
-  class p0,p1,p2,p3,p4,p5,p6,p7 done
-  M_cherny(["Boris Cherny"])
-  M_cherny --- c0
-  class M_cherny deep
-  M_wu(["Cat Wu"])
-  M_wu --- c0
-  class M_wu deep
-  M_karpathy(["Andrej Karpathy"])
-  M_karpathy --- w0
-  class M_karpathy deep
-  M_lecun(["Yann LeCun"])
-  M_lecun --- w0
-  class M_lecun deep
-  M_hinton(["Geoffrey Hinton"])
-  M_hinton --- w0
-  class M_hinton skip
-  M_li(["Fei-Fei Li"])
-  M_li --- w0
-  class M_li deep
-  M_sutton(["Rich Sutton"])
-  M_sutton --- w0
-  class M_sutton deep
-  M_amodei(["Dario Amodei"])
-  M_amodei --- w0
-  class M_amodei skip
-  M_olah(["Chris Olah"])
-  M_olah --- d0
-  class M_olah deep
-  M_hashimoto(["Mitchell Hashimoto"])
-  M_hashimoto --- p0
-  class M_hashimoto deep
-  M_torvalds(["Linus Torvalds"])
-  M_torvalds --- p0
-  class M_torvalds deep
-  M_opencode(["The OpenCode team"])
-  M_opencode --- p0
-  class M_opencode skip
+  class c0,c1,c2,c3,c4,c5,c6,c7 todo
+  class w0,w1,w2,w3,w4,w5,w6,w7 todo
+  class d0,d1,d2,d3,d4,d5,d6,d7 todo
+  class p0,p1,p2,p3,p4,p5,p6,p7 todo
   classDef done fill:#00A86B,stroke:#00D084,color:#000000
   classDef todo fill:#0067A5,stroke:#0088CC,color:#FFFFFF
   classDef deep fill:#FFBF00,stroke:#FFD500,color:#000000
