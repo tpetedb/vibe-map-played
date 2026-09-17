@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.6.0] - 2026-09-17
+
+### Added
+
+- A much bigger map. One constant, `WORLD_SCALE` (1.6), is applied once at load to every coordinate the game uses (land, plots, path, river, lake, bridge, prop positions, mentors, artifacts), while buildings and walkers keep their size; walking speed, the camera, the fog and the sky distances scale with it so the feel stays the same, and the inn stays at the origin. Every stop now has its own path: a spur leaves the ring at the plot and runs outward over a causeway to an annex, a small land blob with a flag that carries the stop's hour. An annex is hidden until its stop is done and pops in with the building's confetti when the stop is claimed (or imported), so the level grows as you play; annexes of done stops are there on load. Two new pictures, `docs/media/island-campus-start.png` and `island-campus-expanded.png`, come from `tools/campus_shots.py`.
+- Onboarding in the game: the title screen is a four-step form on a first visit. Who you are (Lotte, Frank, Max, Rolinda, or your own name; each preset is a different walker), how hard (beginner to god, changeable later under Settings), how you want to play (just the game, or the full experience: a setup guide with the exact commands for the terminal, the camp folder and Obsidian, plus the export and import loop that keeps the two in sync), go. Returning players get the resume button first.
+- Commands fold by difficulty: every command block in a lesson is a `Commands` disclosure, open at beginner, easy and normal, folded at hard, expert and god, always one click away. The setup guide's commands are always open.
+- Setup guide screen from the Roadmap, and `vibe name` to set your name in the terminal.
+- A naming convention for local camps, `vibe-map-<name>-<YYYY-MM-DD>`: `vibe new` without a directory uses it (`--name` picks the person part, else the login), and the setup guide suggests it with your name and today's date.
+- Three roadmap topics on the agents shelf: Prompting (task, goal, hard constraints, context, definition of done), Structure (XML tags for the model, Markdown blocks for the reader, fenced code for anything copied) and The symbols (what `/`, `!`, `@`, `#`, `[[ ]]`, `---` and backticks mean to Claude Code, CLAUDE.md, Markdown and Obsidian), all sourced to the Anthropic and Claude Code docs.
+- Reset progress: a two-click button on the Roadmap and in Settings takes the game back to the start of the roadmap (every stop undone, artifacts and mentor choices cleared, name and settings kept), and `?reset` on the URL does the same for the hosted game: https://tpetedb.github.io/vibe-map/?reset
+
 ## [0.5.0] - 2026-09-17
 
 ### Added
@@ -91,7 +103,8 @@ The initial package on `main`: the course as one folder, no dependencies beyond 
 - The Obsidian vault seed in `vault/Camp/`, `README.md`, `docs/SYLLABUS.md`, `docs/RESOURCES.md` and `docs/ROADMAP.md`.
 - The tech tree source `tools/tech.py` with its generator `tools/regen_tree.py`.
 
-[Unreleased]: https://github.com/tpetedb/vibe-map/compare/v0.5.0...HEAD
+[Unreleased]: https://github.com/tpetedb/vibe-map/compare/v0.6.0...HEAD
+[0.6.0]: https://github.com/tpetedb/vibe-map/compare/v0.5.0...v0.6.0
 [0.5.0]: https://github.com/tpetedb/vibe-map/compare/v0.4.1...v0.5.0
 [0.4.1]: https://github.com/tpetedb/vibe-map/compare/v0.4.0...v0.4.1
 [0.4.0]: https://github.com/tpetedb/vibe-map/compare/v0.3.0...v0.4.0
