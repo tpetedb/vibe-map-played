@@ -1,6 +1,6 @@
 ---
 title: "Memory: the vault as long-term memory"
-date: 2026-09-17
+date: 2026-09-24
 tags: [tech, knowledge]
 generated: 545e8b2f7749
 ---

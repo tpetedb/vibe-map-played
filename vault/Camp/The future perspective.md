@@ -1,6 +1,6 @@
 ---
 title: "The future perspective"
-date: 2026-09-17
+date: 2026-09-24
 tags: [tech, future]
 generated: a1e9438ecf25
 ---

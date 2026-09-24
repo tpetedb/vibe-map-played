@@ -1,13 +1,13 @@
 ---
 title: "Git, part two"
-date: 2026-09-17
+date: 2026-09-24
 tags: [workstream]
 ---
 # Git, part two
 
 Stop 4, [[Evening 4]]. Outcome: Revert, reset, rebase, cherry-pick, worktrees, and how Cherny runs five agents at once.
 
-## 2026-09-17
+## 2026-09-24
 - Tonight I did the work myself and wrote it down while it was
 - still fresh. The agent drafted, I rewrote the half that made no sense, and the
 - check told me what was still missing before I could claim the stop. What I

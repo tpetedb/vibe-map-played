@@ -1,6 +1,6 @@
 ---
 title: "SQL and DuckDB"
-date: 2026-09-17
+date: 2026-09-24
 tags: [tech, data]
 generated: 6b27f7960e2f
 ---

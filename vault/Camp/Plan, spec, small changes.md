@@ -1,13 +1,13 @@
 ---
 title: "Plan, spec, small changes"
-date: 2026-09-17
+date: 2026-09-24
 tags: [workstream]
 ---
 # Plan, spec, small changes
 
 Stop 5, [[Evening 3]]. Outcome: The Cherny workflow: plan mode, a spec, a to-do list, one PR at a time.
 
-## 2026-09-17
+## 2026-09-24
 - Tonight I did the work myself and wrote it down while it was
 - still fresh. The agent drafted, I rewrote the half that made no sense, and the
 - check told me what was still missing before I could claim the stop. What I

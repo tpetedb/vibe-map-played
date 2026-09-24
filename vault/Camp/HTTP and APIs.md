@@ -1,6 +1,6 @@
 ---
 title: "HTTP and APIs"
-date: 2026-09-17
+date: 2026-09-24
 tags: [tech, net]
 generated: 6713c7fddc74
 ---

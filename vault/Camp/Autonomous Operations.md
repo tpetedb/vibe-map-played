@@ -1,14 +1,14 @@
 ---
 title: "Autonomous Operations"
-date: 2026-09-17
+date: 2026-09-24
 tags: [workstream]
 ---
 # Autonomous Operations
 
 23:00, [[Evening 1]]. Outcome: headless Claude on a schedule.
 
-## 2026-09-17
-- not done yet; run `vibe check` when it is
+## 2026-09-24
+- not done yet; run `vibe check 8` when it is
 - links: [[Tonight]], [[Map]]
 
 ## Sources

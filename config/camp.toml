@@ -5,10 +5,11 @@
 
 [learner]
 name = "Tom"
-persona = "data-engineer"  # chief-of-staff | cleaning-ceo | university-md | pabo-teacher | data-engineer | interior-stylist
-difficulty = "hard"  # beginner | easy | normal | hard | expert | god
+persona = "chief-of-staff"  # chief-of-staff | cleaning-ceo | university-md | pabo-teacher | data-engineer | interior-stylist
+difficulty = "normal"  # beginner | easy | normal | hard | expert | god
 mode = "campaign"  # campaign (four evenings) | roadmap (the tech tree as quests)
 provider = "claude"  # claude | codex | gemini | copilot | opencode
+interests = []  # shelves to offer first; empty = everything (vibe interests)
 
 [theme]
 preset = "studio"  # studio | wine-night | boardroom | seminar | field-guide | a name in themes/
@@ -25,6 +26,7 @@ dates = [
 
 [game]
 repo_url = "https://github.com/tpetedb/vibe-map"
+site_url = "https://tpetedb.github.io/vibe-map/"  # where the product is published
 shadow_map = 2048  # drop to 1024 if a phone stutters
 
 [vault]
@@ -32,13 +34,15 @@ path = "vault"
 folder = "Camp"
 mode = "full"  # full (every note from day one) | grow (notes unlock as you play)
 
-[news]  # feeds for `vibe news`; empty means the built-in six
+[news]  # the live world feed; empty feeds means the source registry
+live = true  # false hides every feed-driven element in the game
 feeds = []
 per_feed = 8
 
 [pet]  # the terminal companion; empty means what your name rolled
 enabled = true
-species = ""  # duck | goose | blob | cat | dragon | octopus | owl | penguin | turtle | snail | ghost | axolotl | capybara | cactus | robot | rabbit | mushroom | chonk | crab
+species = ""  # duck | goose | blob | cat | dragon | octopus | owl | penguin | turtle | snail | ghost | axolotl | capybara | cactus | robot | rabbit | mushroom | chonk | crab | dog
 name = ""
 eye = ""  # one of: · * × ◉ @ °
 hat = ""  # none | crown | tophat | propeller | halo | wizard | beanie | tinyduck
+style = "auto"  # auto | pixel | ascii; pixel sprites for cat, crab, dog, duck, snail, turtle

@@ -1,6 +1,6 @@
 ---
 title: "Separation of concerns"
-date: 2026-09-17
+date: 2026-09-24
 tags: [tech, code]
 generated: 60e4bd8e4a6b
 ---

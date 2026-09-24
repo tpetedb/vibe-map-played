@@ -1,13 +1,13 @@
 ---
 title: "CI: the check that runs without you"
-date: 2026-09-17
+date: 2026-09-24
 tags: [workstream]
 ---
 # CI: the check that runs without you
 
 Stop 6, [[Evening 3]]. Outcome: GitHub Actions on every push, so the main branch is always green.
 
-## 2026-09-17
+## 2026-09-24
 - Tonight I did the work myself and wrote it down while it was
 - still fresh. The agent drafted, I rewrote the half that made no sense, and the
 - check told me what was still missing before I could claim the stop. What I

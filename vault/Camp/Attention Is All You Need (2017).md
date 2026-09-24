@@ -1,13 +1,13 @@
 ---
 title: "Attention Is All You Need (2017)"
-date: 2026-09-17
+date: 2026-09-24
 tags: [workstream]
 ---
 # Attention Is All You Need (2017)
 
 Stop 3, [[Evening 2]]. Outcome: Tokens, embeddings, attention, next-token prediction: the transformer, without hand-waving.
 
-## 2026-09-17
+## 2026-09-24
 - Tonight I did the work myself and wrote it down while it was
 - still fresh. The agent drafted, I rewrote the half that made no sense, and the
 - check told me what was still missing before I could claim the stop. What I

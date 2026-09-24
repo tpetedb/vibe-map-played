@@ -1,7 +1,8 @@
 ---
 title: "Dario Amodei"
-date: 2026-09-17
+date: 2026-09-24
 tags: [people]
+generated: 6221a8083dd9
 ---
 # Dario Amodei
 
@@ -30,7 +31,7 @@ The scaling-laws paper is where the power-law plots come from. Core Views explai
 - Dario Amodei: It is stating the uncertainty in both directions instead of picking the convenient end of it. ([Core Views on AI Safety](https://www.anthropic.com/news/core-views-on-ai-safety))
 
 ## Your exercise: A forecast you can be wrong about
-About 10 minutes, in `workspace/mentors/amodei/`. Status: done.
+About 10 minutes, in `workspace/mentors/amodei/`. Status: not yet.
 
 1. Write workspace/mentors/amodei/forecast.md with ## What I expect in a year and ## What would change my mind.
 2. Make the first specific enough to be wrong: a number, a date, a task you think will or will not work.

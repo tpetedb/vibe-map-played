@@ -1,7 +1,8 @@
 ---
 title: "The OpenCode team"
-date: 2026-09-17
+date: 2026-09-24
 tags: [people]
+generated: 0b4ad1e4b14e
 ---
 # The OpenCode team
 
@@ -30,7 +31,7 @@ Install it once, run it on the template repo, and compare notes with the Claude 
 - The OpenCode team: MIT, in the open on GitHub, so you can read how the agent decides instead of guessing. ([OpenCode on GitHub](https://github.com/sst/opencode))
 
 ## Your exercise: The same prompt, two providers
-About 12 minutes, in `workspace/mentors/opencode/`. Status: done.
+About 12 minutes, in `workspace/mentors/opencode/`. Status: not yet.
 
 1. Write workspace/mentors/opencode/providers.md with ## The same prompt and ## What I would keep.
 2. Under the first, one prompt you use often, written out in full.

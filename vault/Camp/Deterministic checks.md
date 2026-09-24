@@ -1,13 +1,13 @@
 ---
 title: "Deterministic checks"
-date: 2026-09-17
+date: 2026-09-24
 tags: [workstream]
 ---
 # Deterministic checks
 
 Stop 3, [[Evening 3]]. Outcome: Tests, linters and formatters: the cheapest way to make an agent behave.
 
-## 2026-09-17
+## 2026-09-24
 - Tonight I did the work myself and wrote it down while it was
 - still fresh. The agent drafted, I rewrote the half that made no sense, and the
 - check told me what was still missing before I could claim the stop. What I

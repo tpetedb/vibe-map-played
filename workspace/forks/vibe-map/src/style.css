@@ -11,52 +11,129 @@
   --green:#00A86B; --green-dim:#0A7A52; --green-bright:#00D084;
   --blue:#0067A5; --blue-dim:#0A4E7A; --blue-bright:#0088CC;
   --radius-s:8px; --radius-m:12px; --radius-l:16px; --radius-pill:999px;
-  --font-display:Sora,system-ui,sans-serif; --font-body:Inter,system-ui,sans-serif;
-  --font-mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+  --space-1:4px; --space-2:8px; --space-3:12px; --space-4:16px; --space-6:24px; --space-8:32px;
+  /* Fonts are the ones the device already has: the game is one file with no
+     CDN and it must work offline, so nothing here asks a third party. */
+  --font-display:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",sans-serif;
+  --font-body:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",sans-serif;
+  --font-mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
   --edge:inset 0 0 0 1px rgba(255,255,255,.08); --lift:0 10px 30px rgba(0,0,0,.6);
   --glow-green:0 0 12px rgba(0,208,132,.45); --glow-yellow:0 0 12px rgba(255,213,0,.40);
   --t-fast:150ms; --t-base:240ms; --t-slow:400ms;
+  /* The talk band under the stage: one number, so the stage can take the rest
+     of the window and no black strip is left between them. The band also
+     carries the bottom safe-area inset, so the stage never pays for it. */
+  --talk-h:104px;
+  --talk-band:calc(var(--talk-h) + env(safe-area-inset-bottom,0px));
   --ease:cubic-bezier(.4,1,.75,.9); --ease-out:cubic-bezier(.2,.8,.2,1);
   /* Names the older rules below still use, mapped onto the tokens. */
   --bg2:var(--surface-1); --panel:rgba(10,10,10,.78); --panel2:var(--surface-2); --ink:var(--text);
   --grass:var(--green-bright); --gold:var(--yellow); --line:var(--hairline); --line2:var(--hairline-2);
   --a1:var(--blue-bright); --a2:var(--orange); --accent:var(--yellow);
   --ring:var(--edge);
+  /* Text size: one multiplier the reading surfaces and the headings read.
+     Settings writes it on the body; everything else is relative to it. */
+  --type-scale:1;
 }
 *{box-sizing:border-box}
 html,body{margin:0;background:var(--bg);color:var(--ink)}
-body{font-family:Inter,"Segoe UI",system-ui,sans-serif;font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
-/* The map: big by default; Settings offers compact and the whole window. */
-#stage{position:relative;height:min(84vh,860px);min-height:440px;overflow:hidden;background:#9BD3F5}
-#stage.map-compact{height:min(56vh,520px)}
-#stage.map-tall{height:100vh;height:100dvh}
+body{font-family:var(--font-body);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+/* The map: big by default; Settings offers compact and the whole window. Big
+   is the window minus the talk band, so the scene and the bubble together fill
+   the screen and nothing is left over as a black letterbox. The stage is never
+   taller than that: a floor under its height turns the 3D view into a page
+   scroll surface and puts the speech bubble below the fold on a short screen.
+   The height is a value of its own because what hangs inside the stage has to
+   measure the room it has: the bar takes the top of it, the button columns the
+   bottom, and the toast stack what is left between them. The plain vh line is
+   the fallback for a browser without dvh. */
+#stage{position:relative;--stage-h:calc(100vh - var(--talk-band));height:var(--stage-h);overflow:hidden;background:#9BD3F5}
+body[data-experience="galaxy"] #stage{background:var(--bg)}
+body[data-experience="galaxy"] #bottom,body[data-experience="galaxy"] #joy,body[data-experience="galaxy"] #jump,body[data-experience="galaxy"] #zoom{display:none}
+#galaxy-ui{position:absolute;z-index:5;left:14px;top:104px;width:min(390px,calc(100% - 28px));max-height:calc(100% - 120px);overflow:auto;padding:14px;border:1px solid var(--hairline-2);border-radius:var(--radius-m);background:rgba(0,0,0,.78);backdrop-filter:blur(14px);font-size:calc(16px * var(--type-scale))}
+.galaxy-head{display:block}.galaxy-head h2,.galaxy-head p{margin:0}.galaxy-scale{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px;margin-top:12px}.galaxy-scale button{min-height:44px;padding:8px 6px;font-size:calc(13px * var(--type-scale))}.galaxy-scale button.on{text-decoration:underline;text-underline-offset:5px;border-color:var(--yellow);color:var(--yellow-bright)}
+#galaxy-list{display:grid;gap:8px;margin-top:12px}.galaxy-place{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 10px;align-items:center;padding:9px 10px;border:1px solid var(--hairline);border-radius:var(--radius-s);background:var(--surface-1)}.galaxy-place[data-state="next"]{border-color:var(--yellow)}.galaxy-place b,.galaxy-place span{grid-column:1;overflow-wrap:anywhere}.galaxy-place button{grid-column:2;grid-row:1 / span 2;min-width:70px;min-height:44px;font-size:calc(14px * var(--type-scale))}.galaxy-state{color:var(--muted);font-size:.75em;text-transform:uppercase;letter-spacing:.08em}.galaxy-place[data-state="done"] .galaxy-state{color:var(--green-bright)}.galaxy-place[data-state="next"] .galaxy-state{color:var(--yellow)}
+body:has(#title:not(.off)) #galaxy-ui{visibility:hidden}
+@media (max-width:1100px){#galaxy-ui{top:auto;bottom:8px;max-height:44%;width:calc(100% - 28px);}.galaxy-head{display:block}.galaxy-scale{justify-content:flex-start;margin-top:10px}}
+#galaxy-ui[data-rendering="list"]{top:84px;bottom:12px;width:calc(100% - 28px);max-height:calc(100% - 96px)}
+body[data-experience="galaxy"] #hud-name,body[data-experience="galaxy"] #hud-stoplabel,body[data-experience="galaxy"] #hud-okrs,body[data-experience="galaxy"] #kpis,body[data-experience="galaxy"] #title .tstats,body[data-experience="galaxy"] #title .kicker,body[data-experience="galaxy"] #cont,body[data-experience="galaxy"] #roles,body[data-experience="galaxy"] #title .brief{display:none}
+body:has(#galaxy-ui[data-rendering="list"]:not([hidden])) #c{visibility:hidden}
+#galaxy-label{position:absolute;z-index:4;pointer-events:none;max-width:min(280px,70%);padding:8px 12px;border:1px solid var(--hairline-2);border-radius:var(--radius-s);background:var(--bg);font-size:calc(13px * var(--type-scale));line-height:1.35;box-shadow:var(--lift)}
+#galaxy-label b,#galaxy-label span{display:block}#galaxy-label span{color:var(--muted);font-size:.85em;margin-top:3px}
+#galaxy-overview svg{width:100%;height:44px}.galaxy-overview-line{fill:none;stroke:var(--blue-bright);stroke-width:1}#galaxy-overview circle{fill:var(--muted)}#galaxy-overview [data-state="done"]{fill:var(--green-bright)}#galaxy-overview [data-state="next"]{fill:var(--yellow)}
+#galaxy-check summary{font-size:.85em;color:var(--yellow-bright);cursor:pointer;padding:8px 0}.galaxy-check{font-size:.9em}.galaxy-check pre{white-space:pre-wrap;overflow-wrap:anywhere}.galaxy-check h3{font-size:1em}
+#stage.map-compact{--stage-h:min(56vh,520px)}
+/* The whole window: the band stops being a strip under the stage and becomes
+   the bottom of it, so the line that says what to do stays on screen. */
+#stage.map-tall{--stage-h:100vh}
+@supports (height:100dvh){
+  #stage{--stage-h:calc(100dvh - var(--talk-band))}
+  #stage.map-tall{--stage-h:100dvh}
+}
+body:has(#stage.map-tall) #talk{position:fixed;left:0;right:0;bottom:0;z-index:20}
+/* The band lies over the bottom of the tall stage, so what lives there steps
+   up by its height instead of hiding behind it. */
+body:has(#stage.map-tall) #joy,body:has(#stage.map-tall) #jump,
+body:has(#stage.map-tall) #bottom{margin-bottom:var(--talk-band)}
 /* Fullscreen is asked for on the document, not on #stage: the sheet and the
-   vault are siblings of the stage and would be invisible otherwise. */
+   vault are siblings of the stage and would be invisible otherwise. A browser
+   without the API (iPhone Safari) is not offered the control at all. */
 :root:fullscreen{overflow-y:auto;background:var(--bg)}
-.setting{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px 0;border-top:1px solid var(--line)}
+body.no-fullscreen .fs-only{display:none}
+.setting{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px;padding:10px 0;border-top:1px solid var(--line)}
 .setting:first-of-type{border-top:0}
-.setting label{font-size:14px}
-.setting select{font:inherit;font-size:13px;color:var(--text);background:var(--surface-2);border:1px solid var(--hairline-2);border-radius:10px;padding:8px 10px;max-width:60%}
+.setting label{font-size:.875em}
+.setting select{font:inherit;font-size:min(.81em,15px);color:var(--text);background:var(--surface-2);border:1px solid var(--hairline-2);border-radius:10px;padding:8px 10px;flex:1 1 200px;min-width:0;max-width:100%;text-overflow:ellipsis}
 body.no-motion *{animation:none!important;transition:none!important}
-#c{position:absolute;inset:0;display:block;width:100%;height:100%;touch-action:pan-y}
-h1,h2,h3{font-family:Sora,"Segoe UI",system-ui,sans-serif;font-weight:700;margin:0 0 .4em;line-height:1.1;letter-spacing:-.02em}
-h1{font-size:clamp(28px,7vw,40px)} h2{font-size:clamp(22px,5vw,28px)}
-h3{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.14em;color:var(--muted);margin-bottom:12px}
+/* The off switch for the live world: one class hides every element the feed
+   drives, so a new one only has to carry live-feed to obey it. */
+body.no-live .live-feed{display:none!important}
+/* The canvas takes every touch itself, so two fingers are a pinch for the
+   camera and never the browser's page zoom. The compact map is the one layout
+   where the page scrolls under the stage, so there a vertical swipe still
+   belongs to the page. */
+#c{position:absolute;inset:0;display:block;width:100%;height:100%;touch-action:none}
+#stage.map-compact #c{touch-action:pan-y}
+/* A soft vignette over the 3D view: CSS over the canvas rather than a render
+   pass, so it costs the GPU nothing the compositor was not already doing. */
+#stage::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(ellipse at 50% 46%,transparent 58%,rgba(0,0,0,.26) 100%)}
+/* The zoom control sits on the right edge, above the jump button on a touch
+   screen, and its three buttons are the generic button made round. */
+#zoom{right:14px;bottom:52px;z-index:6;display:flex;flex-direction:column;gap:6px}
+#zoom button{touch-action:manipulation;width:40px;height:40px;padding:0;border-radius:50%;display:grid;place-items:center;background:rgba(0,0,0,.55);backdrop-filter:blur(6px)}
+#zoom button .ic{width:18px;height:18px;margin:0}
+#zoom button[aria-pressed="true"]{border-color:var(--yellow)}
+@media (hover:none),(pointer:coarse){#zoom{bottom:122px}#zoom button{width:44px;height:44px}}
+#stage.lost #zoom,#stage.lost #joy,#stage.lost #jump,#stage.lost #bottom{display:none}
+#gfxlost{position:absolute;inset:0;z-index:7;display:grid;place-items:center;padding:16px;background:var(--bg)}
+#gfxlost[hidden]{display:none}
+#gfxlost .card{max-width:440px}
+h1,h2,h3{font-family:var(--font-display);font-weight:700;margin:0 0 .4em;line-height:1.1;letter-spacing:-.02em}
+h1{font-size:calc(clamp(28px,7vw,40px)*var(--type-scale))} h2{font-size:calc(clamp(22px,5vw,28px)*var(--type-scale))}
+/* A display heading is one line, so it takes the tight leading above. A group
+   label is small caps with wide tracking and wraps on a narrow panel, where
+   1.1 puts the second line on top of the first. */
+h3{font-size:12px;font-weight:600;line-height:1.45;text-transform:uppercase;letter-spacing:.14em;color:var(--muted);margin-bottom:12px}
 p{margin:0 0 .9em;max-width:38em}
-button{font:inherit;font-weight:600;font-size:14px;color:var(--ink);background:var(--panel2);border:1px solid var(--line2);border-radius:12px;padding:11px 18px;cursor:pointer;box-shadow:var(--ring);transition:transform .12s,box-shadow .2s,border-color .2s}
-button:hover{border-color:var(--blue-bright);transform:translateY(-1px)} button:active{transform:none}
+button{font:inherit;font-weight:600;font-size:.875em;color:var(--ink);background:var(--panel2);border:1px solid var(--line2);border-radius:12px;padding:11px 18px;cursor:pointer;box-shadow:var(--ring);transition:transform .12s,box-shadow .2s,border-color .2s}
+@media (hover:hover){button:hover{border-color:var(--blue-bright);transform:translateY(-1px)}}
+button:active{transform:none}
 button:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid var(--yellow-bright);outline-offset:2px}
 /* One yellow primary per view, black text (12.7:1 on yellow). */
 button.primary{background:var(--yellow);border-color:transparent;color:#000;box-shadow:var(--glow-yellow)}
-button.primary:hover{background:var(--yellow-bright)}
-button:disabled{opacity:.35;cursor:default;transform:none}
+@media (hover:hover){button.primary:hover{background:var(--yellow-bright)}}
+/* A blocked row stays readable: the word in the label carries the state, not
+   a wash of opacity. The second line is dimmed from the markup, so that one
+   inline value is the thing being overridden here. */
+button:disabled{opacity:1;color:var(--muted);background:var(--surface-1);border-color:var(--hairline);box-shadow:none;cursor:default;transform:none}
+button:disabled span{opacity:1!important}
 /* Danger is the bright red as text and border, never a red fill (docs/DESIGN.md). */
 button.danger{color:var(--red-bright);border-color:var(--red-bright)}
 input[type=text],textarea{font:inherit;color:var(--ink);background:var(--panel2);border:1px solid var(--line2);border-radius:12px;padding:12px 14px;width:100%}
-textarea{min-height:120px;resize:vertical;font-family:"JetBrains Mono",ui-monospace,Menlo,monospace;font-size:13.5px;line-height:1.55}
+textarea{min-height:120px;resize:vertical;font-family:var(--font-mono);font-size:13.5px;line-height:1.55}
 .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:14px 0}
 .card{background:var(--panel2);border:1px solid var(--line);border-radius:18px;padding:18px 20px;margin:14px 0}
-.muted{color:var(--muted)}.small{font-size:14px}.num{font-variant-numeric:tabular-nums}
+.muted{color:var(--muted)}.small{font-size:.875em}.num{font-variant-numeric:tabular-nums}
 a{color:var(--blue-bright);text-decoration:none;border-bottom:1px solid rgba(0,136,204,.4)}
 
 /* Lucide icons inherit the button colour; one size per context. */
@@ -67,9 +144,15 @@ h3 .ic{width:13px;height:13px;margin-right:6px;vertical-align:-2px}
 /* overlays */
 .ui{position:absolute;z-index:5;pointer-events:none}
 .ui>*{pointer-events:auto}
-#hud{top:10px;left:12px;right:12px;display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
-#hud-name{flex-shrink:1;min-width:0;overflow:hidden;text-overflow:ellipsis;display:block;flex:1}
-.pill{flex-shrink:1;min-width:0;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);background:var(--panel);border:1px solid var(--line2);backdrop-filter:blur(12px);border-radius:999px;padding:8px 12px;display:flex;gap:8px;align-items:center;white-space:nowrap}
+/* The HUD is the app bar: it stays above the sheet overlay, so Ask, Search and
+   the menu work while a stop is open. The name pill steps aside then, and the
+   sheet's Close button lives on the other side of the bar. */
+#hud{z-index:40;--hud-top:calc(10px + env(safe-area-inset-top,0px));top:var(--hud-top);left:calc(12px + env(safe-area-inset-left,0px));right:calc(12px + env(safe-area-inset-right,0px));display:flex;justify-content:space-between;align-items:flex-start;gap:8px;row-gap:6px;flex-wrap:wrap}
+body:has(#sheet.on) #hud-name,body:has(#sheet.on) #kpis,
+body:has(#sheet.on) #hud-stoplabel,body:has(#sheet.on) #hud-okrs{display:none}
+body:has(#sheet.on) #hud{justify-content:flex-end}
+#hud-name{display:block;flex:0 1 auto;min-width:min(20ch,100%);overflow:hidden;text-overflow:ellipsis}
+.pill{flex-shrink:1;min-width:0;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);background:var(--panel);border:1px solid var(--line2);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-radius:999px;padding:8px 12px;display:flex;gap:8px;align-items:center;white-space:nowrap}
 .pill i{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--line2)}
 /* The one glow on the stage: a rune lighting when an OKR is unlocked. */
 .pill i.on{background:var(--green-bright);box-shadow:var(--glow-green)}
@@ -78,14 +161,23 @@ h3 .ic{width:13px;height:13px;margin-right:6px;vertical-align:-2px}
   @keyframes rune{0%{transform:scale(.6);box-shadow:none}60%{transform:scale(1.3);box-shadow:0 0 18px rgba(0,208,132,.8)}100%{transform:scale(1)}}
 }
 .pill button{padding:4px 10px;font-size:11px;border-radius:999px}
-#kpis{position:absolute;top:54px;left:12px;display:flex;flex-direction:row;gap:6px;z-index:5;pointer-events:none}
-.kpi{background:var(--panel);border:1px solid var(--line);backdrop-filter:blur(12px);border-radius:999px;padding:4px 10px;display:flex;gap:6px;align-items:baseline}
+/* The HUD menu. On a wide screen the secondary group is display:contents, so
+   its buttons sit in the pill and only the tertiary group is a popup; a phone
+   turns the whole menu into the popup. Nothing moves in the DOM either way. */
+#hud-bar{position:relative}
+#hud-more{position:relative;display:flex;align-items:center}
+#hud-menu,#hud-sec{display:contents}
+#hud-ter{position:absolute;top:calc(100% + 8px);right:0;z-index:8;display:none;flex-direction:column;gap:6px;min-width:170px;padding:8px;background:var(--panel);border:1px solid var(--line2);border-radius:var(--radius-m);box-shadow:var(--lift);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+#hud-more.open #hud-ter{display:flex}
+#hud-ter button,#hud-menu>#hud-sec>button{white-space:nowrap}
+#hud-ter button{justify-content:flex-start;text-align:left;width:100%}
+#hud-more-btn[aria-expanded="true"]{border-color:var(--yellow)}
+/* The KPI row is the HUD's own last row, so it sits under the pills however
+   many of them wrap; no offset to keep in step with the button count. */
+#kpis{position:relative;z-index:0;flex-basis:100%;display:flex;flex-direction:row;flex-wrap:wrap;gap:6px;pointer-events:none}
+.kpi{background:var(--panel);border:1px solid var(--line);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-radius:999px;padding:4px 10px;display:flex;gap:6px;align-items:baseline}
 .kpi b{display:inline;font-family:var(--font-display);font-size:13px;letter-spacing:-.02em;color:var(--text);font-variant-numeric:tabular-nums}
 .kpi span{font-size:8px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
-/* Phones: the button pill is wider than the screen minus the name, so the
-   name takes its own row and the KPIs drop below the second row. Must come
-   after the #kpis rule above or the cascade keeps top:54px. */
-@media (max-width:480px){#hud-name{flex-basis:100%}#kpis{top:100px;flex-wrap:wrap;right:12px}}
 /* Future-retro, kept subtle: 4 percent scanlines on the title box only, never on body text elsewhere. */
 #title .box{position:relative;overflow:hidden}
 #title .box::after{content:"";position:absolute;inset:0;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='2'%3E%3Crect y='1' width='1' height='1' fill='%23000' fill-opacity='.04'/%3E%3C/svg%3E");background-size:1px 2px}
@@ -93,95 +185,143 @@ h3 .ic{width:13px;height:13px;margin-right:6px;vertical-align:-2px}
   #title .box{animation:rise var(--t-slow) var(--ease-out)}
   @keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 }
-#bottom{left:12px;right:12px;bottom:10px;display:flex;flex-direction:column;gap:8px;align-items:stretch}
+#bottom{left:calc(12px + env(safe-area-inset-left,0px));right:calc(12px + env(safe-area-inset-right,0px));bottom:10px;display:flex;flex-direction:column;gap:8px;align-items:stretch}
 #enter{align-self:center;display:none;animation:rise .3s ease both}
 #enter.on{display:flex}
 #enter button{font-size:15px;padding:13px 22px;border-radius:999px;box-shadow:var(--glow-yellow)}
-.bubble{display:flex;gap:10px;align-items:flex-start;background:var(--panel2);border:1px solid var(--line);border-radius:16px;padding:10px 12px;backdrop-filter:blur(16px);position:relative;max-width:640px;margin:0 auto;width:100%}
+.bubble{display:flex;gap:10px;align-items:flex-start;background:var(--panel2);border:1px solid var(--line);border-radius:16px;padding:10px 12px;-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);position:relative;max-width:640px;margin:0 auto;width:100%}
 .bubble::before{content:"";position:absolute;left:0;top:12px;bottom:12px;width:3px;border-radius:3px;background:var(--accent)}
 .bubble svg{width:44px;height:44px;flex:0 0 44px;background:var(--panel2);border-radius:12px;border:1px solid var(--line)}
 .bubble b{display:block;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
 .bubble span{font-size:13px;line-height:1.4;display:block}
-#talk{padding:10px 12px 0;background:var(--bg)}
-.hint{text-align:center;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-shadow:0 1px 2px rgba(0,0,0,.4)}
+#talk{height:var(--talk-band);padding:10px 12px calc(10px + env(safe-area-inset-bottom,0px));background:var(--bg);display:flex;align-items:center}
+#talk .bubble{max-height:calc(var(--talk-h) - 20px);overflow:auto}
+/* The hint sits on bright grass, so it carries its own backing instead of
+   relying on a text shadow. */
+.hint{align-self:center;max-width:100%;text-align:center;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--text);background:rgba(0,0,0,.55);border:1px solid var(--hairline);border-radius:var(--radius-pill);padding:6px 14px;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
 @keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 
-/* sheet */
-#sheet{display:none;position:relative;background:var(--bg);border-top:1px solid var(--line2)}
-#sheet.on{display:block}
+/* The sheet is an overlay with its own scroll container: the page behind it
+   never moves, the reading column is framed instead of floating on black, and
+   the action row of the open screen sticks to the bottom of that container.
+   The HUD floats above this overlay, so the sheet keeps a band clear for it:
+   the scroll container starts under the bar, which is why no amount of
+   scrolling can put a line of the lesson behind a pill. One number, because
+   the Close button sits in the same band. */
+#sheet{display:none;position:fixed;inset:0;width:min(820px,100%);margin-inline:auto;z-index:30;background:var(--bg);box-shadow:var(--lift);--sheet-top:calc(62px + env(safe-area-inset-top,0px));padding-top:var(--sheet-top)}
+#sheet.on{display:flex;flex-direction:column}
+@media (min-width:821px){#sheet{border-left:1px solid var(--line2);border-right:1px solid var(--line2)}}
 #sheet .grab{display:none}
-#sheet .inner{padding:16px 18px 60px;max-width:640px;width:100%;margin:0 auto}
-#sheet .x{position:absolute;top:12px;right:14px;padding:6px 12px;font-size:12px;border-radius:999px;z-index:2}
-.screen{display:none}.screen.on{display:block}
+#sheet .inner{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;scroll-padding-bottom:96px;padding:10px 22px 0;max-width:680px;width:100%;margin:0 auto}
+#sheet .x{position:absolute;top:12px;left:16px;right:auto;padding:6px 12px;font-size:12px;border-radius:999px;z-index:3}
+/* The action row of the open screen: Mark as done and Back, always reachable. */
+#sheet .inner .row.actions{position:sticky;bottom:0;z-index:2;margin:18px -22px 0;padding:14px 22px;padding-bottom:calc(14px + env(safe-area-inset-bottom,0px));background:var(--bg);border-top:1px solid var(--line)}
+.screen{display:none}.screen.on{display:block;padding-bottom:24px}
 
 /* title overlay */
 /* The island renders behind the title from the first frame (a slow orbit
    until start), so the panel sits left on wide screens and leaves the
    right half of the stage clear. */
-#title{position:fixed;inset:0;z-index:20;display:flex;align-items:center;justify-content:flex-start;padding:16px;background:rgba(0,0,0,.22)}
-#title .box{background:rgba(10,10,10,.88);border:1px solid var(--line2);border-radius:var(--radius-l);padding:22px 22px 18px;max-width:520px;width:100%;max-height:90vh;overflow:auto;backdrop-filter:blur(14px);margin-left:max(0px,calc((100vw - 1200px)/2))}
+#title{position:fixed;inset:0;z-index:50;display:flex;align-items:center;justify-content:flex-start;padding:16px;background:rgba(0,0,0,.22)}
+/* The title is modal: the island keeps turning behind it, but the HUD, the
+   walk hint and the speech bubble are covered by the panel and dead to a
+   click, so they are hidden rather than half readable under it. Hidden, not
+   removed: the stage keeps its size, so the camera does not jump at Start.
+   This is also what takes the HUD out of the tab order until then. */
+body:has(#title:not(.off)) #hud,body:has(#title:not(.off)) #bottom,
+body:has(#title:not(.off)) #talk,body:has(#title:not(.off)) #zoom{visibility:hidden}
+#title .box{background:rgba(10,10,10,.88);border:1px solid var(--line2);border-radius:var(--radius-l);padding:22px 22px 18px;max-width:520px;width:100%;max-height:90vh;overflow:auto;-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);margin-left:max(0px,calc((100vw - 1200px)/2))}
 @media (max-width:760px){#title{justify-content:center}#title .box{margin-left:0}}
 /* Phones: the box covers the HUD instead of letting it bleed through, and the
    whole screen is the form. */
 @media (max-width:480px){#title{padding:8px;background:var(--bg)}#title .box{background:var(--surface-1);max-height:100%;border-radius:var(--radius-m)}}
-.kicker{font-family:var(--font-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0 0 10px}
+.kicker{font-family:var(--font-mono);font-size:.69em;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0 0 10px}
 .kicker b{color:var(--yellow);font-weight:600}
 .tstats{display:flex;gap:22px;margin:12px 0 10px;padding:12px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
 .tstats div{display:flex;flex-direction:column;gap:3px}
-.tstats b{font-family:var(--font-display);font-size:22px;letter-spacing:-.02em;font-variant-numeric:tabular-nums;line-height:1}
+.tstats b{font-family:var(--font-display);font-size:1.375em;letter-spacing:-.02em;font-variant-numeric:tabular-nums;line-height:1}
 .tstats span{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
 .tstats .done b{color:var(--green-bright)}
-details.brief{margin:4px 0 8px}details.brief summary{cursor:pointer;font-size:13px;color:var(--blue-bright);list-style:none;font-family:var(--font-mono)}
-details.brief summary::-webkit-details-marker{display:none}details.brief summary::before{content:"> "}details.brief[open] summary::before{content:"v "}
+details.brief{margin:4px 0 8px}details.brief summary{cursor:pointer;font-size:.81em;color:var(--blue-bright);list-style:none;font-family:var(--font-mono)}
+details.brief summary::-webkit-details-marker{display:none}details.brief summary::before{content:">"}details.brief[open] summary::before{content:"v"}
 details.brief p{margin-top:8px}
 .stamp{font-family:var(--font-mono);font-size:11px;color:var(--muted);margin:10px 0 0;display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
 .stamp i{font-style:normal;color:var(--green-bright)}
 #title.off{display:none}
 /* Onboarding steps on the title screen. A returning player sees the resume
    button first; the steps fold under a summary. */
-.step{display:flex;align-items:center;gap:10px;margin:14px 0 6px;font-family:var(--font-display);font-size:15px;letter-spacing:-.01em}
+.step{display:flex;align-items:center;gap:10px;margin:14px 0 6px;font-family:var(--font-display);font-size:.94em;letter-spacing:-.01em}
 .step b{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:var(--yellow);color:#000;font-size:12px;font-family:var(--font-mono)}
 .choices{display:flex;flex-wrap:wrap;gap:8px}
-.choice{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;font-size:13px;border-radius:var(--radius-pill)}
+.choice{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;font-size:.81em;border-radius:var(--radius-pill)}
 .choice i{width:12px;height:12px;border-radius:50%;border:1px solid rgba(255,255,255,.25)}
 .choice.on{border-color:var(--yellow);box-shadow:0 0 0 1px var(--yellow) inset}
 .choices.modes{flex-direction:column}.choices.modes .choice{display:flex;flex-direction:column;align-items:flex-start;gap:2px;border-radius:var(--radius-m);width:100%;text-align:left}
-.choices.modes .choice span{font-weight:400;color:var(--muted);font-size:12.5px}
+.choices.modes .choice span{font-weight:400;color:var(--muted);font-size:.96em}
 .setup{margin:8px 0 4px;padding:4px 12px 8px;border:1px solid var(--line);border-radius:var(--radius-m)}
 .setup h4{font-family:var(--font-display);font-size:14px;margin:12px 0 4px}
-.setup pre,#s-setup pre{background:rgba(0,0,0,.28);border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin:6px 0 10px;overflow-x:auto;font-family:var(--font-mono);font-size:12.5px;line-height:1.5}
+.setup pre,#s-setup pre{background:rgba(0,0,0,.28);border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin:6px 0 10px;overflow-x:auto;font-family:var(--font-mono);font-size:.78em;line-height:1.5}
 /* The primary row stays on screen however long the form gets, and the setup
-   guide is rendered below it rather than between two steps. */
-#title .box .row.go{position:sticky;bottom:-18px;z-index:2;margin:14px -22px -18px;padding:12px 22px 18px;background:var(--surface-1);border-top:1px solid var(--line)}
+   guide is rendered below it rather than between two steps. Both offsets: a
+   sticky bottom alone lets the row scroll off the top once the guide is open,
+   and the field and the button must never be out of reach. The top offset is
+   the box's own padding, so the held row covers that strip instead of leaving
+   a clipped line of text above itself. The row's own
+   padding fills the box's bottom padding when it rests at the end, so it takes
+   no negative margin, which would print the opaque row over the text below. */
+#title .box .row.go{position:sticky;top:-22px;bottom:-18px;z-index:2;margin:14px -22px 0;padding:12px 22px 18px;background:var(--surface-1);border-top:1px solid var(--line)}
+#title .box .row.go #name{flex:1;min-width:150px;width:auto}
+#title .box .row.go #namehint{flex-basis:100%;margin:-2px 0 0;font-size:13px}
 #title .box .row.go+.setup{margin-top:18px}
 #namehint.err{color:var(--red-bright)}
 @media (prefers-reduced-motion:no-preference){
   #name.shake{animation:shake 320ms var(--ease)}
   @keyframes shake{10%,90%{transform:translateX(-2px)}30%,70%{transform:translateX(4px)}50%{transform:translateX(-4px)}}
 }
-#title.returning #onboard{display:none}
+/* First visit: the steps are the screen, so the disclosure is invisible and
+   only a returning player gets the line that opens them again. */
+#title:not(.returning) #obfold>summary{display:none}
+#obfold>summary{cursor:pointer;font-size:.81em;color:var(--blue-bright);list-style:none;font-family:var(--font-mono);margin:12px 0 0}
+#obfold>summary::-webkit-details-marker{display:none}
+#obfold>summary::before{content:">"}#obfold[open]>summary::before{content:"v"}
 #title.returning details.brief{margin-top:10px}
 /* Lesson commands fold at hard and above; the summary is the only thing
    that changes with the difficulty, the commands are always one click away. */
-details.cmds{margin:8px 0 12px}details.cmds summary{cursor:pointer;font-family:var(--font-mono);font-size:12px;color:var(--blue-bright);list-style:none}
-details.cmds summary::-webkit-details-marker{display:none}details.cmds summary::before{content:"> "}details.cmds[open] summary::before{content:"v "}
+details.cmds{margin:8px 0 12px}details.cmds summary{cursor:pointer;font-family:var(--font-mono);font-size:.75em;color:var(--blue-bright);list-style:none}
+details.cmds summary::-webkit-details-marker{display:none}details.cmds summary::before{content:">"}details.cmds[open] summary::before{content:"v"}
 details.cmds[open] summary{margin-bottom:-4px}details.cmds pre{margin-top:8px}
+/* The gap after the chevron is a margin, never a space inside the content: a
+   coarse pointer lays the summary out as a flex row, where a trailing space in
+   generated content collapses and the marker runs into the word. */
+details.brief summary::before,details.cmds summary::before,#obfold>summary::before{margin-right:.6ch}
 
-.pairing{border:1px solid rgba(255,213,0,.35);background:rgba(255,213,0,.08);border-radius:14px;padding:10px 14px;margin:0 0 14px;font-size:13.5px;line-height:1.5}
+.pairing{border:1px solid rgba(255,213,0,.35);background:rgba(255,213,0,.08);border-radius:14px;padding:10px 14px;margin:0 0 14px;font-size:.84em;line-height:1.5}
 .pairing b{display:block;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:2px}
 .pairing i{color:var(--muted)}
 .lesson{margin-top:18px;padding-top:14px;border-top:1px solid var(--line)}
-.lesson h4{font-family:Sora,sans-serif;font-size:15px;margin:18px 0 6px;letter-spacing:-.01em}
+.lesson h4{font-family:var(--font-display);font-size:.94em;margin:18px 0 6px;letter-spacing:-.01em}
 .lesson ol{padding-left:22px;margin:6px 0 10px}.lesson li{margin:4px 0}
-.lesson pre{background:rgba(0,0,0,.28);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin:8px 0 12px;overflow-x:auto;font-family:"JetBrains Mono",ui-monospace,Menlo,monospace;font-size:12.5px;line-height:1.5;white-space:pre-wrap;word-break:break-word}
-.callout{border-radius:14px;padding:12px 14px;margin:12px 0;font-size:14.5px;border:1px solid var(--line)}
+.lesson pre{background:rgba(0,0,0,.28);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin:8px 0 12px;overflow-x:auto;font-family:var(--font-mono);font-size:.78em;line-height:1.5;white-space:pre-wrap;word-break:break-word}
+.callout{border-radius:14px;padding:12px 14px;margin:12px 0;font-size:.9em;border:1px solid var(--line)}
 .callout b{display:block;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;margin-bottom:4px}
 .callout.ok{border-color:rgba(0,208,132,.4);background:rgba(0,208,132,.08)}.callout.ok b{color:var(--grass)}
 .callout.why{border-color:rgba(0,136,204,.4);background:rgba(0,136,204,.08)}.callout.why b{color:var(--blue-bright)}
 .callout.try{border-color:rgba(255,213,0,.4);background:rgba(255,213,0,.08)}.callout.try b{color:var(--gold)}
 .hour{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--a1);background:rgba(0,136,204,.12);border:1px solid rgba(0,136,204,.3);border-radius:999px;padding:5px 12px;margin-bottom:10px}
-/* The artifact demos print like a terminal: mono, one line per step. */
-.term{background:rgba(0,0,0,.35);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin:8px 0 12px;min-height:110px;font-family:var(--font-mono);font-size:12.5px;line-height:1.6;white-space:pre-wrap;word-break:break-word;color:var(--text)}
+/* The artifact demos print like a terminal: mono, one line per step. A step
+   wider than the panel folds with a hanging indent, so the left edge belongs
+   to the start of a step and anything set in from it is the rest of the step
+   above: the columns keep their origin and the fold reads as a fold. Folding
+   rather than scrolling sideways because most steps end in the sentence the
+   demo is for, and a sentence off the right edge of a phone is a sentence
+   nobody reads.
+   A grid holding one run of text, because a transcript arrives a line at a
+   time: laid out as flow text, WebKit keeps the indent a line was given when
+   it was appended, and a step short enough to need no fold is left set in as
+   if it were the tail of the step above. A grid container lays the whole
+   transcript out again on every line, so what the columns say is what the
+   finished transcript says. */
+.term{display:grid;background:rgba(0,0,0,.35);border:1px solid var(--line);border-radius:12px;padding:12px 14px 12px calc(14px + 3ch);margin:8px 0 12px;min-height:110px;font-family:var(--font-mono);font-size:.78em;line-height:1.6;white-space:pre-wrap;text-indent:-3ch each-line;overflow-wrap:break-word;color:var(--text)}
 /* The workstream 2 demo component: one card, two change requests. */
 .demo{margin:10px 0}
 .demo-card{border:1px solid var(--line);border-left-width:3px;border-radius:var(--radius-m);padding:12px 14px;background:var(--panel2)}
@@ -193,10 +333,10 @@ details.cmds[open] summary{margin-bottom:-4px}details.cmds pre{margin-top:8px}
 .demo-card td{padding:3px 12px 3px 0;color:var(--ink)}
 .stats{display:grid;grid-template-columns:auto 1fr;gap:1px 14px;font-size:14px}
 .stats b{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);padding-top:3px}
-.prompt{display:block;width:100%;text-align:left;padding:14px 16px;margin:8px 0;font-family:"JetBrains Mono",ui-monospace,Menlo,monospace;font-size:13px}
+.prompt{display:block;width:100%;text-align:left;padding:14px 16px;margin:8px 0;font-family:var(--font-mono);font-size:13px}
 /* The workstream 3 schema demo, and the workstream 1 prompt it writes out. */
 .schema{margin-top:10px}
-table.csv{border-collapse:collapse;width:100%;font-size:13px;font-family:"JetBrains Mono",ui-monospace,Menlo,monospace}
+table.csv{border-collapse:collapse;width:100%;font-size:13px;font-family:var(--font-mono)}
 table.csv th{text-align:left;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);padding:0 10px 4px 0;white-space:nowrap}
 table.csv th.changed{color:var(--red-bright)}
 table.csv td{padding:2px 10px 2px 0;color:var(--ink);white-space:nowrap}
@@ -213,20 +353,22 @@ pre.out.err{color:var(--red-bright);border-color:var(--red)}
 .web line{stroke:var(--a2);stroke-width:1.5;stroke-dasharray:400;stroke-dashoffset:400}
 .web.woven line{animation:draw 1.4s ease forwards}.web.woven circle,.web.woven text{animation:fade .5s ease backwards}
 @keyframes draw{to{stroke-dashoffset:0}}@keyframes fade{from{opacity:0}to{opacity:1}}
-.date{display:block;width:100%;text-align:left;padding:14px 18px;margin:8px 0;font-weight:600;font-size:15px;border-radius:16px}
+.date{display:block;width:100%;text-align:left;padding:14px 18px;margin:8px 0;font-weight:600;font-size:.94em;border-radius:16px}
 .date.pick,.wine.pick{background:var(--accent);border-color:transparent;color:#fff}
-.msg{white-space:pre-wrap;font-size:14px;font-family:"JetBrains Mono",ui-monospace,Menlo,monospace;background:rgba(0,0,0,.18);border:1px solid var(--line);border-radius:14px;padding:14px}
+.msg{white-space:pre-wrap;font-size:.875em;font-family:var(--font-mono);background:rgba(0,0,0,.18);border:1px solid var(--line);border-radius:14px;padding:14px}
 
 /* vault */
-#vault{display:none;flex-direction:column;background:#1e1e1e;color:#dcddde;font-family:Inter,sans-serif;border-top:1px solid #333}
+/* The reader is the palette's own surface, not an imported Obsidian grey:
+   the link blue only reaches AA against the dark surfaces (docs/DESIGN.md). */
+#vault{display:none;flex-direction:column;background:var(--surface-1);color:var(--text);font-family:var(--font-body);border-top:1px solid var(--hairline)}
 #vault.on{display:flex}
-#vtop{display:flex;align-items:center;gap:10px;padding:10px 12px 8px;border-bottom:1px solid var(--hairline);background:var(--surface-2);flex-wrap:wrap}
-#vtop b{font-family:Sora,sans-serif;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--yellow)}
+#vtop{display:flex;align-items:center;gap:10px;padding:calc(10px + env(safe-area-inset-top,0px)) calc(12px + env(safe-area-inset-right,0px)) 8px calc(12px + env(safe-area-inset-left,0px));border-bottom:1px solid var(--hairline);background:var(--surface-2);flex-wrap:wrap}
+#vtop b{font-family:var(--font-display);font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--yellow)}
 #vtop span{font-size:12px;color:var(--muted);flex:1;min-width:120px}
 #vtop button{padding:6px 12px;font-size:12px;border-radius:8px;background:var(--surface-2);border:1px solid var(--hairline-2);color:var(--text);box-shadow:none}
 #vg{touch-action:none;cursor:grab}
 #vg{display:block;width:100%;height:clamp(340px,52vh,560px);background:var(--bg);touch-action:none;border-bottom:1px solid var(--hairline)}
-#vtree{display:none;overflow-x:auto;padding:12px;background:#181818;border-bottom:1px solid #333;-webkit-overflow-scrolling:touch}
+#vtree{display:none;overflow-x:auto;padding:12px;background:var(--bg);border-bottom:1px solid var(--hairline);-webkit-overflow-scrolling:touch}
 #vtree.on{display:block}
 #vtree{scrollbar-width:thin;scrollbar-color:var(--hairline-2) transparent}
 #vtree::-webkit-scrollbar{height:9px}
@@ -235,32 +377,79 @@ pre.out.err{color:var(--red-bright);border-color:var(--red)}
 .treenav{position:sticky;left:0;display:flex;gap:8px;align-items:center;margin:0 0 10px}
 .treenav button{padding:5px 12px;font-size:12px;border-radius:999px;background:var(--surface-2);border:1px solid var(--hairline-2);color:var(--text);box-shadow:none}
 .ages{display:flex;gap:10px;min-width:max-content}
-.age{width:190px;flex:0 0 190px;background:#222;border:1px solid #333;border-radius:14px;padding:10px}
-.age h4{margin:0 0 2px;font-family:Sora,sans-serif;font-size:13px;color:#fff}
+.age{width:190px;flex:0 0 190px;background:var(--surface-2);border:1px solid var(--hairline);border-radius:14px;padding:10px}
+.age h4{margin:0 0 2px;font-family:var(--font-display);font-size:13px;color:var(--text)}
 .age .lvl{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--orange-bright);margin-bottom:4px}
-.age p{font-size:11px;color:#999;margin:0 0 8px;line-height:1.35}
-.tech{display:block;width:100%;text-align:left;font-size:12px;padding:7px 9px;margin:4px 0;border-radius:9px;background:#2a2a2a;border:1px solid #3a3a3a;color:#ddd;box-shadow:none}
+.age p{font-size:11px;color:var(--muted);margin:0 0 8px;line-height:1.35}
+.tech{display:block;width:100%;text-align:left;font-size:12px;padding:7px 9px;margin:4px 0;border-radius:9px;background:var(--surface-3);border:1px solid var(--hairline-2);color:var(--text);box-shadow:none}
 .tech.sel{border-color:var(--blue-bright);background:rgba(0,136,204,.18)}
+.tech.locked{opacity:.5}
 .tech em.d{float:right;font-style:normal;font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-left:6px}
 .tech em.d2{color:var(--yellow)}.tech em.d3{color:var(--orange-bright)}
 .tech i{display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:6px}
-#vnote{padding:16px 18px 60px;font-size:15px;line-height:1.6;max-width:640px;margin:0 auto}
-#vnote h1{font-size:22px;color:#fff;margin:0 0 8px;letter-spacing:-.01em}
-#vnote h2{font-size:14px;color:var(--blue-bright);text-transform:uppercase;letter-spacing:.1em;margin:18px 0 6px}
+/* Interests: a shelf you did not choose is set back, never hidden, disabled
+   or unreadable. It gives up its surface, the white of its title and the
+   colour of its count, and keeps its hairline and the contrast of every word
+   on it: opacity takes the 11px description down with the card, and a screen
+   with no hover has no way to bring it back. */
+.age.faded{background:transparent}
+.age.faded h4,.age.faded .lvl{color:var(--muted)}
+.age.faded .tech{opacity:.85}
+.age.faded:focus-within{background:var(--surface-2)}
+.age.faded:focus-within h4{color:var(--text)}
+.age.faded:focus-within .lvl{color:var(--orange-bright)}
+.age.faded:focus-within .tech{opacity:1}
+@media (hover:hover){.age.faded:hover{background:var(--surface-2)}
+  .age.faded:hover h4{color:var(--text)}
+  .age.faded:hover .lvl{color:var(--orange-bright)}
+  .age.faded:hover .tech{opacity:1}}
+.idot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:6px;vertical-align:middle}
+.setting.wide{display:block}
+.setting.wide label{display:block;margin-bottom:8px}
+/* The companion picker: the select and its animated preview on one row, the
+   preview drawn at whole pixels so the sprite stays crisp. */
+.setting.pet{display:flex;flex-wrap:wrap;align-items:center;gap:12px}
+.setting.pet label{flex:0 0 auto;margin:0}
+.setting.pet select{max-width:none}
+.setting.pet canvas{width:96px;height:72px;image-rendering:pixelated;background:var(--surface-2);border:1px solid var(--hairline-2);border-radius:10px}
+.setting.pet p{flex:1 0 100%;margin:0}
+button.link{background:none;border:0;padding:0;box-shadow:none;color:var(--blue-bright);font:inherit;font-size:inherit;text-decoration:underline;cursor:pointer}
+#vnote{padding:16px 18px 60px;font-size:calc(15px*var(--type-scale));line-height:1.6;max-width:640px;margin:0 auto}
+#vnote h1{font-size:1.47em;color:var(--text);margin:0 0 8px;letter-spacing:-.01em}
+#vnote h2{font-size:.94em;color:var(--blue-bright);text-transform:uppercase;letter-spacing:.1em;margin:18px 0 6px}
 #vnote p{margin:0 0 10px;max-width:none}
 #vnote ul{margin:0 0 10px 18px;padding:0}
 #vnote li{margin:2px 0}
 #vnote .wl{color:var(--blue-bright);cursor:pointer;border-bottom:1px solid rgba(0,136,204,.4)}
-#vnote .wl:hover{color:var(--text);border-bottom-color:var(--blue-bright)}
+@media (hover:hover){#vnote .wl:hover{color:var(--text);border-bottom-color:var(--blue-bright)}}
 #vnote .wl.locked{color:var(--muted);border-bottom-style:dashed;border-bottom-color:rgba(139,147,167,.4);cursor:default}
 #vnote .tag{display:inline-block;font-size:11px;background:rgba(0,168,107,.15);color:var(--green-bright);border-radius:6px;padding:2px 7px;margin-right:4px}
-#vnote .bl{border-top:1px solid #333;margin-top:16px;padding-top:10px}
+#vnote .bl{border-top:1px solid var(--hairline);margin-top:16px;padding-top:10px}
 #vnote .bl .wl{display:inline-block;margin:2px 8px 2px 0}
 #vnote a{color:var(--blue-bright);border-bottom:1px solid rgba(0,136,204,.4)}
-#vnote code{background:#2a2a2a;border-radius:4px;padding:1px 5px;font-family:"JetBrains Mono",Menlo,monospace;font-size:13px}
-#joy{position:absolute;left:14px;bottom:44px;width:88px;height:88px;border-radius:50%;background:rgba(0,0,0,.22);border:1px solid rgba(255,255,255,.35);backdrop-filter:blur(6px);z-index:6;touch-action:none}
+#vnote code{background:var(--surface-3);border-radius:4px;padding:1px 5px;font-family:var(--font-mono);font-size:.87em}
+/* The command palette: one box over everything, the same spacing scale. */
+#pal{display:none;position:fixed;inset:0;z-index:70;background:rgba(0,0,0,.6);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);padding:max(8vh,24px) var(--space-4) var(--space-4);justify-content:center;align-items:flex-start}
+#pal.on{display:flex}
+.pal-box{width:min(620px,100%);max-height:70vh;display:flex;flex-direction:column;background:var(--surface-1);border:1px solid var(--hairline-2);border-radius:var(--radius-l);box-shadow:var(--lift);overflow:hidden}
+#pal-q{border:0;border-bottom:1px solid var(--hairline);border-radius:0;background:transparent;padding:var(--space-4);font-size:16px}
+#pal-q:focus-visible{outline-offset:-2px}
+#pal-list{overflow-y:auto;padding:var(--space-2);display:flex;flex-direction:column;gap:2px}
+.pal-row{display:flex;align-items:center;gap:var(--space-3);width:100%;text-align:left;padding:10px 12px;border:1px solid transparent;border-radius:var(--radius-m);background:transparent;box-shadow:none;font-weight:600}
+.pal-row.sel{background:var(--surface-2);border-color:var(--hairline-2);transform:none}
+@media (hover:hover){.pal-row:hover{background:var(--surface-2);border-color:var(--hairline-2);transform:none}}
+.pal-row .pal-what{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pal-row .pal-sub{display:block;font-size:11px;font-weight:400;color:var(--muted);overflow:hidden;text-overflow:ellipsis}
+.pal-row .pal-kind{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);flex:none}
+.pal-empty{padding:var(--space-4);margin:0}
+.pal-hint{margin:0;padding:10px var(--space-4);border-top:1px solid var(--hairline)}
+@media (max-width:480px){.pal-hint{display:none}}
+/* The stick and the jump button are for fingers; a mouse gets the ground, the
+   arrow keys and WASD, which the hint line already offers. */
+@media (hover:hover) and (pointer:fine){#joy,#jump,#hint .touch{display:none}}
+#joy{position:absolute;left:calc(14px + env(safe-area-inset-left,0px));bottom:44px;width:88px;height:88px;border-radius:50%;background:rgba(0,0,0,.22);border:1px solid rgba(255,255,255,.35);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);z-index:6;touch-action:none}
 #knob{position:absolute;left:26px;top:26px;width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.85);box-shadow:0 2px 8px rgba(0,0,0,.3);transition:transform .05s}
-#jump{position:absolute;right:14px;bottom:52px;width:56px;height:56px;border-radius:50%;padding:0;font-size:22px;z-index:6;background:var(--accent);color:#000;border:0;box-shadow:0 6px 18px rgba(0,0,0,.5)}
+#jump{position:absolute;right:calc(14px + env(safe-area-inset-right,0px));bottom:52px;width:56px;height:56px;border-radius:50%;padding:0;font-size:22px;z-index:6;background:var(--accent);color:#000;border:0;box-shadow:0 6px 18px rgba(0,0,0,.5)}
 .rolinda{border-left:3px solid var(--orange);padding:8px 14px;margin:14px 0;font-style:italic;font-size:14px}
 .rolinda b{font-style:normal;display:block;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--orange-bright);margin-bottom:2px}
 .mentor-head{display:flex;gap:14px;align-items:center;margin-bottom:10px}
@@ -274,19 +463,281 @@ pre.out.err{color:var(--red-bright);border-color:var(--red)}
 .ideas li{margin:4px 0}
 .deep{display:none;border:1px solid rgba(0,136,204,.35);background:rgba(0,136,204,.06);border-radius:16px;padding:14px 16px;margin:12px 0}
 .deep.on{display:block}
-.pathrow{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:8px 0;border-top:1px solid var(--line);font-size:14px}
+.pathrow{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:8px 0;border-top:1px solid var(--line);font-size:14px;overflow-wrap:anywhere;min-width:0}
 .pathrow:first-child{border-top:0}
-.pathrow .st{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 8px;border-radius:999px;background:var(--panel2);color:var(--muted)}
+.pathrow .st{flex:none;white-space:nowrap;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 8px;border-radius:999px;background:var(--panel2);color:var(--muted)}
 .pathrow .st.deep{background:rgba(0,136,204,.15);color:var(--a1)}
 .pathrow .st.skip{background:rgba(240,73,35,.12);color:var(--red-bright)}
+/* The chat panel. The log is a fixed window so the question box stays in view
+   on a phone; every turn says where its answer came from. */
+.chip{display:inline-block;font-size:12px;color:var(--blue-bright);background:rgba(0,136,204,.12);border:1px solid rgba(0,136,204,.3);border-radius:999px;padding:3px 10px;margin:0 0 10px}
+.chatlog{max-height:46vh;overflow-y:auto;border:1px solid var(--line);border-radius:14px;padding:10px 12px;background:var(--surface-1)}
+.chatlog .cturn{border-top:1px solid var(--line);padding:8px 0}
+.chatlog .cturn:first-child{border-top:0;padding-top:0}
+.chatlog .you{margin:0 0 4px;font-size:13px;color:var(--muted)}
+.chatlog .them{margin:0;font-size:14px;white-space:pre-wrap}
+.chatlog .src{display:block;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-top:4px}
+.chatlog .wl{display:inline-block;margin:4px 8px 0 0;font-size:13px;color:var(--blue-bright);cursor:pointer;border-bottom:1px solid rgba(0,136,204,.4)}
 .evening{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--a2);margin-bottom:4px}
 .worlds{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0 4px}
 .world{border-radius:14px;padding:10px 12px;text-align:left;font-size:13px;line-height:1.35}
-.world b{display:block;font-family:Sora,sans-serif;font-size:14px}
+.world b{display:block;font-family:var(--font-display);font-size:14px}
 .world.pick{border-color:var(--a1);box-shadow:0 0 0 2px rgba(0,136,204,.35)}
 .world i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:-1px}
 @media (prefers-reduced-motion:reduce){#enter,#sheet{transition:none;animation:none}}
 /* Phones: the HUD pill is already at its width limit, so the icons go. */
 @media (max-width:480px){.pill button .ic{display:none}}
-/* Phones: the pill is full; Settings lives on the Roadmap sheet instead. */
-@media (max-width:480px){.pill button[aria-label="Settings"]{display:none}}
+/* The compact HUD: a narrow window, or a phone lying down. Only Roadmap and
+   Search stay in the pill and everything else is the menu, which drops under
+   the whole HUD rather than off the More button: anywhere else it is wider
+   than the space beside it and covers the column the pointer is aiming at.
+   Both rows take the full width, so the bar lines up under the name. */
+@media (max-width:820px),(max-height:520px) and (pointer:coarse){
+  /* Opaque, not glass: none of the island shows through the HUD, and no
+     blurred layer is left to become the containing block of the menu. */
+  .pill{background:var(--surface-1);-webkit-backdrop-filter:none;backdrop-filter:none;flex-wrap:wrap;row-gap:6px}
+  #hud-name{flex:1 0 100%}
+  #hud-bar{flex:1 0 100%;position:static}
+  #hud-search{margin-left:auto}
+  #hud-more{position:static}
+  #hud-menu{position:absolute;z-index:45;top:calc(100% + 8px);right:0;min-width:200px;max-width:min(320px,100%);max-height:60vh;max-height:60dvh;overflow-y:auto;overscroll-behavior:contain;display:none;flex-direction:column;gap:6px;padding:8px;background:var(--surface-1);border:1px solid var(--hairline-2);border-radius:var(--radius-m);box-shadow:var(--lift)}
+  #hud-more.open #hud-menu{display:flex}
+  #hud-sec{display:flex;flex-direction:column;gap:6px}
+  #hud-ter{position:static;display:flex;min-width:0;padding:6px 0 0;background:none;border:0;border-top:1px solid var(--line);box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none}
+  #hud-menu button{justify-content:flex-start;text-align:left;width:100%;flex:none;padding:8px 12px;font-size:12px}
+  #hud-menu .ic{display:inline-block}
+  #hud-search .lbl{display:none}
+  #hud-search .ic{display:inline-block;margin-right:0;width:16px;height:16px}
+  /* Over a sheet the bar is back to its own width, so the sheet's Close
+     button has the other side of the row to itself. */
+  body:has(#sheet.on) #hud-bar{flex:0 1 auto}
+}
+/* The band the panel keeps clear of the HUD follows the pill, and two things
+   make the pill taller than the desktop one: a narrow window, where the bar
+   takes a row of its own under the name, and a finger, which makes every
+   button 44px at any width. So the band is written for both, and not for the
+   compact HUD alone: a tablet has the finger without the narrow window. */
+@media (max-width:820px),(pointer:coarse){
+  #sheet{--sheet-top:calc(86px + env(safe-area-inset-top,0px))}
+}
+/* A finger gets the same menu as a sheet on the bottom edge, where the thumb
+   is and where the window can always hold it, with the island dimmed behind
+   it so the sheet is the only thing to tap. */
+@media (pointer:coarse) and (max-width:820px),(pointer:coarse) and (max-height:520px){
+  #hud-menu{position:fixed;top:auto;left:max(12px,env(safe-area-inset-left,0px));right:max(12px,env(safe-area-inset-right,0px));bottom:max(12px,env(safe-area-inset-bottom,0px));max-width:min(480px,calc(100% - 24px));margin-inline:auto;max-height:calc(100vh - 24px);max-height:calc(100dvh - 24px);border-radius:var(--radius-l)}
+  #hud-menu::before{content:"";flex:none;align-self:center;width:36px;height:4px;margin:2px 0 6px;border-radius:var(--radius-pill);background:var(--hairline-2)}
+  #hud-more.open::after{content:"";position:fixed;inset:0;z-index:44;background:rgba(0,0,0,.5)}
+  /* The button that opened the sheet stays above its backdrop: it is also the
+     button that closes it. */
+  #hud-more.open #hud-more-btn{position:relative;z-index:46}
+  #hud-menu button{padding:10px 14px;font-size:14px;border-radius:var(--radius-m)}
+  #hud-menu .ic{width:16px;height:16px;margin-right:10px}
+}
+/* Fingers, not pointers: every control is at least 44px tall on a coarse
+   pointer (WCAG 2.5.5 target size), and the stick and the jump button own the
+   bottom band, so the hint and the Enter button stop above them. */
+@media (pointer:coarse){
+  button:not(.link),summary,select,.choice{min-height:44px}
+  .pill button{min-height:44px;padding:8px 14px}
+  details.brief summary,details.cmds summary{display:flex;align-items:center}
+  #sheet .x{padding:10px 16px}
+  #bottom{bottom:140px}
+  #hint .keys{display:none}
+  input,textarea,select{font-size:16px}
+}
+/* Lying down there is width but no height: the menu rows go two abreast, so
+   the whole menu is on screen instead of scrolling past the bottom edge, and
+   the hint moves into the gap between the two controls rather than above
+   them, where a short stage has nothing to spare. */
+@media (max-height:520px) and (pointer:coarse){
+  #hud-menu{max-width:min(560px,calc(100% - 24px))}
+  #hud-sec{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+  #bottom{bottom:10px;left:calc(110px + env(safe-area-inset-left,0px));right:calc(84px + env(safe-area-inset-right,0px))}
+}
+/* The toast stack: what just happened, gone in five seconds. It is a message
+   and never state, so nothing below it depends on one being there.
+   It hangs under the HUD and out of the HUD's own flow: under, so it clears
+   every button at any width and any wrap; out of the flow, because the bar's
+   box is what the minimap measures to hang itself under, and a message that
+   joined that box would push the map down the window and onto the zoom
+   column. A message moves nothing.
+   It takes the row it hangs in, less the corner the map keeps at the right
+   end of it and never more than a reading width: a message is as tall as the
+   lines its words wrap to, and half a phone is twice the lines of a whole
+   one.
+   Its height is the room between the two, not a fraction of the window: the
+   stage, less the bar it hangs from (100% is that bar, however many rows it
+   wrapped to) and less the button column at the bottom, so no batch of
+   unlocks can reach the zoom buttons in either hand. Never more than 40vh,
+   because a message is not a page.
+   Never less than one whole card and the fade under it, whatever the room
+   says: the stack gives way at the far end from the bar, so the only thing
+   that can cut the card a player is being shown is a room shorter than that
+   card, and a phone lying down or a compact map has no free band at all to
+   give it. Five seconds of a card over a button is better than a sentence
+   nobody reaches the end of, which is what the room alone leaves there.
+   One card is the card's own box and ten lines of message: what the longest
+   message the game raises, a bottle lesson and its link, comes to at the
+   width a phone gives a card, and room over it for a font wider than the one
+   it was measured on. A message that outgrows even that turns the stack's own
+   test red rather than arriving cut.
+   The newest message is at the top, nearest the bar it hangs from. The fade
+   is the last of that room and nothing switches it on: it marks a card that
+   reaches the bound, and on a stack that ends above it there is nothing under
+   the gradient to dim. */
+#toast{--keep:192px;--fade:24px;--card:calc(40px + 10 * 12px * 1.45);position:absolute;top:calc(100% + 8px);left:0;width:min(340px,calc(100% - 56px));display:flex;flex-direction:column-reverse;justify-content:flex-end;align-items:flex-start;gap:8px;height:max(calc(var(--card) + var(--fade)),min(40vh,calc(var(--stage-h) - 100% - var(--hud-top) - 8px - var(--keep))));overflow:hidden;pointer-events:none;-webkit-mask-image:linear-gradient(to bottom,#000 calc(100% - var(--fade)),transparent);mask-image:linear-gradient(to bottom,#000 calc(100% - var(--fade)),transparent)}
+/* The room to keep at the bottom: where #zoom stands and how tall it is, plus
+   a gap, so the lowest card and the highest button never meet. */
+@media (hover:none),(pointer:coarse){#toast{--keep:274px}}
+/* The title hides the HUD and covers it, and the record is repaired before
+   the island is entered, so what that repair says has to stay on screen: the
+   row comes forward with the panel, and it is the only thing in the HUD that
+   is visible there, so nothing else comes with it. */
+body:has(#title:not(.off)) #toast{visibility:visible}
+body:has(#title:not(.off)) #hud{z-index:51}
+/* The vault takes the page below the HUD, so the stack anchors to the window
+   for as long as it is open, on the same side as on the island. On a laptop
+   that corner is empty; on a phone the reader is the width of the window, so
+   a message lies over the end of the note for the five seconds it is up, and
+   that corner is the one it costs least. It hangs from the bottom edge there, so
+   the newest message is the lowest one and the stack gives way at the top:
+   the same rule, read from the other end. */
+body:has(#vault.on) #toast{position:fixed;inset:auto auto 14px 14px;width:min(340px,calc(100vw - 28px));height:max(calc(var(--card) + var(--fade)),40vh);flex-direction:column;justify-content:flex-end;-webkit-mask-image:linear-gradient(to bottom,transparent,#000 var(--fade));mask-image:linear-gradient(to bottom,transparent,#000 var(--fade))}
+/* The card is read over the island, over an open panel and inside the fade at
+   the bound, so it carries its own surface: a translucent card leans on a
+   backdrop blur, and a blur is worth nothing behind a mask and not enough
+   over a page of text. Same colour as the pills, without the alpha. */
+.tst{flex:none;width:min(340px,100%);background:var(--surface-1);border:1px solid var(--line2);border-radius:14px;padding:10px 12px;box-shadow:var(--lift)}
+.tst b{display:flex;align-items:center;gap:6px;font-family:var(--font-display);font-size:13px;color:var(--yellow)}
+.tst span{display:block;font-size:12px;line-height:1.45;color:var(--muted);margin-top:2px}
+.tst a{pointer-events:auto;color:var(--a1)}
+.packtabs button.pick{border-color:var(--a1);color:var(--text)}
+
+/* dashboard (s-dash). One spacing scale, tabular numerals everywhere, one hue
+   per meaning; every chart is inline SVG sized by its viewBox, so the panel
+   works at 393px without a second layout. */
+#s-dash .tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:var(--space-2);margin:var(--space-4) 0}
+#s-dash .tile{background:var(--surface-2);border:1px solid var(--hairline);border-radius:var(--radius-m);padding:var(--space-3) var(--space-3) var(--space-2);display:flex;flex-direction:column;gap:2px;min-width:0}
+#s-dash .tl{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+#s-dash .tv{font-family:var(--font-display);font-size:26px;line-height:1.1;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+#s-dash .tv .of{font-size:14px;color:var(--muted);font-weight:600}
+#s-dash .tc{font-size:11px;color:var(--muted);line-height:1.35}
+#s-dash .ch{display:block;width:100%;height:auto;margin-top:var(--space-1)}
+#s-dash .tile .ch{margin-top:var(--space-2)}
+#s-dash .rings{display:grid;grid-template-columns:repeat(auto-fit,minmax(88px,1fr));gap:var(--space-3)}
+#s-dash .ring{display:flex;flex-direction:column;align-items:center;gap:2px;text-align:center}
+#s-dash .ring .ch{width:64px}
+#s-dash .rl{font-size:11px;color:var(--text);line-height:1.2}
+#s-dash .rn{font-size:10px;font-weight:700;letter-spacing:.1em;color:var(--muted);font-variant-numeric:tabular-nums}
+#s-dash text{fill:var(--muted);font-family:var(--font-mono);font-size:9px;font-variant-numeric:tabular-nums}
+#s-dash text.rt{fill:var(--text);font-family:var(--font-display);font-size:18px;font-weight:700}
+#s-dash text.v{fill:var(--text)}
+#s-dash .grid{stroke:var(--hairline)}
+#s-dash .axis{stroke:var(--hairline-2)}
+#s-dash .legend{display:flex;align-items:center;gap:6px;margin:var(--space-2) 0 0;flex-wrap:wrap}
+#s-dash .sw{display:inline-block;width:12px;height:12px;border-radius:3px;background:var(--green-bright)}
+#s-dash .sw.blue{background:var(--blue)}
+#s-dash .sw.green{background:var(--green)}
+#s-dash .path{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+#s-dash .step{font-size:12px;font-variant-numeric:tabular-nums;background:rgba(0,168,107,.14);color:var(--green-bright);border-radius:var(--radius-pill);padding:3px 10px}
+#s-dash .arrow{color:var(--muted)}
+#s-dash .feed{list-style:none;margin:0;padding:0}
+#s-dash .feed li{display:flex;align-items:center;gap:var(--space-2);padding:7px 0;border-top:1px solid var(--hairline);font-size:13px}
+#s-dash .feed li:first-child{border-top:0}
+#s-dash .feed i{width:7px;height:7px;border-radius:50%;flex:none}
+#s-dash .feed li span:first-of-type{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#s-dash .feed .when{font-family:var(--font-mono);font-size:11px;color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums}
+#s-dash .dash-empty{margin:0}
+
+/* quality of life (issue #127, batch 3): the copy row under every command
+   block, the Continue card on the title and the Roadmap, and the line that
+   says which island you are standing on. Palette variables and the existing
+   button, card and pill shapes only, so these read as part of the panel they
+   sit in. */
+/* Spoken, not shown: the confirmation a screen reader reads out. It stays in
+   the layout (a display:none region is never announced) and takes no room. */
+.sr{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0}
+/* The copy control is a row under its command block, never over it: on a
+   phone a button on top of the text hides the command it copies. */
+.cmdbar{display:flex;justify-content:flex-end;margin:-6px 0 12px}
+.cmdbar .copy{padding:6px 14px;font-size:.75em;font-family:var(--font-mono);border-radius:var(--radius-pill);color:var(--blue-bright)}
+details.cmds .cmdbar{margin-top:-8px}
+/* A finger needs 44 px, so on a touch screen the button grows to it rather
+   than the text shrinking away from it. */
+@media (pointer:coarse){.cmdbar .copy{min-height:44px;min-width:88px;font-size:13px}}
+/* Continue: the next stop, its goal and the one command for it. */
+.cont{border-color:var(--yellow-dim)}
+.cont h3{color:var(--yellow)}
+.cont .cont-t{display:block;font-family:var(--font-display);font-size:1.06em;letter-spacing:-.01em;margin:2px 0 4px}
+.cont pre.cmd{background:rgba(0,0,0,.28);border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin:6px 0 10px;overflow-x:auto;font-family:var(--font-mono);font-size:.78em;line-height:1.5;white-space:pre-wrap;word-break:break-word}
+.cont .row{margin:0}
+#cont .cont{margin:10px 0 0;padding:14px 16px}
+#mapcont .cont{margin-top:10px}
+/* You are here, above the list of stops, and the one row to open next. */
+.here{font-size:.81em;color:var(--muted);margin:0 0 10px;display:flex;align-items:center;gap:6px}
+.here b{color:var(--text)}
+.date.next{border-color:var(--yellow);box-shadow:0 0 0 1px var(--yellow) inset}
+
+/* quality of life (issue #127, batch 1): reading comfort, contrast and the
+   hand the phone is held in. Every one of them is a value in S.settings that
+   applySettings writes onto the body, so the stylesheet is the only place the
+   look of it is decided. */
+/* Text size. The multiplier lands on the surfaces there is reading on, so a
+   lesson and the title grow while the HUD, the stick and the minimap stay
+   where a thumb left them; the vault reader carries it in its own rule,
+   because its base size is not the body's. The sizes inside those surfaces
+   are relative, so they follow without a second rule each. */
+body[data-text="large"]{--type-scale:1.2}
+body[data-text="larger"]{--type-scale:1.45}
+#sheet .inner,#title .box{font-size:calc(16px*var(--type-scale))}
+/* Above Normal the value gets the whole row rather than sharing it with
+   the label. A select cannot wrap or fold, so the value is either whole
+   or lost, and how much of it fits beside a label is a question about
+   font metrics, which differ between one device and the next. The same
+   constraint caps the control size above: the longest option has to fit
+   the narrowest phone at every text size. */
+body[data-text="large"] .setting select,body[data-text="larger"] .setting select{flex-basis:100%}
+/* Line spacing, the numbers XAG 101 names: 1.5 line, 0.12em letter, 0.16em
+   word. It is spacing and not a font, so nothing is downloaded and the game
+   stays one file. A command block keeps its own tracking: a monospace block
+   that no longer lines up is harder to read, not easier. */
+body[data-spacing="comfortable"] #sheet .inner,
+body[data-spacing="comfortable"] #title .box,
+body[data-spacing="comfortable"] #vnote{line-height:1.75;letter-spacing:.12em;word-spacing:.16em}
+body[data-spacing="comfortable"] pre,body[data-spacing="comfortable"] code,
+body[data-spacing="comfortable"] .term{letter-spacing:normal;word-spacing:normal}
+/* More contrast raises the token values and adds an edge to the controls that
+   leaned on a fill. It is not a second theme: black is still the brand
+   (docs/DESIGN.md), and every colour here clears 7:1 on it. */
+body.contrast-more{--muted:#C6CCD9;--hairline:rgba(255,255,255,.32);--hairline-2:rgba(255,255,255,.52);
+  --surface-2:#1C1C1C;--surface-3:#242424;
+  --blue-bright:#4DB8FF;--green-bright:#2BE39B;--orange-bright:#FFC078;--red-bright:#FF8A6B}
+body.contrast-more button,body.contrast-more .card,body.contrast-more .kpi{border-color:var(--hairline-2)}
+/* Forced colours: the system repaints text and background itself, so the only
+   thing left to say is that the controls keep an edge. */
+@media (forced-colors:active){
+  button,.card,.pill,.kpi,.tst,input,textarea,select{border:1px solid currentColor}
+  .ic{stroke:currentColor}
+}
+/* Left-handed and one-handed: the stick, the jump button and the zoom column
+   swap sides. The stick reads its own bounding rectangle, so no input code
+   knows about this. */
+body.hand-left #joy{left:auto;right:calc(14px + env(safe-area-inset-right,0px))}
+body.hand-left #jump{right:auto;left:calc(14px + env(safe-area-inset-left,0px))}
+body.hand-left #zoom{right:auto;left:14px}
+@media (max-height:520px) and (pointer:coarse){
+  body.hand-left #bottom{left:calc(84px + env(safe-area-inset-left,0px));right:calc(110px + env(safe-area-inset-right,0px))}
+}
+/* Quiet: the toast stack is suppressed and nothing else is. The event behind
+   a toast is still recorded, so the dashboard and the achievements are whole. */
+body.quiet #toast{display:none}
+/* A group heading already separates its first row from the one above it. */
+h3+.setting{border-top:0}
+
+body[data-experience="galaxy"] #toast .saved{align-self:flex-start!important}
+
+body[data-experience="galaxy"][data-galaxy-walk="on"]:has(#galaxy-ui[data-rendering="scene"]) #joy{display:block;left:auto;right:20px;top:90px;bottom:auto;background:var(--surface-1)}
+body[data-experience="galaxy"]:has(#sheet.on,#vault.on,#pal.on) #joy{visibility:hidden}
+#galaxy-walk button{min-height:44px}#galaxy-walk-status{min-height:2.5em}
+
+@media (max-width:1100px){body[data-experience="galaxy"][data-galaxy-walk="on"]:has(#galaxy-ui[data-rendering="scene"]) #joy{left:14px;right:auto}body.hand-left[data-experience="galaxy"][data-galaxy-walk="on"]:has(#galaxy-ui[data-rendering="scene"]) #joy{left:auto;right:14px}}

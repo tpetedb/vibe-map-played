@@ -1,13 +1,13 @@
 ---
 title: "Git, part one"
-date: 2026-09-17
+date: 2026-09-24
 tags: [workstream]
 ---
 # Git, part one
 
 Stop 3, [[Evening 4]]. Outcome: Fork, clone, branch, commit, push, pull request, learned by doing it to the template.
 
-## 2026-09-17
+## 2026-09-24
 - Tonight I did the work myself and wrote it down while it was
 - still fresh. The agent drafted, I rewrote the half that made no sense, and the
 - check told me what was still missing before I could claim the stop. What I

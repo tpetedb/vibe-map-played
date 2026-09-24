@@ -1,6 +1,6 @@
 ---
 title: "Interfaces: GUI, TUI, CLI, API"
-date: 2026-09-17
+date: 2026-09-24
 tags: [tech, shell]
 generated: 56d08d225fde
 ---

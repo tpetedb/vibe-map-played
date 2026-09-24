@@ -1,6 +1,6 @@
 ---
 title: "Files, folders and paths"
-date: 2026-09-17
+date: 2026-09-24
 tags: [tech, shell]
 generated: c647aff07b64
 ---

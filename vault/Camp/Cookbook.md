@@ -1,38 +1,39 @@
 ---
 title: "Cookbook"
-date: 2026-09-17
+date: 2026-09-24
 tags: [recipe]
+generated: 4676f70b05e0
 ---
 # Cookbook
 
-Recipes for a Data engineer. Each one is a prompt you paste into your provider, a definition of done, and the workstream it belongs to. Every persona has its own set; switch with `vibe persona <id>`.
+Recipes for a Chief of Staff. Each one is a prompt you paste into your provider, a definition of done, and the workstream it belongs to. Every persona has its own set; switch with `vibe persona <id>`.
 
-## Two-file task pattern
-Workstream 3. A pipeline task as a .py plus a .yaml sidecar with tests.
-
-```text
-Create tasks/orders_silver.py and tasks/orders_silver.yaml (source, target, schedule, owner). The task reads bronze from DuckDB, dedupes, writes silver. pytest with a fixture CSV.
-```
-
-**Done when:** uv run pytest is green and the yaml validates.
-
-## Schema drift guard
-Workstream 4. A hook that refuses a commit when a CSV header changes.
+## The week in one page
+Workstream 2. Turn a folder of meeting notes into a one-page brief.
 
 ```text
-Write a pre-commit style Claude Code hook (PostToolUse on Edit and Write) that compares data/*.csv headers to schema.json and prints the diff. Show me the settings.json block.
+Read every .md file in notes/, list the decisions made, the open decisions with an owner, and the three risks. Write brief.md. Do not invent anything that is not in the notes.
 ```
 
-**Done when:** Renaming a column produces a loud message.
+**Done when:** brief.md exists and every line traces to a note.
 
-## Nightly run report
-Workstream 8. Headless agent summarises last night's runs into the vault.
+## Meeting cost dashboard
+Workstream 3. A chart of minutes per decision by meeting.
 
 ```text
-Write a script that runs the provider in print mode over workspace/data/pipeline_runs.csv and writes vault/Camp/Runs.md with a table and one paragraph. Schedule it at 07:00.
+Using workspace/data/examples/meetings.csv, write workspace/sql/cost_per_decision.sql in DuckDB and a Python script that draws a bar chart to workspace/python/out/. Explain the one SQL construct I have not seen.
 ```
 
-**Done when:** Runs.md is updated by the schedule, not by you.
+**Done when:** The chart opens and the worst meeting is obvious.
+
+## Monday morning agent
+Workstream 8. An agent that drafts the weekly agenda every Monday at 07:30.
+
+```text
+Write a script that runs the provider in print mode with the prompt in prompts/agenda.md and writes agenda-<date>.md. Then show me the crontab line for Monday 07:30.
+```
+
+**Done when:** A file appears on Monday without you touching the keyboard.
 
 Back to [[Your field]] · [[Tonight]]
 

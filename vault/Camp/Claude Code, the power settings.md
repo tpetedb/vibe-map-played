@@ -1,13 +1,13 @@
 ---
 title: "Claude Code, the power settings"
-date: 2026-09-17
+date: 2026-09-24
 tags: [workstream]
 ---
 # Claude Code, the power settings
 
 Stop 5, [[Evening 4]]. Outcome: Plan mode, --continue, /compact, /rewind, permissions, memory, and the surfaces: terminal, web, phone and Chrome.
 
-## 2026-09-17
+## 2026-09-24
 - Tonight I did the work myself and wrote it down while it was
 - still fresh. The agent drafted, I rewrote the half that made no sense, and the
 - check told me what was still missing before I could claim the stop. What I

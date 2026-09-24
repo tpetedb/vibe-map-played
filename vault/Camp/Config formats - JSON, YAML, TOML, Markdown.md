@@ -1,6 +1,6 @@
 ---
 title: "Config formats: JSON, YAML, TOML, Markdown"
-date: 2026-09-17
+date: 2026-09-24
 tags: [tech, formats]
 generated: dfca93c29de4
 ---

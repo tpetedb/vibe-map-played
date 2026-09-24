@@ -1,6 +1,6 @@
 ---
 title: "Changelogs (Keep a Changelog)"
-date: 2026-09-17
+date: 2026-09-24
 tags: [tech, docs]
 generated: a3d9b67852d6
 ---

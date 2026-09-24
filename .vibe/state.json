@@ -48,543 +48,581 @@
     "wu": "deep",
     "karpathy": "deep",
     "lecun": "deep",
-    "hinton": "skip",
+    "hinton": "deep",
     "li": "deep",
     "sutton": "deep",
-    "amodei": "skip",
+    "amodei": "deep",
     "olah": "deep",
     "hashimoto": "deep",
     "torvalds": "deep",
-    "opencode": "skip"
+    "opencode": "deep"
   },
   "log": [
     {
       "world": "campus",
       "n": 1,
-      "at": "2026-09-17T19:47",
-      "note": "done in the game, imported",
-      "xp": 75
+      "at": "2026-09-24T08:01",
+      "note": "played instance",
+      "xp": 100
     },
     {
       "world": "campus",
       "n": 2,
-      "at": "2026-09-17T19:47",
-      "note": "done in the game, imported",
-      "xp": 75
+      "at": "2026-09-24T08:01",
+      "note": "played instance",
+      "xp": 100
     },
     {
       "world": "campus",
       "n": 3,
-      "at": "2026-09-17T19:47",
-      "note": "done in the game, imported",
-      "xp": 75
+      "at": "2026-09-24T08:01",
+      "note": "played instance",
+      "xp": 100
     },
     {
       "world": "campus",
       "n": 4,
-      "at": "2026-09-17T19:47",
-      "note": "done in the game, imported",
-      "xp": 75
+      "at": "2026-09-24T08:01",
+      "note": "played instance",
+      "xp": 100
     },
     {
       "world": "campus",
       "n": 5,
-      "at": "2026-09-17T19:47",
-      "note": "done in the game, imported",
-      "xp": 75
+      "at": "2026-09-24T08:01",
+      "note": "played instance",
+      "xp": 100
     },
     {
       "world": "campus",
       "n": 6,
-      "at": "2026-09-17T19:47",
-      "note": "done in the game, imported",
-      "xp": 75
+      "at": "2026-09-24T08:01",
+      "note": "played instance",
+      "xp": 100
     },
     {
       "world": "campus",
       "n": 7,
-      "at": "2026-09-17T19:47",
-      "note": "done in the game, imported",
-      "xp": 75
+      "at": "2026-09-24T08:01",
+      "note": "played instance",
+      "xp": 100
     },
     {
       "world": "campus",
       "n": 8,
-      "at": "2026-09-17T19:47",
-      "note": "done in the game, imported",
-      "xp": 75
-    },
-    {
-      "world": "desert",
-      "n": 1,
-      "at": "2026-09-17T19:47",
-      "note": "done in the game, imported",
-      "xp": 75
-    },
-    {
-      "world": "desert",
-      "n": 2,
-      "at": "2026-09-17T19:47",
-      "note": "done in the game, imported",
-      "xp": 75
-    },
-    {
-      "world": "desert",
-      "n": 3,
-      "at": "2026-09-17T19:47",
-      "note": "done in the game, imported",
-      "xp": 75
-    },
-    {
-      "world": "desert",
-      "n": 4,
-      "at": "2026-09-17T19:47",
-      "note": "done in the game, imported",
-      "xp": 75
-    },
-    {
-      "world": "desert",
-      "n": 5,
-      "at": "2026-09-17T19:47",
-      "note": "done in the game, imported",
-      "xp": 75
-    },
-    {
-      "world": "desert",
-      "n": 6,
-      "at": "2026-09-17T19:47",
-      "note": "done in the game, imported",
-      "xp": 75
-    },
-    {
-      "world": "desert",
-      "n": 7,
-      "at": "2026-09-17T19:47",
-      "note": "done in the game, imported",
-      "xp": 75
-    },
-    {
-      "world": "desert",
-      "n": 8,
-      "at": "2026-09-17T19:47",
-      "note": "done in the game, imported",
-      "xp": 75
-    },
-    {
-      "world": "prod",
-      "n": 1,
-      "at": "2026-09-17T19:47",
-      "note": "done in the game, imported",
-      "xp": 75
-    },
-    {
-      "world": "prod",
-      "n": 2,
-      "at": "2026-09-17T19:47",
-      "note": "done in the game, imported",
-      "xp": 75
-    },
-    {
-      "world": "prod",
-      "n": 3,
-      "at": "2026-09-17T19:47",
-      "note": "done in the game, imported",
-      "xp": 75
-    },
-    {
-      "world": "prod",
-      "n": 4,
-      "at": "2026-09-17T19:47",
-      "note": "done in the game, imported",
-      "xp": 75
-    },
-    {
-      "world": "prod",
-      "n": 5,
-      "at": "2026-09-17T19:47",
-      "note": "done in the game, imported",
-      "xp": 75
-    },
-    {
-      "world": "prod",
-      "n": 6,
-      "at": "2026-09-17T19:47",
-      "note": "done in the game, imported",
-      "xp": 75
-    },
-    {
-      "world": "prod",
-      "n": 7,
-      "at": "2026-09-17T19:47",
-      "note": "done in the game, imported",
-      "xp": 75
-    },
-    {
-      "world": "prod",
-      "n": 8,
-      "at": "2026-09-17T19:47",
-      "note": "done in the game, imported",
-      "xp": 75
+      "at": "2026-09-24T08:01",
+      "note": "played instance",
+      "xp": 100
     },
     {
       "world": "winter",
       "n": 1,
-      "at": "2026-09-17T19:47",
-      "note": "done in the game, imported",
-      "xp": 75
+      "at": "2026-09-24T08:01",
+      "note": "played instance",
+      "xp": 100
     },
     {
       "world": "winter",
       "n": 2,
-      "at": "2026-09-17T19:47",
-      "note": "done in the game, imported",
-      "xp": 75
+      "at": "2026-09-24T08:01",
+      "note": "played instance",
+      "xp": 100
     },
     {
       "world": "winter",
       "n": 3,
-      "at": "2026-09-17T19:47",
-      "note": "done in the game, imported",
-      "xp": 75
+      "at": "2026-09-24T08:01",
+      "note": "played instance",
+      "xp": 100
     },
     {
       "world": "winter",
       "n": 4,
-      "at": "2026-09-17T19:47",
-      "note": "done in the game, imported",
-      "xp": 75
+      "at": "2026-09-24T08:01",
+      "note": "played instance",
+      "xp": 100
     },
     {
       "world": "winter",
       "n": 5,
-      "at": "2026-09-17T19:47",
-      "note": "done in the game, imported",
-      "xp": 75
+      "at": "2026-09-24T08:01",
+      "note": "played instance",
+      "xp": 100
     },
     {
       "world": "winter",
       "n": 6,
-      "at": "2026-09-17T19:47",
-      "note": "done in the game, imported",
-      "xp": 75
+      "at": "2026-09-24T08:01",
+      "note": "played instance",
+      "xp": 100
     },
     {
       "world": "winter",
       "n": 7,
-      "at": "2026-09-17T19:47",
-      "note": "done in the game, imported",
-      "xp": 75
+      "at": "2026-09-24T08:01",
+      "note": "played instance",
+      "xp": 100
     },
     {
       "world": "winter",
       "n": 8,
-      "at": "2026-09-17T19:47",
-      "note": "done in the game, imported",
-      "xp": 75
+      "at": "2026-09-24T08:01",
+      "note": "played instance",
+      "xp": 100
+    },
+    {
+      "world": "desert",
+      "n": 1,
+      "at": "2026-09-24T08:01",
+      "note": "played instance",
+      "xp": 100
+    },
+    {
+      "world": "desert",
+      "n": 2,
+      "at": "2026-09-24T08:01",
+      "note": "played instance",
+      "xp": 100
+    },
+    {
+      "world": "desert",
+      "n": 3,
+      "at": "2026-09-24T08:01",
+      "note": "played instance",
+      "xp": 100
+    },
+    {
+      "world": "desert",
+      "n": 4,
+      "at": "2026-09-24T08:01",
+      "note": "played instance",
+      "xp": 100
+    },
+    {
+      "world": "desert",
+      "n": 5,
+      "at": "2026-09-24T08:01",
+      "note": "played instance",
+      "xp": 100
+    },
+    {
+      "world": "desert",
+      "n": 6,
+      "at": "2026-09-24T08:01",
+      "note": "played instance",
+      "xp": 100
+    },
+    {
+      "world": "desert",
+      "n": 7,
+      "at": "2026-09-24T08:01",
+      "note": "played instance",
+      "xp": 100
+    },
+    {
+      "world": "desert",
+      "n": 8,
+      "at": "2026-09-24T08:01",
+      "note": "played instance",
+      "xp": 100
+    },
+    {
+      "world": "prod",
+      "n": 1,
+      "at": "2026-09-24T08:01",
+      "note": "played instance",
+      "xp": 100
+    },
+    {
+      "world": "prod",
+      "n": 2,
+      "at": "2026-09-24T08:01",
+      "note": "played instance",
+      "xp": 100
+    },
+    {
+      "world": "prod",
+      "n": 3,
+      "at": "2026-09-24T08:01",
+      "note": "played instance",
+      "xp": 100
+    },
+    {
+      "world": "prod",
+      "n": 4,
+      "at": "2026-09-24T08:01",
+      "note": "played instance",
+      "xp": 100
+    },
+    {
+      "world": "prod",
+      "n": 5,
+      "at": "2026-09-24T08:01",
+      "note": "played instance",
+      "xp": 100
+    },
+    {
+      "world": "prod",
+      "n": 6,
+      "at": "2026-09-24T08:01",
+      "note": "played instance",
+      "xp": 100
+    },
+    {
+      "world": "prod",
+      "n": 7,
+      "at": "2026-09-24T08:01",
+      "note": "played instance",
+      "xp": 100
+    },
+    {
+      "world": "prod",
+      "n": 8,
+      "at": "2026-09-24T08:01",
+      "note": "played instance",
+      "xp": 100
     }
   ],
-  "xp": 4800,
+  "xp": 3200,
   "badges": [
     "first-light",
     "full-evening",
     "campaign",
     "streak-3",
-    "linked",
     "collector",
-    "mentored",
-    "builder"
+    "builder",
+    "mentored"
   ],
   "checks": {
-    "mentor:cherny": {
+    "campus:1": {
       "ok": true,
-      "at": "2026-09-17T19:47",
+      "at": "2026-09-24T08:01",
       "passed": [
-        "One rule, and the command that proves it",
-        "your note on Boris Cherny"
+        "scripted learner deliverable"
       ],
       "failed": []
     },
-    "mentor:wu": {
+    "campus:2": {
       "ok": true,
-      "at": "2026-09-17T19:47",
+      "at": "2026-09-24T08:01",
       "passed": [
-        "Spec, plan, to-do, in that order",
-        "your note on Cat Wu"
+        "scripted learner deliverable"
       ],
       "failed": []
     },
-    "mentor:karpathy": {
+    "campus:3": {
       "ok": true,
-      "at": "2026-09-17T19:47",
+      "at": "2026-09-24T08:01",
       "passed": [
-        "A bigram model in twenty lines",
-        "your note on Andrej Karpathy"
+        "scripted learner deliverable"
       ],
       "failed": []
     },
-    "mentor:lecun": {
+    "campus:4": {
       "ok": true,
-      "at": "2026-09-17T19:47",
+      "at": "2026-09-24T08:01",
       "passed": [
-        "What mattered, and what you could throw away",
-        "your note on Yann LeCun"
+        "scripted learner deliverable"
       ],
       "failed": []
     },
-    "mentor:hinton": {
+    "campus:5": {
       "ok": true,
-      "at": "2026-09-17T19:47",
+      "at": "2026-09-24T08:01",
       "passed": [
-        "Twenty steps of learning from error",
-        "your note on Geoffrey Hinton"
+        "scripted learner deliverable"
       ],
       "failed": []
     },
-    "mentor:li": {
+    "campus:6": {
       "ok": true,
-      "at": "2026-09-17T19:47",
+      "at": "2026-09-24T08:01",
       "passed": [
-        "Label ten things yourself",
-        "your note on Fei-Fei Li"
+        "scripted learner deliverable"
       ],
       "failed": []
     },
-    "mentor:sutton": {
+    "campus:7": {
       "ok": true,
-      "at": "2026-09-17T19:47",
+      "at": "2026-09-24T08:01",
       "passed": [
-        "The rule you wrote against plain search",
-        "your note on Rich Sutton"
+        "scripted learner deliverable"
       ],
       "failed": []
     },
-    "mentor:amodei": {
+    "campus:8": {
       "ok": true,
-      "at": "2026-09-17T19:47",
+      "at": "2026-09-24T08:01",
       "passed": [
-        "A forecast you can be wrong about",
-        "your note on Dario Amodei"
+        "scripted learner deliverable"
       ],
       "failed": []
     },
-    "mentor:olah": {
+    "winter:1": {
       "ok": true,
-      "at": "2026-09-17T19:47",
+      "at": "2026-09-24T08:01",
       "passed": [
-        "Draw the circuit of one decision",
-        "your note on Chris Olah"
+        "scripted learner deliverable"
       ],
       "failed": []
     },
-    "mentor:hashimoto": {
+    "winter:2": {
       "ok": true,
-      "at": "2026-09-17T19:47",
+      "at": "2026-09-24T08:01",
       "passed": [
-        "One readable config file",
-        "your note on Mitchell Hashimoto"
+        "scripted learner deliverable"
       ],
       "failed": []
     },
-    "mentor:torvalds": {
+    "winter:3": {
       "ok": true,
-      "at": "2026-09-17T19:47",
+      "at": "2026-09-24T08:01",
       "passed": [
-        "Hash a blob the way git does",
-        "your note on Linus Torvalds"
+        "scripted learner deliverable"
       ],
       "failed": []
     },
-    "mentor:opencode": {
+    "winter:4": {
       "ok": true,
-      "at": "2026-09-17T19:47",
+      "at": "2026-09-24T08:01",
       "passed": [
-        "The same prompt, two providers",
-        "your note on The OpenCode team"
+        "scripted learner deliverable"
       ],
       "failed": []
     },
-    "artifact:cafe": {
+    "winter:5": {
       "ok": true,
-      "at": "2026-09-17T19:47",
+      "at": "2026-09-24T08:01",
       "passed": [
-        "Serve one request and get a 404 on purpose",
-        "your note on The cafe"
+        "scripted learner deliverable"
       ],
       "failed": []
     },
-    "artifact:fountain": {
+    "winter:6": {
       "ok": true,
-      "at": "2026-09-17T19:47",
+      "at": "2026-09-24T08:01",
       "passed": [
-        "Put a cache in front of a slow answer",
-        "your note on The fountain"
+        "scripted learner deliverable"
       ],
       "failed": []
     },
-    "artifact:well": {
+    "winter:7": {
       "ok": true,
-      "at": "2026-09-17T19:47",
+      "at": "2026-09-24T08:01",
       "passed": [
-        "A table, an index and one transaction",
-        "your note on The well"
+        "scripted learner deliverable"
       ],
       "failed": []
     },
-    "artifact:lighthouse": {
+    "winter:8": {
       "ok": true,
-      "at": "2026-09-17T19:47",
+      "at": "2026-09-24T08:01",
       "passed": [
-        "Turn a name into an address, twice over",
-        "your note on The lighthouse"
+        "scripted learner deliverable"
       ],
       "failed": []
     },
-    "artifact:dock": {
+    "desert:1": {
       "ok": true,
-      "at": "2026-09-17T19:47",
+      "at": "2026-09-24T08:01",
       "passed": [
-        "Write a Dockerfile and build the image",
-        "your note on The dock"
+        "scripted learner deliverable"
       ],
       "failed": []
     },
-    "artifact:windmill": {
+    "desert:2": {
       "ok": true,
-      "at": "2026-09-17T19:47",
+      "at": "2026-09-24T08:01",
       "passed": [
-        "A workflow that turns without you",
-        "your note on The windmill"
+        "scripted learner deliverable"
       ],
       "failed": []
     },
-    "artifact:balloon": {
+    "desert:3": {
       "ok": true,
-      "at": "2026-09-17T19:47",
+      "at": "2026-09-24T08:01",
       "passed": [
-        "Put a number on the meter before you launch",
-        "your note on The balloon"
+        "scripted learner deliverable"
       ],
       "failed": []
     },
-    "artifact:mountain": {
+    "desert:4": {
       "ok": true,
-      "at": "2026-09-17T19:47",
+      "at": "2026-09-24T08:01",
       "passed": [
-        "Name the six layers under your own keystroke",
-        "your note on The mountain"
+        "scripted learner deliverable"
       ],
       "failed": []
     },
-    "artifact:stall": {
+    "desert:5": {
       "ok": true,
-      "at": "2026-09-17T19:47",
+      "at": "2026-09-24T08:01",
       "passed": [
-        "An API with a menu it writes itself",
-        "your note on The market stall"
+        "scripted learner deliverable"
       ],
       "failed": []
     },
-    "artifact:bridge": {
+    "desert:6": {
       "ok": true,
-      "at": "2026-09-17T19:47",
+      "at": "2026-09-24T08:01",
       "passed": [
-        "Declare one server on the other side",
-        "your note on The bridge"
+        "scripted learner deliverable"
       ],
       "failed": []
     },
-    "artifact:factory": {
+    "desert:7": {
       "ok": true,
-      "at": "2026-09-17T19:47",
+      "at": "2026-09-24T08:01",
       "passed": [
-        "Raw to bronze to silver to gold, in one file",
-        "your note on The factory"
+        "scripted learner deliverable"
       ],
       "failed": []
     },
-    "artifact:post-office": {
+    "desert:8": {
       "ok": true,
-      "at": "2026-09-17T19:47",
+      "at": "2026-09-24T08:01",
       "passed": [
-        "A queue, a retry and a dead letter",
-        "your note on The post office"
+        "scripted learner deliverable"
       ],
       "failed": []
     },
-    "artifact:shop": {
+    "prod:1": {
       "ok": true,
-      "at": "2026-09-17T19:47",
+      "at": "2026-09-24T08:01",
       "passed": [
-        "Buy a library and keep the receipt",
-        "your note on The shop"
+        "scripted learner deliverable"
       ],
       "failed": []
     },
-    "artifact:bank": {
+    "prod:2": {
       "ok": true,
-      "at": "2026-09-17T19:47",
+      "at": "2026-09-24T08:01",
       "passed": [
-        "A safe, and the note that says what is in it",
-        "your note on The bank"
+        "scripted learner deliverable"
       ],
       "failed": []
     },
-    "artifact:data-centre": {
+    "prod:3": {
       "ok": true,
-      "at": "2026-09-17T19:47",
+      "at": "2026-09-24T08:01",
       "passed": [
-        "The same work, one at a time and in a batch",
-        "your note on The data centre"
+        "scripted learner deliverable"
       ],
       "failed": []
     },
-    "artifact:energy-grid": {
+    "prod:4": {
       "ok": true,
-      "at": "2026-09-17T19:47",
+      "at": "2026-09-24T08:01",
       "passed": [
-        "Back off the way the docs tell you to",
-        "your note on The energy grid"
+        "scripted learner deliverable"
       ],
       "failed": []
     },
-    "artifact:library": {
+    "prod:5": {
       "ok": true,
-      "at": "2026-09-17T19:47",
+      "at": "2026-09-24T08:01",
       "passed": [
-        "Retrieve three notes and cite the one you used",
-        "your note on The library"
+        "scripted learner deliverable"
       ],
       "failed": []
     },
-    "artifact:office": {
+    "prod:6": {
       "ok": true,
-      "at": "2026-09-17T19:47",
+      "at": "2026-09-24T08:01",
       "passed": [
-        "Hire one subagent with a narrow brief",
-        "your note on The office"
+        "scripted learner deliverable"
       ],
       "failed": []
     },
-    "artifact:households": {
+    "prod:7": {
       "ok": true,
-      "at": "2026-09-17T19:47",
+      "at": "2026-09-24T08:01",
       "passed": [
-        "Export one person's rows, then erase them",
-        "your note on The households"
+        "scripted learner deliverable"
       ],
       "failed": []
     },
-    "artifact:school": {
+    "prod:8": {
       "ok": true,
-      "at": "2026-09-17T19:47",
+      "at": "2026-09-24T08:01",
       "passed": [
-        "Split the data, train, and read the honest number",
-        "your note on The school"
+        "scripted learner deliverable"
       ],
       "failed": []
     }
   },
-  "roadmap_done": [],
+  "roadmap_done": [
+    "unix",
+    "bash",
+    "zsh",
+    "files",
+    "dotfiles",
+    "justfile",
+    "config",
+    "env",
+    "localhost",
+    "git",
+    "python",
+    "toml",
+    "pylibs",
+    "sql",
+    "web",
+    "languages",
+    "markdown",
+    "obsidian",
+    "data",
+    "http",
+    "apis",
+    "ssh",
+    "yaml",
+    "docker",
+    "github",
+    "ci",
+    "cloud",
+    "llm",
+    "context",
+    "harness",
+    "agentsmd",
+    "skills",
+    "hooks",
+    "githooks",
+    "agenthooks",
+    "prompting",
+    "promptstructure",
+    "symbols",
+    "concerns",
+    "meta",
+    "interfaces",
+    "mcp",
+    "subagents",
+    "headless",
+    "tests",
+    "security",
+    "cost",
+    "kubernetes",
+    "vault",
+    "future",
+    "semver",
+    "changelog",
+    "adr",
+    "readme",
+    "csv",
+    "jsonl",
+    "parquet",
+    "arrow",
+    "schemas",
+    "duckdblab",
+    "iceberg",
+    "dlt",
+    "kafka",
+    "polars",
+    "dbt",
+    "airflow",
+    "dagster",
+    "dataquality",
+    "medallion",
+    "datamap"
+  ],
   "artifacts": [
     "cafe",
     "fountain",
@@ -598,11 +636,12 @@
     "bridge",
     "factory",
     "post-office",
+    "switchboard",
+    "shop",
+    "bank",
     "data-centre",
     "energy-grid",
     "library",
-    "shop",
-    "bank",
     "office",
     "households",
     "school"
@@ -620,6 +659,7 @@
     "bridge",
     "factory",
     "post-office",
+    "switchboard",
     "shop",
     "bank",
     "data-centre",
@@ -643,5 +683,68 @@
     "torvalds",
     "opencode"
   ],
-  "unlocked": []
+  "unlocked": [],
+  "items": [
+    "campus-commit",
+    "campus-pr",
+    "campus-token",
+    "campus-crate",
+    "campus-packet",
+    "campus-key",
+    "campus-tube",
+    "campus-bean",
+    "campus-scroll",
+    "campus-bubble",
+    "winter-commit",
+    "winter-branch",
+    "winter-token",
+    "winter-crate",
+    "winter-packet",
+    "winter-key",
+    "winter-tube",
+    "winter-bean",
+    "winter-scroll",
+    "winter-bubble",
+    "desert-commit",
+    "desert-branch",
+    "desert-token",
+    "desert-crate",
+    "desert-packet",
+    "desert-key",
+    "desert-tube",
+    "desert-bean",
+    "desert-scroll",
+    "desert-bubble",
+    "prod-commit",
+    "prod-branch",
+    "prod-token",
+    "prod-crate",
+    "prod-packet",
+    "prod-key",
+    "prod-tube",
+    "prod-bean",
+    "prod-scroll",
+    "prod-bubble"
+  ],
+  "ach": [
+    "first-light",
+    "full-evening",
+    "campaign",
+    "collector",
+    "builder",
+    "mentored",
+    "first-sit",
+    "ten-items",
+    "island-items",
+    "mentor-verified"
+  ],
+  "wear": [
+    "beanie",
+    "shades",
+    "jacket",
+    "backpack",
+    "lanyard"
+  ],
+  "pet": "crab",
+  "interests": []
 }

@@ -1,6 +1,6 @@
 ---
 title: "Prompting: task, goal, hard constraints"
-date: 2026-09-17
+date: 2026-09-24
 tags: [tech, agents]
 generated: 1984d16044c1
 ---

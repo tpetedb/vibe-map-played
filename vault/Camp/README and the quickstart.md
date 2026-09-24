@@ -1,6 +1,6 @@
 ---
 title: "README and the quickstart"
-date: 2026-09-17
+date: 2026-09-24
 tags: [tech, docs]
 generated: 337e5c949111
 ---

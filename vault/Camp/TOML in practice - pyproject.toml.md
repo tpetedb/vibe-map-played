@@ -1,6 +1,6 @@
 ---
 title: "TOML in practice: pyproject.toml"
-date: 2026-09-17
+date: 2026-09-24
 tags: [tech, formats]
 generated: ced392bc70a3
 ---

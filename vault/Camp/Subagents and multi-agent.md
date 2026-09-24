@@ -1,6 +1,6 @@
 ---
 title: "Subagents and multi-agent"
-date: 2026-09-17
+date: 2026-09-24
 tags: [tech, agents]
 generated: 8e09e5505ebf
 ---

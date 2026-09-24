@@ -1,7 +1,8 @@
 ---
 title: "Geoffrey Hinton"
-date: 2026-09-17
+date: 2026-09-24
 tags: [people]
+generated: 0d0082ab5eb5
 ---
 # Geoffrey Hinton
 
@@ -28,7 +29,7 @@ The 1986 Nature paper is three pages and readable. His Nobel lecture and the pri
 - Geoffrey Hinton: He argued in Cambridge that large scale digital computation is probably far better at acquiring knowledge than biological computation, and may soon be much more intelligent than us. ([Cambridge on the 2024 Nobel Prize](https://www.cam.ac.uk/research/news/university-of-cambridge-alumnus-awarded-2024-nobel-prize-in-physics))
 
 ## Your exercise: Twenty steps of learning from error
-About 12 minutes, in `workspace/mentors/hinton/`. Status: done.
+About 12 minutes, in `workspace/mentors/hinton/`. Status: not yet.
 
 1. Write workspace/mentors/hinton/descent.py with w = 0.0 and the target function f(w) = (w - 3) ** 2.
 2. Twenty times: compute the gradient 2 * (w - 3) and take a step of 0.1 against it.

@@ -8,7 +8,7 @@
 // lesson cannot drift apart.
 const GUARDRAIL = "Keep it to a single file called index.html, no external libraries, no frameworks. Keep score. When you are done, tell me how to open it.";
 window.pitchTyped=function(v){S.pitch=v;save();renderPitch()};
-window.copyPitch=function(){const t=$("pitch-out").textContent;const ok=()=>{$("pitch-copy").textContent="Copied";setTimeout(()=>$("pitch-copy").textContent="Copy the prompt",1500)};if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(t).then(ok).catch(()=>{})};
+window.copyPitch=function(){copyText($("pitch-out").textContent,$("pitch-copy"),"Copy the prompt",$("pitch-out"))};
 function renderPitch(){const out=$("pitch-out");if(!out)return;const box=$("pitch");if(box&&box.value!==(S.pitch||""))box.value=S.pitch||"";
   const v=(S.pitch||"").trim();
   out.textContent=v?`Build a small browser game. ${v}\n\n${GUARDRAIL}`:"Type your three sentences above and the prompt appears here, with the guardrail already attached.";
@@ -20,8 +20,11 @@ function renderPitch(){const out=$("pitch-out");if(!out)return;const box=$("pitc
 // what it named; the vague one is free to change everything else too.
 const CARD0={title:"Tonight's scores",accent:"#0067A5",cols:["Player","Score"],badge:false,serif:false};
 let card=Object.assign({},CARD0);
+// Both asks start from the same card, which is what makes them comparable:
+// the precise one changes the one thing it named, the vague one everything
+// it was not told to leave alone.
 window.speak=function(precise){
-  card=precise?Object.assign({},card,{badge:true})
+  card=precise?Object.assign({},CARD0,{badge:true})
     :{title:"Impactful Scores Experience",accent:"#FF8C1A",cols:["Player"],badge:false,serif:true};
   $("speak-out").textContent=precise
     ?"One change, delivered as scoped: a badge. Title, colour, columns and font untouched, and a one-line summary back."
@@ -55,10 +58,14 @@ function renderSchema(){const el=$("schema");if(!el)return;const broken=scoreCol
   :"Four column names, in this order, are the contract. The game writes them, the queries read them."}</p>`}
 
 /* ---- Workstream 4: commits are snapshots, rollback is always on ---- */
-window.commit=function(){const t=$("release").value.trim();if(!t)return;S.versions.push({t,at:new Date().toLocaleTimeString([],{hour:"2-digit",minute:"2-digit"})});save();renderVersions();hud()};
+// An empty box is a refusal with a reason, never a button that does nothing.
+function releaseMsg(t){const el=$("release-msg");if(el)el.textContent=t||""}
+window.commit=function(){const t=$("release").value.trim();
+  if(!t){releaseMsg("Nothing to commit: the release note is empty. Say what this release is, then tag it.");return}
+  releaseMsg("");S.versions.push({t,at:new Date().toLocaleTimeString([],{hour:"2-digit",minute:"2-digit"})});save();renderVersions();hud()};
 window.ruin=function(){$("release").value="A smal scorng board that rnks the team by cofee consmption and also everything is now in Comic Sans. Sev 1. Paging Tom."};
 window.revert=function(i){$("release").value=S.versions[i].t};
-function renderVersions(){$("versions").innerHTML=S.versions.length?S.versions.map((v,i)=>`<li><span class="muted">v${i+1}, ${v.at}: ${v.t.slice(0,44)}${v.t.length>44?"…":""}</span><button onclick="revert(${i})">Roll back</button></li>`).join(""):`<li class="muted small">No releases tagged yet. Commit one, trigger a P1, then roll back.</li>`}
+function renderVersions(){$("versions").innerHTML=S.versions.length?S.versions.map((v,i)=>`<li><span class="muted">v${i+1}, ${esc(v.at)}: ${esc(String(v.t).slice(0,44))}${v.t.length>44?"…":""}</span><button onclick="revert(${i})">Roll back</button></li>`).join(""):`<li class="muted small">No releases tagged yet. Commit one, trigger a P1, then roll back.</li>`}
 
 /* ---- Workstream 5: a connector is a plug, and unplugging is the point ---- */
 const B={cal:"Integrated. It can now read Thursday and pre-populate the 10:00 agenda.",files:"Integrated. It can now surface the deck you lost in March.",mail:"Integrated. It can now distil a 40-message thread into three action items."};
@@ -66,7 +73,9 @@ window.bridge=function(k){S.bridges[k]=!S.bridges[k];save();renderBridges();hud(
 function renderBridges(){for(const k in B){const el=$("b-"+k),sp=el.querySelector("span");el.classList.toggle("on",!!S.bridges[k]);sp.textContent=S.bridges[k]?B[k]:"Not integrated";sp.className=S.bridges[k]?"":"muted"}}
 
 /* ---- Workstream 6: notes with links are a graph ---- */
-window.weave=function(){const nodes=[["Tonight",200,150],[playerLabel()||"You",90,60],["Playbook",310,60],["Data warehouse",60,220],["Releases",200,275],["Integrations",340,220],["Rolinda's questions",200,25],["Q4 roadmap",330,275]];
+// The player's name is the one node here that is not ours: it can arrive in
+// an imported progress code, so it is text like any other field.
+window.weave=function(){const nodes=[["Tonight",200,150],[esc(playerLabel()||"You"),90,60],["Playbook",310,60],["Data warehouse",60,220],["Releases",200,275],["Integrations",340,220],["Rolinda's questions",200,25],["Q4 roadmap",330,275]];
   const links=[[0,1],[0,2],[0,3],[0,4],[0,5],[0,6],[1,2],[3,4],[4,7],[2,7],[5,7],[6,2]];const svg=$("web");svg.classList.remove("woven");
   svg.innerHTML=links.map(([a,b])=>`<line x1="${nodes[a][1]}" y1="${nodes[a][2]}" x2="${nodes[b][1]}" y2="${nodes[b][2]}"/>`).join("")+nodes.map((n,i)=>`<g style="animation-delay:${i*.12}s"><circle cx="${n[1]}" cy="${n[2]}" r="${i===0?13:8}"/><text x="${n[1]}" y="${n[2]+(i===6?-16:22)}" text-anchor="middle">${n[0]}</text></g>`).join("");
   requestAnimationFrame(()=>svg.classList.add("woven"))};

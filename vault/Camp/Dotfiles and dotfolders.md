@@ -1,13 +1,13 @@
 ---
 title: "Dotfiles and dotfolders"
-date: 2026-09-17
+date: 2026-09-24
 tags: [workstream]
 ---
 # Dotfiles and dotfolders
 
 Stop 2, [[Evening 3]]. Outcome: What .git, .gitignore, .env, .venv, .claude, .agents, .github and ~/.config actually are.
 
-## 2026-09-17
+## 2026-09-24
 - Tonight I did the work myself and wrote it down while it was
 - still fresh. The agent drafted, I rewrote the half that made no sense, and the
 - check told me what was still missing before I could claim the stop. What I

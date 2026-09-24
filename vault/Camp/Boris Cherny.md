@@ -1,7 +1,8 @@
 ---
 title: "Boris Cherny"
-date: 2026-09-17
+date: 2026-09-24
 tags: [people]
+generated: 0d1113f87342
 ---
 # Boris Cherny
 
@@ -31,7 +32,7 @@ His team keeps Sutton's Bitter Lesson framed on the wall and builds for the mode
 - Boris Cherny: Five to ten sessions, each in its own checkout or worktree, so they never fight over the same files. ([How Boris uses Claude Code (curated)](https://howborisusesclaudecode.com/))
 
 ## Your exercise: One rule, and the command that proves it
-About 10 minutes, in `workspace/mentors/cherny/`. Status: done.
+About 10 minutes, in `workspace/mentors/cherny/`. Status: not yet.
 
 1. Think of one thing your agent got wrong today.
 2. Write workspace/mentors/cherny/CLAUDE.md with a heading ## Rules and one rule that would have prevented it.

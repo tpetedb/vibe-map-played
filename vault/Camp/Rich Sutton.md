@@ -1,7 +1,8 @@
 ---
 title: "Rich Sutton"
-date: 2026-09-17
+date: 2026-09-24
 tags: [people]
+generated: 7f63a4e5450e
 ---
 # Rich Sutton
 
@@ -30,7 +31,7 @@ The essay is short enough to read at the signpost. The textbook (free online) is
 - Rich Sutton: The 2024 Turing Award with Andrew Barto, for the foundations of reinforcement learning: a machine that learns from experience, which is what Turing asked for in 1947. ([Turing Award 2024 (Amii)](https://www.amii.ca/updates-insights/rich-sutton-awarded-a-m-turing-award-for-reinforcement-learning-research))
 
 ## Your exercise: The rule you wrote against plain search
-About 12 minutes, in `workspace/mentors/sutton/`. Status: done.
+About 12 minutes, in `workspace/mentors/sutton/`. Status: not yet.
 
 1. Write workspace/mentors/sutton/search.py with NUMS = [2, 17, 30, 41, 55, 70, 88].
 2. First try a rule you invent for finding the two numbers that add up to 100, and print what it gives.

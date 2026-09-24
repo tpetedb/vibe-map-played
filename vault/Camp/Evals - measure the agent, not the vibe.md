@@ -1,13 +1,13 @@
 ---
 title: "Evals: measure the agent, not the vibe"
-date: 2026-09-17
+date: 2026-09-24
 tags: [workstream]
 ---
 # Evals: measure the agent, not the vibe
 
 Stop 8, [[Evening 3]]. Outcome: A tiny harness that scores your prompts and skills on fixed cases.
 
-## 2026-09-17
+## 2026-09-24
 - Tonight I did the work myself and wrote it down while it was
 - still fresh. The agent drafted, I rewrote the half that made no sense, and the
 - check told me what was still missing before I could claim the stop. What I

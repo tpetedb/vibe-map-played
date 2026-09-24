@@ -1,6 +1,6 @@
 ---
 title: "HTML, CSS and JavaScript"
-date: 2026-09-17
+date: 2026-09-24
 tags: [tech, code]
 generated: e6ff3ccfd3c7
 ---

@@ -1,13 +1,13 @@
 ---
 title: "Scaling laws and the Bitter Lesson"
-date: 2026-09-17
+date: 2026-09-24
 tags: [workstream]
 ---
 # Scaling laws and the Bitter Lesson
 
 Stop 4, [[Evening 2]]. Outcome: Why bigger kept winning, and why the Claude Code team framed Sutton's essay.
 
-## 2026-09-17
+## 2026-09-24
 - Tonight I did the work myself and wrote it down while it was
 - still fresh. The agent drafted, I rewrote the half that made no sense, and the
 - check told me what was still missing before I could claim the stop. What I

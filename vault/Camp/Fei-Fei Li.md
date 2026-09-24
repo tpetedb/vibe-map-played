@@ -1,7 +1,8 @@
 ---
 title: "Fei-Fei Li"
-date: 2026-09-17
+date: 2026-09-24
 tags: [people]
+generated: 03f30d037896
 ---
 # Fei-Fei Li
 
@@ -28,7 +29,7 @@ The story of ImageNet is the story of how a benchmark, not a model, forced every
 - Fei-Fei Li: Human-centred AI at Stanford: a framework for research, education, practice and policy that starts from human needs rather than from the model. ([Stanford HAI](https://hai.stanford.edu))
 
 ## Your exercise: Label ten things yourself
-About 15 minutes, in `workspace/mentors/li/`. Status: done.
+About 15 minutes, in `workspace/mentors/li/`. Status: not yet.
 
 1. Pick ten things you can see: files in a folder, emails, photos, tabs.
 2. Write workspace/mentors/li/labels.csv with the header item,label and one row each.

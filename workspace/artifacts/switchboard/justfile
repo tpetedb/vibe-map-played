@@ -1,0 +1,11 @@
+# say hello, to a name or to the camp
+greet name='camp':
+    @echo "hello {{name}}"
+
+# the numbers in this folder, counted
+count:
+    @ls -1 | wc -l
+
+# greet first, then count: one command for the whole round
+round: greet
+    @just count
